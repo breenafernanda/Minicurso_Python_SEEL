@@ -1,0 +1,24 @@
+# Lê o número de casos de teste
+N = int(input())
+
+# Itera sobre cada caso de teste
+for _ in range(N):
+    # Lê os valores de X e Y
+    X, Y = map(int, input().split())
+    
+    # Inicializa a soma dos ímpares consecutivos
+    soma = 0
+    contagem = 0
+    
+    # Ajusta X para o próximo ímpar, se necessário
+    if X % 2 == 0:
+        X += 1
+    
+    # Soma os Y ímpares consecutivos a partir de X
+    while contagem < Y:
+        soma += X
+        X += 2
+        contagem += 1
+    
+    # Imprime o resultado para o caso de teste atual
+    print(soma)

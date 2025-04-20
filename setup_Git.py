@@ -52,6 +52,6 @@ tor_temp_profile/
 if __name__ == "__main__":
     repositorio = "Minicurso_Python_SEEL"
     repositorio_link = f"https://github.com/breenafernanda/{repositorio}.git"
-    commit = 'Arquivos Iniciais'
+    commit = 'beecrowd'
     
     setup_git("breenafernanda", "d201810853@uftm.edu.br", commit,repositorio_link)
