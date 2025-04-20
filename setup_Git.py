@@ -58,7 +58,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         commit = sys.argv[1]
     else:
-        commit = 'beecrowd'  # Valor padrão caso nenhum parâmetro seja fornecido
+        commit = 'supportv0'  # Valor padrão caso nenhum parâmetro seja fornecido
     
     print(f"📝 Mensagem de commit: {commit}")
     setup_git("breenafernanda", "d201810853@uftm.edu.br", commit, repositorio_link)
