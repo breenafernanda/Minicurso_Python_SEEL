@@ -13,8 +13,7 @@
     <header class="header">
         <div class="container header-container">
             <div class="logo">
-                <img src="img/seel_logo.svg" alt="SEEL Logo">
-                <span class="logo-text">SEEL</span>
+                <img src="img/seel_logo_rotated.svg" alt="SEEL Logo">
             </div>
             <nav>
                 <ul class="nav-menu">
