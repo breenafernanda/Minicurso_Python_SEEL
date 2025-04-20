@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 7: Geração de Documentos PDF</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --dark-bg: #2c3e50;
+            --code-bg: #f8f8f8;
+            --code-border: #ddd;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        .slide {
+            width: 100%;
+            max-width: 1024px;
+            margin: 0 auto 40px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            page-break-after: always;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .slide-title {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .slide-subtitle {
+            font-size: 22px;
+            color: var(--secondary-color);
+            margin: 10px 0 20px;
+        }
+        
+        .slide-content {
+            flex-grow: 1;
+        }
+        
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #777;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        
+        .logo {
+            height: 40px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .slide-number {
+            font-weight: bold;
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .note {
+            background-color: #fff8dc;
+            border-left: 4px solid #ffeb3b;
+            padding: 10px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .code-comment {
+            color: #6a9955;
+        }
+        
+        .code-keyword {
+            color: #569cd6;
+        }
+        
+        .code-string {
+            color: #ce9178;
+        }
+        
+        .code-function {
+            color: #dcdcaa;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .presenter-notes {
+            background-color: #f9f9f9;
+            border: 1px dashed #ccc;
+            padding: 10px;
+            margin-top: 30px;
+            font-style: italic;
+            color: #555;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+            }
+            
+            .slide {
+                box-shadow: none;
+                page-break-after: always;
+                min-height: auto;
+                margin-bottom: 0;
+            }
+            
+            .presenter-notes {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Título do Módulo -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Geração de Documentos PDF</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Criando catálogos e relatórios visuais</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Objetivo do Módulo</h3>
+                    <p>Criar documentos PDF profissionais a partir dos dados extraídos e processados, com formatação avançada, elementos visuais e interatividade.</p>
+                    
+                    <h3>O que vamos aprender:</h3>
+                    <ul>
+                        <li>Introdução às bibliotecas para geração de PDF</li>
+                        <li>Criação de documentos com ReportLab</li>
+                        <li>Formatação de texto e elementos visuais</li>
+                        <li>Adição de imagens e gráficos</li>
+                        <li>Criação de tabelas e listas</li>
+                        <li>Geração de catálogos de produtos</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <div class="note">
+                        "Os documentos PDF são ideais para relatórios formais, catálogos de produtos e documentação que precisa manter aparência consistente em qualquer dispositivo ou quando impressa."
+                    </div>
+                    
+                    <h3>Duração estimada:</h3>
+                    <p>20 minutos</p>
+                    
+                    <h3>Por que é importante?</h3>
+                    <p>PDFs são amplamente utilizados para documentos formais e de apresentação. Automatizar sua criação permite gerar relatórios e catálogos profissionais sem intervenção manual.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 7: Geração de Documentos PDF</div>
+            <div class="slide-number">Slide 1</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Comece perguntando quem já precisou criar documentos PDF manualmente e quanto tempo isso costuma levar. Explique que este módulo mostrará como automatizar esse processo, criando documentos com aparência profissional diretamente do Python. Mencione que os PDFs são especialmente úteis para documentos que precisam ser impressos ou que devem manter aparência consistente em qualquer dispositivo.
+        </div>
+    </div>
+
+    <!-- Slide 2: Introdução às Bibliotecas para PDF -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Introdução às Bibliotecas para PDF</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Principais bibliotecas para PDF em Python</h3>
+                    <table>
+                        <tr>
+                            <th>Biblioteca</th>
+                            <th>Foco</th>
+                            <th>Complexidade</th>
+                        </tr>
+                        <tr>
+                            <td><span class="highlight">ReportLab</span></td>
+                            <td>Criação de PDFs do zero</td>
+                            <td>Média a Alta</td>
+                        </tr>
+                        <tr>
+                            <td>PyPDF2</td>
+                            <td>Manipulação de PDFs existentes</td>
+                            <td>Baixa a Média</td>
+                        </tr>
+                        <tr>
+                            <td>FPDF</td>
+                            <td>Criação simples de PDFs</td>
+                            <td>Baixa</td>
+                        </tr>
+                        <tr>
+                            <td>WeasyPrint</td>
+                            <td>Conversão HTML para PDF</td>
+                            <td>Média</td>
+                        </tr>
+                        <tr>
+                            <td>Xhtml2pdf</td>
+                            <td>Conversão HTML para PDF</td>
+                            <td>Média</td>
+                        </tr>
+                    </table>
+                    
+                    <h3>Instalação do ReportLab</h3>
+                    <pre>pip install reportlab</pre>
+                    
+                    <h3>Importações básicas</h3>
+                    <pre>from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter, A4
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Por que ReportLab?</h3>
+                    <ul>
+                        <li>Biblioteca mais completa e madura para geração de PDFs</li>
+                        <li>Suporte a elementos avançados (tabelas, gráficos, imagens)</li>
+                        <li>Controle preciso sobre posicionamento e formatação</li>
+                        <li>Amplamente utilizada em ambientes corporativos</li>
+                        <li>Documentação extensa e comunidade ativa</li>
+                        <li>Versão open-source com recursos essenciais</li>
+                    </ul>
+                    
+                    <h3>Abordagens para criar PDFs</h3>
+                    <ol>
+                        <li><span class="highlight">Canvas:</span> Abordagem de baixo nível, com controle preciso de posicionamento (x,y)</li>
+                        <li><span class="highlight">Platypus:</span> Sistema de layout de alto nível com fluxo automático de conteúdo</li>
+                        <li><span class="highlight">Templates:</span> Uso de modelos predefinidos para documentos padronizados</li>
+                        <li><span class="highlight">HTML para PDF:</span> Conversão de HTML/CSS para PDF (outras bibliotecas)</li>
+                    </ol>
+                    
+                    <div class="note">
+                        Neste módulo, focaremos principalmente no ReportLab, combinando as abordagens Canvas e Platypus para criar documentos profissionais com controle preciso sobre o layout.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 7: Geração de Documentos PDF</div>
+            <div class="slide-number">Slide 2</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Explique as diferentes bibliotecas disponíveis para trabalhar com PDFs em Python e por que o ReportLab é a escolha mais comum para criação de documentos do zero. Mencione que existem duas abordagens principais no ReportLab: Canvas (baixo nível, com coordenadas x,y) e Platypus (alto nível, com fluxo automático de conteúdo). Explique que combinaremos ambas as abordagens para aproveitar o melhor de cada uma.
+        </div>
+    </div>
+
+    <!-- Slide 3: Primeiros Passos com ReportLab -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Primeiros Passos com ReportLab</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Abordagem Canvas (baixo nível)</h3>
+                    <pre>from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+
+# Criar um novo documento PDF
+c = canvas.Canvas("exemplo_canvas.pdf", pagesize=letter)
+
+# Obter dimensões da página
+width, height = letter
+
+# Adicionar texto
+c.setFont("Helvetica", 12)
+c.drawString(100, height - 100, "Olá, ReportLab!")
+
+# Adicionar linha
+c.line(100, height - 110, 300, height - 110)
+
+# Adicionar retângulo
+c.rect(100, height - 200, 200, 50)
+
+# Adicionar círculo
+c.circle(200, height - 300, 30)
+
+# Salvar o documento
+c.save()</pre>
+                    
+                    <h3>Sistema de coordenadas</h3>
+                    <ul>
+                        <li>Origem (0,0) no canto inferior esquerdo</li>
+                        <li>Coordenadas em pontos (1/72 de polegada)</li>
+                        <li>Página A4: 595 x 842 pontos</li>
+                        <li>Página Letter: 612 x 792 pontos</li>
+                        <li>Para posicionar do topo: <code>y = height - valor</code></li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Abordagem Platypus (alto nível)</h3>
+                    <pre>from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.pagesizes import letter
+
+# Criar documento
+doc = SimpleDocTemplate(
+    "exemplo_platypus.pdf",
+    pagesize=letter,
+    rightMargin=72,
+    leftMargin=72,
+    topMargin=72,
+    bottomMargin=72
+)
+
+# Estilos
+styles = getSampleStyleSheet()
+title_style = styles['Heading1']
+normal_style = styles['Normal']
+
+# Lista de elementos a serem adicionados
+elements = []
+
+# Adicionar título
+elements.append(Paragraph("Relatório de Exemplo", title_style))
+elements.append(Spacer(1, 12))
+
+# Adicionar parágrafos
+elements.append(Paragraph("Este é um exemplo de documento criado com ReportLab Platypus.", normal_style))
+elements.append(Spacer(1, 12))
+elements.append(Paragraph("Platypus gerencia automaticamente o fluxo de conteúdo, quebras de página e layout.", normal_style))
+
+# Construir o documento
+doc.build(elements)</pre>
+                    
+                    <h3>Quando usar cada abordagem?</h3>
+                    <ul>
+                        <li><span class="highlight">Canvas:</span> Para posicionamento preciso e desenhos personalizados</li>
+                        <li><span class="highlight">Platypus:</span> Para documentos com muito texto e fluxo automático</li>
+                        <li><span class="highlight">Combinados:</span> Para documentos complexos com elementos personalizados</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="note">
+                O ReportLab trabalha com unidades em pontos (1/72 de polegada). Para converter: 1 cm ≈ 28.35 pontos, 1 polegada = 72 pontos.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 7: Geração de Documentos PDF</div>
+            <div class="slide-number">Slide 3</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre os exemplos básicos de criação de PDF com as duas abordagens. Explique o sistema de coordenadas do Canvas, que pode ser confuso para iniciantes (origem no canto inferior esquerdo, diferente da maioria dos sistemas gráficos). Mostre como a abordagem Platypus é mais simples para documentos baseados em texto, pois gerencia automaticamente o fluxo de conteúdo e quebras de página.
+        </div>
+    </div>
+
+    <!-- Slide 4: Formatação de Texto -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Formatação de Texto</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Fontes e estilos com Canvas</h3>
+                    <pre>from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib.colors import red, blue, green
+
+# Registrar fonte personalizada (opcional)
+pdfmetrics.registerFont(TTFont('Vera', 'Vera.ttf'))
+
+# Configurar fonte
+c.setFont("Helvetica-Bold", 16)
+c.setFillColor(blue)
+c.drawString(100, 700, "Título em Azul e Negrito")
+
+# Mudar fonte e cor
+c.setFont("Times-Roman", 12)
+c.setFillColor(red)
+c.drawString(100, 680, "Texto em vermelho")
+
+# Texto rotacionado
+c.saveState()
+c.translate(100, 650)
+c.rotate(45)
+c.setFont("Helvetica", 12)
+c.drawString(0, 0, "Texto rotacionado")
+c.restoreState()
+
+# Texto justificado (mais complexo no Canvas)
+from reportlab.lib.utils import simpleSplit
+text = "Um texto longo que será quebrado em múltiplas linhas..."
+lines = simpleSplit(text, "Helvetica", 12, 300)
+y = 600
+for line in lines:
+    c.drawString(100, y, line)
+    y -= 15</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Estilos com Platypus</h3>
+                    <pre>from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
+from reportlab.lib import colors
+
+# Obter estilos padrão
+styles = getSampleStyleSheet()
+
+# Usar estilos existentes
+title = Paragraph("Título do Documento", styles['Heading1'])
+subtitle = Paragraph("Subtítulo", styles['Heading2'])
+normal_text = Paragraph("Texto normal.", styles['Normal'])
+
+# Criar estilo personalizado
+custom_style = ParagraphStyle(
+    name='CustomStyle',
+    fontName='Helvetica-Bold',
+    fontSize=14,
+    leading=16,
+    textColor=colors.darkblue,
+    alignment=TA_CENTER,
+    spaceAfter=12,
+    spaceBefore=6,
+    borderWidth=1,
+    borderColor=colors.black,
+    borderPadding=5,
+    backColor=colors.lightgrey
+)
+
+# Usar estilo personalizado
+custom_para = Paragraph(
+    "Este é um parágrafo com estilo personalizado.",
+    custom_style
+)
+
+# Formatação inline com tags HTML
+html_text = Paragraph(
+    """Este texto tem <b>negrito</b>, <i>itálico</i>, 
+    <u>sublinhado</u> e <font color="red">vermelho</font>.
+    Também pode ter <super>sobrescrito</super> e 
+    <sub>subscrito</sub>.""",
+    styles['Normal']
+)</pre>
+                    
+                    <h3>Tags HTML suportadas</h3>
+                    <ul>
+                        <li><code>&lt;b&gt;</code> - Negrito</li>
+                        <li><code>&lt;i&gt;</code> - Itálico</li>
+                        <li><code>&lt;u&gt;</code> - Sublinhado</li>
+                        <li><code>&lt;super&gt;</code> - Sobrescrito</li>
+                        <li><code>&lt;sub&gt;</code> - Subscrito</li>
+                        <li><code>&lt;font&gt;</code> - Cor, tamanho</li>
+                        <li><code>&lt;br/&gt;</code> - Quebra de linha</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="note">
+                O Platypus suporta um subconjunto de tags HTML para formatação de texto, tornando mais fácil criar documentos com formatação rica sem precisar definir múltiplos estilos.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 7: Geração de Documentos PDF</div>
+            <div class="slide-number">Slide 4</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre as diferentes opções de formatação de texto, tanto com Canvas quanto com Platypus. Explique que o Platypus oferece uma abordagem mais simples para formatação de texto, especialmente com o suporte a tags HTML. Mostre como criar estilos personalizados para manter a consistência em todo o documento. Mencione que é possível registrar fontes personalizadas (TTF) se necessário.
+        </div>
+    </div>
+
+    <!-- Slide 5: Adição de Imagens -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Adição de Imagens</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Imagens com Canvas</h3>
+                    <pre>from reportlab.lib.utils import ImageReader
+
+# Adicionar imagem com tamanho original
+logo = ImageReader('logo.png')
+c.drawImage(logo, 100, 700, mask='auto')
+
+# Adicionar imagem com tamanho específico
+c.drawImage('produto.jpg', 100, 500, width=200, height=150, mask='auto')
+
+# Preservar proporção
+img_width, img_height = 300, 200  # Tamanho desejado
+c.drawImage(
+    'imagem.png', 
+    100, 300, 
+    width=img_width, 
+    height=img_height, 
+    preserveAspectRatio=True,
+    mask='auto'
+)
+
+# Rotacionar imagem
+c.saveState()
+c.translate(300, 200)
+c.rotate(45)
+c.drawImage('icone.png', 0, 0, width=50, height=50, mask='auto')
+c.restoreState()</pre>
+                    
+                    <h3>Formatos suportados</h3>
+                    <ul>
+                        <li>JPEG (.jpg, .jpeg)</li>
+                        <li>PNG (.png) - com transparência</li>
+                        <li>GIF (.gif) - sem animação</li>
+                        <li>BMP (.bmp)</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Imagens com Platypus</h3>
+                    <pre>from reportlab.platypus import Image as PlatypusImage
+
+# Criar objeto de imagem
+logo = PlatypusImage('logo.png', width=100, height=50)
+elements.append(logo)
+
+# Adicionar espaçamento
+elements.append(Spacer(1, 12))
+
+# Imagem com largura fixa e altura proporcional
+produto_img = PlatypusImage('produto.jpg', width=300)
+elements.append(produto_img)
+
+# Imagem com link
+from reportlab.platypus.flowables import Flowable, HRFlowable
+from reportlab.lib.colors import blue
+
+class ImageWithLink(Flowable):
+    def __init__(self, image_path, url, width=None, height=None):
+        self.image = PlatypusImage(image_path, width=width, height=height)
+        self.url = url
+        Flowable.__init__(self)
+        
+    def wrap(self, *args):
+        return self.image.wrap(*args)
+        
+    def draw(self):
+        self.image.drawOn(self.canv, 0, 0)
+        self.canv.linkURL(self.url, (0, 0, self.image.drawWidth, self.image.drawHeight))
+
+# Uso
+img_link = ImageWithLink('produto.jpg', 'https://exemplo.com/produto', width=200)
+elements.append(img_link)</pre>
+                    
+                    <h3>Dicas para imagens</h3>
+                    <ul>
+                        <li>Use <code>mask='auto'</code> para preservar transparência em PNGs</li>
+                        <li>Otimize imagens antes de incluí-las para reduzir o tamanho do PDF</li>
+                        <li>Considere armazenar imagens em base64 para PDFs autônomos</li>
+                        <li>Para imagens da web, baixe-as primeiro com <code>requests</code> ou use <code>BytesIO</code></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="note">
+                As imagens são essenciais para catálogos de produtos e relatórios visuais. O ReportLab oferece bom suporte para imagens, mas é importante otimizá-las para manter o tamanho do PDF gerenciável.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 7: Geração de Documentos PDF</div>
+            <div class="slide-number">Slide 5</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre como adicionar imagens aos documentos PDF, tanto com Canvas quanto com Platypus. Explique a diferença entre os dois métodos e quando usar cada um. Mostre como preservar a proporção das imagens e como adicionar links a elas. Mencione a importância de otimizar as imagens para reduzir o tamanho do PDF final.
+        </div>
+    </div>
+
+    <!-- Slide 6: Criação de Tabelas -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Criação de Tabelas</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Tabelas com Platypus</h3>
+                    <pre>from reportlab.platypus import Table, TableStyle
+from reportlab.lib import colors
+
+# Dados para a tabela
+data = [
+    ['Produto', 'Preço', 'Quantidade', 'Total'],
+    ['Notebook', 'R$ 3.500,00', 2, 'R$ 7.000,00'],
+    ['Mouse', 'R$ 120,00', 5, 'R$ 600,00'],
+    ['Teclado', 'R$ 200,00', 3, 'R$ 600,00'],
+    ['Monitor', 'R$ 800,00', 2, 'R$ 1.600,00']
+]
+
+# Criar tabela
+table = Table(data)
+
+# Estilizar a tabela
+style = TableStyle([
+    # Estilo do cabeçalho
+    ('BACKGROUND', (0, 0), (-1, 0), colors.blue),
+    ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+    ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+    ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+    
+    # Bordas externas
+    ('BOX', (0, 0), (-1, -1), 1, colors.black),
+    
+    # Linhas internas
+    ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+    
+    # Alinhamento de colunas
+    ('ALIGN', (1, 1), (1, -1), 'RIGHT'),  # Preço
+    ('ALIGN', (2, 1), (2, -1), 'CENTER'),  # Quantidade
+    ('ALIGN', (3, 1), (3, -1), 'RIGHT'),  # Total
+    
+    # Cores alternadas nas linhas
+    ('BACKGROUND', (0, 1), (-1, 1), colors.lightgrey),
+    ('BACKGROUND', (0, 3), (-1, 3), colors.lightgrey),
+])
+
+table.setStyle(style)
+
+# Adicionar à lista de elementos
+elements.append(table)</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Tabelas avançadas</h3>
+                    <pre># Larguras de coluna personalizadas
+col_widths = [150, 100, 80, 100]
+table = Table(data, colWidths=col_widths)
+
+# Alturas de linha personalizadas
+row_heights = [30, 20, 20, 20, 20]
+table = Table(data, colWidths=col_widths, rowHeights=row_heights)
+
+# Mesclar células
+style.add('SPAN', (0, 5), (2, 5))  # Mescla 3 células na linha 6
+
+# Formatação condicional
+for i in range(1, len(data)):
+    # Destacar valores acima de R$ 1.000,00
+    if 'R$ 1.000,00' in data[i][3]:
+        style.add('BACKGROUND', (3, i), (3, i), colors.lightgreen)
+        style.add('TEXTCOLOR', (3, i), (3, i), colors.darkgreen)
+
+# Adicionar imagens em células
+from reportlab.platypus import Image as PlatypusImage
+
+# Substituir texto por imagem
+img = PlatypusImage('produto.png', width=30, height=30)
+data[1][0] = img  # Substitui "Notebook" por uma imagem
+
+# Tabela com cabeçalho repetido em cada página
+from reportlab.platypus import LongTable
+long_table = LongTable(data, colWidths=col_widths, repeatRows=1)
+long_table.setStyle(style)</pre>
+                    
+                    <h3>Dicas para tabelas</h3>
+                    <ul>
+                        <li>Use <code>repeatRows</code> para repetir cabeçalhos em tabelas longas</li>
+                        <li>Defina larguras de coluna para evitar problemas de layout</li>
+                        <li>Combine <code>SPAN</code> para criar layouts complexos</li>
+                        <li>Use <code>VALIGN</code> para alinhar conteúdo verticalmente</li>
+                        <li>Para tabelas muito grandes, considere dividir em múltiplas tabelas</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="note">
+                As tabelas são uma das formas mais eficazes de apresentar dados estruturados em documentos PDF. O ReportLab oferece recursos avançados para formatação de tabelas, permitindo criar relatórios profissionais.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 7: Geração de Documentos PDF</div>
+            <div class="slide-number">Slide 6</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre como criar e formatar tabelas com o ReportLab. Explique os diferentes comandos de estilo e como eles afetam a aparência da tabela. Mostre exemplos de tabelas simples e avançadas, incluindo mesclagem de células e formatação condicional. Mencione que as tabelas são uma das formas mais eficazes de apresentar dados estruturados em documentos PDF.
+        </div>
+    </div>
+
+    <!-- Slide 7: Gráficos e Elementos Visuais -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Gráficos e Elementos Visuais</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Gráficos com ReportLab</h3>
+                    <pre>from reportlab.graphics.shapes import Drawing
+from reportlab.graphics.charts.barcharts import VerticalBarChart
+from reportlab.graphics.charts.piecharts import Pie
+from reportlab.graphics.charts.linecharts import LineChart
+from reportlab.lib import colors
+
+# Criar um gráfico de barras
+drawing = Drawing(400, 200)
+bc = VerticalBarChart()
+bc.x = 50
+bc.y = 50
+bc.height = 125
+bc.width = 300
+bc.data = [[1200, 3500, 500, 1000, 2000]]
+bc.categoryAxis.categoryNames = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai']
+bc.bars[0].fillColor = colors.blue
+drawing.add(bc)
+
+# Adicionar ao documento
+elements.append(drawing)
+
+# Gráfico de pizza
+drawing = Drawing(400, 200)
+pc = Pie()
+pc.x = 150
+pc.y = 100
+pc.width = 150
+pc.height = 150
+pc.data = [20, 30, 40, 10]
+pc.labels = ['Produto A', 'Produto B', 'Produto C', 'Produto D']
+pc.slices.strokeWidth = 0.5
+pc.slices[0].fillColor = colors.blue
+pc.slices[1].fillColor = colors.red
+pc.slices[2].fillColor = colors.green
+pc.slices[3].fillColor = colors.yellow
+drawing.add(pc)
+elements.append(drawing)</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Elementos visuais personalizados</h3>
+                    <pre>from reportlab.graphics.shapes import Rect, Line, Circle, String
+from reportlab.lib.colors import PCMYKColor
+
+# Criar um desenho personalizado
+drawing = Drawing(400, 200)
+
+# Adicionar retângulo
+rect = Rect(50, 50, 100, 80, fillColor=colors.lightblue)
+drawing.add(rect)
+
+# Adicionar círculo
+circle = Circle(250, 100, 40, fillColor=colors.pink)
+drawing.add(circle)
+
+# Adicionar linha
+line = Line(50, 50, 350, 150, strokeColor=colors.red, strokeWidth=2)
+drawing.add(line)
+
+# Adicionar texto
+text = String(150, 100, "Gráfico Personalizado", 
+              fontSize=12, fillColor=colors.black)
+drawing.add(text)
+
+elements.append(drawing)
+
+# Alternativa: Usar Matplotlib e salvar como imagem
+import matplotlib.pyplot as plt
+import io
+from reportlab.lib.utils import ImageReader
+
+# Criar gráfico com Matplotlib
+plt.figure(figsize=(6, 4))
+plt.bar(['A', 'B', 'C', 'D'], [10, 25, 15, 30])
+plt.title('Vendas por Categoria')
+
+# Salvar em buffer de memória
+buf = io.BytesIO()
+plt.savefig(buf, format='png', dpi=300)
+buf.seek(0)
+
+# Adicionar ao PDF
+img = ImageReader(buf)
+elements.append(PlatypusImage(img, width=400, height=300))</pre>
+                    
+                    <h3>Dicas para gráficos</h3>
+                    <ul>
+                        <li>Os gráficos nativos do ReportLab são limitados em personalização</li>
+                        <li>Para gráficos complexos, use Matplotlib e converta para imagem</li>
+                        <li>Considere usar cores consistentes para categorias em todos os gráficos</li>
+                        <li>Adicione legendas e títulos claros para facilitar a interpretação</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="note">
+                Os gráficos são essenciais para visualizar tendências e comparações em relatórios. Embora o ReportLab ofereça gráficos básicos, para visualizações mais complexas, considere usar Matplotlib e incorporar as imagens geradas.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 7: Geração de Documentos PDF</div>
+            <div class="slide-number">Slide 7</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre como adicionar gráficos e elementos visuais aos documentos PDF. Explique as limitações dos gráficos nativos do ReportLab e como usar Matplotlib para criar visualizações mais complexas. Mostre exemplos de gráficos de barras, pizza e linha, bem como elementos visuais personalizados. Mencione a importância de usar cores consistentes e adicionar legendas claras.
+        </div>
+    </div>
+
+    <!-- Slide 8: Exemplo Prático Completo -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Exemplo Prático Completo</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Criando um catálogo de produtos</h2>
+            
+            <pre>from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, Table, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib import colors
+from reportlab.lib.units import cm
+import json
+import os
+import matplotlib.pyplot as plt
+import io
+
+def criar_catalogo_produtos():
+    # Carregar dados (simulando dados processados pelo Pandas)
+    try:
+        with open('produtos_processados.json', 'r', encoding='utf-8') as f:
+            produtos = json.load(f)
+    except FileNotFoundError:
+        # Dados de exemplo caso o arquivo não exista
+        produtos = [
+            {
+                "nome": "Notebook Dell Inspiron",
+                "preco": 3599.90,
+                "desconto": 0.15,
+                "preco_original": 4199.90,
+                "categoria": "Informática",
+                "descricao": "Notebook com processador Intel Core i5, 8GB RAM, 256GB SSD",
+                "imagem": "notebook.jpg"
+            },
+            {
+                "nome": "Mouse sem fio Logitech",
+                "preco": 89.90,
+                "desconto": 0.25,
+                "preco_original": 119.90,
+                "categoria": "Informática",
+                "descricao": "Mouse óptico sem fio com 1000 DPI e bateria de longa duração",
+                "imagem": "mouse.jpg"
+            },
+            {
+                "nome": "Teclado mecânico Redragon",
+                "preco": 199.90,
+                "desconto": 0.20,
+                "preco_original": 249.90,
+                "categoria": "Informática",
+                "descricao": "Teclado mecânico com switches Blue, iluminação RGB",
+                "imagem": "teclado.jpg"
+            },
+            {
+                "nome": "Headset Gamer HyperX",
+                "preco": 299.90,
+                "desconto": 0.10,
+                "preco_original": 329.90,
+                "categoria": "Áudio",
+                "descricao": "Headset com som surround 7.1, microfone removível",
+                "imagem": "headset.jpg"
+            }
+        ]
+    
+    # Criar documento
+    doc = SimpleDocTemplate(
+        "catalogo_produtos.pdf",
+        pagesize=A4,
+        rightMargin=72,
+        leftMargin=72,
+        topMargin=72,
+        bottomMargin=72
+    )
+    
+    # Estilos
+    styles = getSampleStyleSheet()
+    title_style = ParagraphStyle(
+        'TitleStyle',
+        parent=styles['Heading1'],
+        fontSize=24,
+        alignment=1,  # Centralizado
+        spaceAfter=20
+    )
+    subtitle_style = ParagraphStyle(
+        'SubtitleStyle',
+        parent=styles['Heading2'],
+        fontSize=18,
+        textColor=colors.blue,
+        spaceAfter=10
+    )
+    normal_style = styles['Normal']
+    product_name_style = ParagraphStyle(
+        'ProductName',
+        parent=styles['Heading3'],
+        fontSize=14,
+        textColor=colors.darkblue
+    )
+    price_style = ParagraphStyle(
+        'Price',
+        parent=styles['Normal'],
+        fontSize=12,
+        textColor=colors.red,
+        alignment=1  # Centralizado
+    )
+    
+    # Lista de elementos
+    elements = []
+    
+    # Título do catálogo
+    elements.append(Paragraph("Catálogo de Produtos", title_style))
+    elements.append(Spacer(1, 0.5*cm))
+    
+    # Data do catálogo
+    from datetime import datetime
+    data_atual = datetime.now().strftime("%d/%m/%Y")
+    elements.append(Paragraph(f"Atualizado em: {data_atual}", normal_style))
+    elements.append(Spacer(1, 1*cm))
+    
+    # Agrupar produtos por categoria
+    categorias = {}
+    for produto in produtos:
+        cat = produto.get('categoria', 'Sem categoria')
+        if cat not in categorias:
+            categorias[cat] = []
+        categorias[cat].append(produto)
+    
+    # Criar gráfico de preços médios por categoria
+    if len(categorias) > 1:
+        plt.figure(figsize=(6, 4))
+        cats = []
+        precos_medios = []
+        
+        for cat, prods in categorias.items():
+            cats.append(cat)
+            precos_medios.append(sum(p['preco'] for p in prods) / len(prods))
+        
+        plt.bar(cats, precos_medios, color='skyblue')
+        plt.title('Preço Médio por Categoria')
+        plt.ylabel('Preço (R$)')
+        plt.xticks(rotation=45)
+        plt.tight_layout()
+        
+        # Salvar em buffer
+        buf = io.BytesIO()
+        plt.savefig(buf, format='png', dpi=100)
+        buf.seek(0)
+        
+        # Adicionar ao PDF
+        elements.append(Paragraph("Análise de Preços", subtitle_style))
+        elements.append(Image(buf, width=400, height=300))
+        elements.append(Spacer(1, 0.5*cm))
+    
+    # Adicionar produtos por categoria
+    for categoria, produtos_cat in categorias.items():
+        elements.append(Paragraph(f"Categoria: {categoria}", subtitle_style))
+        elements.append(Spacer(1, 0.3*cm))
+        
+        # Tabela de produtos
+        for produto in produtos_cat:
+            # Verificar se a imagem existe
+            img_path = produto.get('imagem', None)
+            if img_path and os.path.exists(img_path):
+                img = Image(img_path, width=100, height=100)
+            else:
+                # Imagem placeholder
+                img = Paragraph("[Imagem não disponível]", normal_style)
+            
+            # Calcular economia
+            economia = produto['preco_original'] - produto['preco']
+            
+            # Criar tabela para o produto
+            data = [
+                [img, Paragraph(produto['nome'], product_name_style)],
+                ['', Paragraph(produto.get('descricao', ''), normal_style)],
+                [
+                    Paragraph(f"<strike>De: R$ {produto['preco_original']:.2f}</strike>", normal_style),
+                    Paragraph(f"Por: <b>R$ {produto['preco']:.2f}</b>", price_style)
+                ],
+                [
+                    Paragraph(f"Desconto: {produto['desconto']*100:.0f}%", normal_style),
+                    Paragraph(f"Economia: R$ {economia:.2f}", normal_style)
+                ]
+            ]
+            
+            # Estilo da tabela
+            produto_table = Table(data, colWidths=[120, 300])
+            produto_table.setStyle(TableStyle([
+                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+                ('GRID', (0, 0), (-1, -1), 0.5, colors.lightgrey),
+                ('BACKGROUND', (0, 0), (-1, 0), colors.lightblue),
+            ]))
+            
+            elements.append(produto_table)
+            elements.append(Spacer(1, 0.5*cm))
+        
+        elements.append(Spacer(1, 0.5*cm))
+    
+    # Adicionar rodapé
+    elements.append(Paragraph("Todos os preços sujeitos a alteração sem aviso prévio.", normal_style))
+    
+    # Construir o documento
+    doc.build(elements)
+    print("Catálogo de produtos criado com sucesso: catalogo_produtos.pdf")
+    
+    return "catalogo_produtos.pdf"
+
+if __name__ == "__main__":
+    criar_catalogo_produtos()</pre>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 7: Geração de Documentos PDF</div>
+            <div class="slide-number">Slide 8</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Analise este exemplo linha por linha, destacando as técnicas de formatação, a criação de estilos personalizados, a adição de imagens e gráficos, e a organização do conteúdo. Explique como este script se conecta com os módulos anteriores (Selenium, Pandas, OpenPyXL) e como ele cria um catálogo de produtos profissional a partir dos dados processados. Se possível, execute o código para demonstrar o resultado em tempo real, mostrando o PDF gerado.
+        </div>
+    </div>
+
+    <!-- Slide 9: Projeto Integrador -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Projeto Integrador</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content" style="text-align: center;">
+            <h2 class="slide-subtitle">Combinando todas as tecnologias</h2>
+            
+            <div style="margin: 30px 0;">
+                <h3>Fluxo completo de automação:</h3>
+                <ol style="text-align: left; max-width: 80%; margin: 20px auto;">
+                    <li><span class="highlight">Extração de dados</span> de sites de e-commerce com Selenium</li>
+                    <li><span class="highlight">Processamento e análise</span> dos dados com Pandas</li>
+                    <li><span class="highlight">Geração de relatórios em Excel</span> com OpenPyXL</li>
+                    <li><span class="highlight">Criação de catálogos em PDF</span> com ReportLab</li>
+                </ol>
+            </div>
+            
+            <p style="font-size: 18px; margin: 30px 0;">
+                Agora você tem todas as ferramentas necessárias para automatizar tarefas complexas e criar fluxos de trabalho eficientes que economizam horas de trabalho manual!
+            </p>
+            
+            <div class="note" style="text-align: left; max-width: 80%; margin: 40px auto;">
+                <strong>Próximos passos:</strong> Vamos aplicar todos esses conhecimentos em um projeto prático integrado, onde criaremos um sistema completo de monitoramento de preços e geração de relatórios automatizados.
+            </div>
+            
+            <p style="font-size: 24px; margin-top: 40px; color: var(--accent-color);">
+                Alguma dúvida sobre geração de documentos PDF ou sobre o curso em geral?
+            </p>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 7: Geração de Documentos PDF</div>
+            <div class="slide-number">Slide 9</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Faça um resumo de todo o curso, conectando os diferentes módulos em um fluxo completo de automação. Explique como cada tecnologia se encaixa no processo e como elas podem ser combinadas para criar soluções poderosas. Reserve um tempo para responder dúvidas sobre o ReportLab e sobre o curso em geral. Mencione que o próximo passo será aplicar todos esses conhecimentos em um projeto prático integrado.
+        </div>
+    </div>
+</body>
+</html>

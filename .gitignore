@@ -1,0 +1,9 @@
+# Ignore arquivos locais
+contas.xlsx
+*.zip
+*.7z
+*.log
+*.tmp
+__pycache__/
+.env
+tor_temp_profile/

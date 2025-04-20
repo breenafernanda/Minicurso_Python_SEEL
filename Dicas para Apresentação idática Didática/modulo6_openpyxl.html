@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 6: Trabalhando com Planilhas usando OpenPyXL</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --dark-bg: #2c3e50;
+            --code-bg: #f8f8f8;
+            --code-border: #ddd;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        .slide {
+            width: 100%;
+            max-width: 1024px;
+            margin: 0 auto 40px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            page-break-after: always;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .slide-title {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .slide-subtitle {
+            font-size: 22px;
+            color: var(--secondary-color);
+            margin: 10px 0 20px;
+        }
+        
+        .slide-content {
+            flex-grow: 1;
+        }
+        
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #777;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        
+        .logo {
+            height: 40px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .slide-number {
+            font-weight: bold;
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .note {
+            background-color: #fff8dc;
+            border-left: 4px solid #ffeb3b;
+            padding: 10px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .code-comment {
+            color: #6a9955;
+        }
+        
+        .code-keyword {
+            color: #569cd6;
+        }
+        
+        .code-string {
+            color: #ce9178;
+        }
+        
+        .code-function {
+            color: #dcdcaa;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .presenter-notes {
+            background-color: #f9f9f9;
+            border: 1px dashed #ccc;
+            padding: 10px;
+            margin-top: 30px;
+            font-style: italic;
+            color: #555;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+            }
+            
+            .slide {
+                box-shadow: none;
+                page-break-after: always;
+                min-height: auto;
+                margin-bottom: 0;
+            }
+            
+            .presenter-notes {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Título do Módulo -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Trabalhando com Planilhas usando OpenPyXL</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Criando relatórios profissionais em Excel</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Objetivo do Módulo</h3>
+                    <p>Criar e manipular planilhas Excel de forma programática, com formatação profissional e recursos avançados, para apresentar os dados processados.</p>
+                    
+                    <h3>O que vamos aprender:</h3>
+                    <ul>
+                        <li>Introdução ao OpenPyXL</li>
+                        <li>Criação e manipulação de planilhas</li>
+                        <li>Formatação avançada de células</li>
+                        <li>Adição de gráficos e imagens</li>
+                        <li>Criação de relatórios profissionais</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <div class="note">
+                        "O OpenPyXL permite criar planilhas Excel com aparência profissional diretamente do Python, automatizando a geração de relatórios que normalmente levariam horas para serem criados manualmente."
+                    </div>
+                    
+                    <h3>Duração estimada:</h3>
+                    <p>20 minutos</p>
+                    
+                    <h3>Por que é importante?</h3>
+                    <p>Planilhas Excel são amplamente utilizadas no ambiente corporativo. Automatizar sua criação com formatação profissional agrega valor significativo aos projetos de automação.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 6: Trabalhando com Planilhas usando OpenPyXL</div>
+            <div class="slide-number">Slide 1</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Comece perguntando quem já precisou criar relatórios em Excel manualmente e quanto tempo isso costuma levar. Explique que este módulo mostrará como automatizar esse processo, criando planilhas com aparência profissional diretamente do Python. Mencione que o OpenPyXL vai além do que o Pandas pode fazer em termos de formatação e recursos visuais.
+        </div>
+    </div>
+
+    <!-- Slide 2: Introdução ao OpenPyXL -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Introdução ao OpenPyXL</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>O que é o OpenPyXL?</h3>
+                    <ul>
+                        <li>Biblioteca Python para manipulação de arquivos Excel (.xlsx)</li>
+                        <li>Permite ler, escrever e modificar planilhas Excel</li>
+                        <li>Suporta formatação avançada, fórmulas, gráficos e imagens</li>
+                        <li>Trabalha com o formato Office Open XML (XLSX)</li>
+                        <li>Não requer instalação do Microsoft Excel</li>
+                    </ul>
+                    
+                    <h3>Instalação</h3>
+                    <pre>pip install openpyxl</pre>
+                    
+                    <h3>Importação básica</h3>
+                    <pre>from openpyxl import Workbook, load_workbook
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.chart import BarChart, Reference
+from openpyxl.drawing.image import Image</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Pandas vs OpenPyXL</h3>
+                    <table>
+                        <tr>
+                            <th>Pandas</th>
+                            <th>OpenPyXL</th>
+                        </tr>
+                        <tr>
+                            <td>Foco em análise de dados</td>
+                            <td>Foco em criação de planilhas</td>
+                        </tr>
+                        <tr>
+                            <td>Formatação básica</td>
+                            <td>Formatação avançada</td>
+                        </tr>
+                        <tr>
+                            <td>Operações em massa</td>
+                            <td>Controle célula a célula</td>
+                        </tr>
+                        <tr>
+                            <td>Sem suporte a gráficos</td>
+                            <td>Suporte a gráficos e imagens</td>
+                        </tr>
+                        <tr>
+                            <td>Mais simples para uso básico</td>
+                            <td>Mais flexível para personalização</td>
+                        </tr>
+                    </table>
+                    
+                    <h3>Quando usar cada um?</h3>
+                    <ul>
+                        <li><span class="highlight">Pandas:</span> Para análise de dados e exportação rápida</li>
+                        <li><span class="highlight">OpenPyXL:</span> Para relatórios formatados e visuais</li>
+                        <li><span class="highlight">Combinados:</span> Processar com Pandas, formatar com OpenPyXL</li>
+                    </ul>
+                    
+                    <div class="note">
+                        É possível usar Pandas para processar os dados e depois OpenPyXL para adicionar formatação avançada ao arquivo Excel gerado.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 6: Trabalhando com Planilhas usando OpenPyXL</div>
+            <div class="slide-number">Slide 2</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Explique a diferença entre Pandas e OpenPyXL para trabalhar com Excel. Enfatize que o Pandas é ótimo para análise e manipulação de dados, mas o OpenPyXL oferece muito mais controle sobre a aparência e formatação das planilhas. Mencione que ambas as bibliotecas podem ser usadas em conjunto: Pandas para processar os dados e OpenPyXL para criar o relatório final com formatação profissional.
+        </div>
+    </div>
+
+    <!-- Slide 3: Criação e Manipulação Básica -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Criação e Manipulação Básica</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Criar uma nova planilha</h3>
+                    <pre># Criar um novo workbook
+wb = Workbook()
+
+# Acessar a planilha ativa
+ws = wb.active
+
+# Renomear a planilha
+ws.title = "Relatório de Produtos"
+
+# Criar novas planilhas
+ws2 = wb.create_sheet("Resumo")
+ws3 = wb.create_sheet("Gráficos", 0)  # Índice 0 (primeira posição)
+
+# Acessar planilhas por nome
+resumo_sheet = wb["Resumo"]
+
+# Listar todas as planilhas
+print(wb.sheetnames)
+
+# Salvar o workbook
+wb.save("relatorio.xlsx")</pre>
+                    
+                    <h3>Carregar uma planilha existente</h3>
+                    <pre># Carregar um arquivo existente
+wb = load_workbook("arquivo_existente.xlsx")
+
+# Acessar uma planilha específica
+ws = wb["Planilha1"]
+
+# Verificar se uma planilha existe
+if "Dados" in wb.sheetnames:
+    ws = wb["Dados"]
+else:
+    ws = wb.create_sheet("Dados")</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Manipulação de células</h3>
+                    <pre># Escrever valores em células
+ws["A1"] = "Produto"
+ws["B1"] = "Preço"
+ws["C1"] = "Quantidade"
+
+# Usando coordenadas de linha e coluna
+ws.cell(row=2, column=1).value = "Notebook"
+ws.cell(row=2, column=2).value = 3500
+ws.cell(row=2, column=3).value = 5
+
+# Acessar valores de células
+valor = ws["A1"].value
+preco = ws.cell(row=2, column=2).value
+
+# Iterando por linhas
+for row in ws.iter_rows(min_row=2, max_row=5, min_col=1, max_col=3):
+    for cell in row:
+        print(cell.value)
+
+# Iterando por colunas
+for col in ws.iter_cols(min_row=1, max_row=5, min_col=1, max_col=3):
+    for cell in col:
+        print(cell.value)</pre>
+                    
+                    <h3>Dimensões e intervalos</h3>
+                    <pre># Obter dimensões da planilha
+print(ws.dimensions)  # Ex: A1:C10
+
+# Mesclar células
+ws.merge_cells("A1:C1")
+ws.merge_cells(start_row=2, start_column=1, end_row=2, end_column=3)
+
+# Desagrupar células mescladas
+ws.unmerge_cells("A1:C1")</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                O OpenPyXL usa coordenadas baseadas em 1 para linhas e colunas (a primeira linha é 1, não 0), diferente da maioria das estruturas de dados em Python.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 6: Trabalhando com Planilhas usando OpenPyXL</div>
+            <div class="slide-number">Slide 3</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre a criação de uma planilha simples e como manipular células. Explique a diferença entre acessar células por notação de string ("A1") e por coordenadas numéricas (row=1, column=1). Mencione que o OpenPyXL usa coordenadas baseadas em 1, não em 0 como a maioria das estruturas em Python. Mostre como iterar por linhas e colunas, o que é útil para processar dados em massa.
+        </div>
+    </div>
+
+    <!-- Slide 4: Formatação de Células -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Formatação de Células</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Formatação de texto</h3>
+                    <pre># Importações necessárias
+from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
+
+# Aplicar fonte
+ws["A1"].font = Font(
+    name="Arial",
+    size=14,
+    bold=True,
+    italic=False,
+    color="FF0000"  # Vermelho em formato RRGGBB
+)
+
+# Alinhamento
+ws["A1"].alignment = Alignment(
+    horizontal="center",
+    vertical="center",
+    wrap_text=True
+)
+
+# Aplicar formatação a múltiplas células
+header_font = Font(bold=True, size=12)
+for cell in ws[1]:  # Primeira linha
+    cell.font = header_font</pre>
+                    
+                    <h3>Cores e preenchimentos</h3>
+                    <pre># Cor de fundo
+ws["A1"].fill = PatternFill(
+    start_color="FFFF00",  # Amarelo
+    end_color="FFFF00",
+    fill_type="solid"
+)
+
+# Gradiente (raro)
+ws["B1"].fill = PatternFill(
+    start_color="FFFF00",
+    end_color="FF0000",
+    fill_type="gradient"
+)</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Bordas</h3>
+                    <pre># Definir estilo de borda
+thin_border = Border(
+    left=Side(style="thin"),
+    right=Side(style="thin"),
+    top=Side(style="thin"),
+    bottom=Side(style="thin")
+)
+
+# Aplicar borda a uma célula
+ws["A1"].border = thin_border
+
+# Aplicar a um intervalo
+for row in ws["A1:C5"]:
+    for cell in row:
+        cell.border = thin_border</pre>
+                    
+                    <h3>Formatação de números</h3>
+                    <pre># Formato de moeda
+ws["B2"].number_format = "R$ #,##0.00"
+
+# Formato de porcentagem
+ws["C2"].number_format = "0.00%"
+
+# Formato de data
+ws["D2"].number_format = "dd/mm/yyyy"
+
+# Aplicar formatação condicional (básica)
+from openpyxl.formatting.rule import CellIsRule
+from openpyxl.styles import Color
+
+# Destacar valores acima de 1000
+ws.conditional_formatting.add(
+    "B2:B10",
+    CellIsRule(
+        operator="greaterThan",
+        formula=["1000"],
+        stopIfTrue=True,
+        fill=PatternFill(bgColor="FFC7CE")  # Rosa claro
+    )
+)</pre>
+                    
+                    <h3>Ajuste de dimensões</h3>
+                    <pre># Ajustar largura da coluna
+ws.column_dimensions["A"].width = 20
+
+# Ajustar altura da linha
+ws.row_dimensions[1].height = 30</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                A formatação adequada torna os relatórios mais legíveis e profissionais. Cabeçalhos destacados, cores consistentes e bordas bem aplicadas melhoram significativamente a aparência das planilhas.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 6: Trabalhando com Planilhas usando OpenPyXL</div>
+            <div class="slide-number">Slide 4</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre exemplos de formatação e como eles afetam a aparência da planilha. Explique que as cores no Excel são definidas em formato hexadecimal RRGGBB. Mostre como criar estilos reutilizáveis (como o thin_border no exemplo) para manter a consistência em toda a planilha. Mencione a importância da formatação de números para valores monetários, porcentagens e datas.
+        </div>
+    </div>
+
+    <!-- Slide 5: Adição de Gráficos -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Adição de Gráficos</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Tipos de gráficos disponíveis</h3>
+                    <ul>
+                        <li>BarChart (gráfico de barras)</li>
+                        <li>LineChart (gráfico de linhas)</li>
+                        <li>PieChart (gráfico de pizza)</li>
+                        <li>ScatterChart (gráfico de dispersão)</li>
+                        <li>AreaChart (gráfico de área)</li>
+                        <li>BubbleChart (gráfico de bolhas)</li>
+                        <li>RadarChart (gráfico de radar)</li>
+                    </ul>
+                    
+                    <h3>Importações necessárias</h3>
+                    <pre>from openpyxl.chart import (
+    BarChart, LineChart, PieChart,
+    Reference, Series
+)
+from openpyxl.chart.label import DataLabelList</pre>
+                    
+                    <h3>Dados de exemplo</h3>
+                    <pre># Preparar dados para o gráfico
+ws = wb.active
+ws["A1"] = "Categoria"
+ws["B1"] = "Vendas"
+
+categorias = ["Eletrônicos", "Roupas", "Alimentos", "Livros"]
+vendas = [15000, 12000, 9000, 7500]
+
+for i, (cat, venda) in enumerate(zip(categorias, vendas), 2):
+    ws.cell(row=i, column=1).value = cat
+    ws.cell(row=i, column=2).value = venda</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Criando um gráfico de barras</h3>
+                    <pre># Criar um gráfico de barras
+chart = BarChart()
+chart.title = "Vendas por Categoria"
+chart.x_axis.title = "Categoria"
+chart.y_axis.title = "Vendas (R$)"
+
+# Definir dados para o gráfico
+data = Reference(ws, min_row=2, max_row=5, min_col=2, max_col=2)
+cats = Reference(ws, min_row=2, max_row=5, min_col=1, max_col=1)
+
+# Adicionar dados ao gráfico
+chart.add_data(data)
+chart.set_categories(cats)
+
+# Personalizar aparência
+chart.style = 10  # Estilo visual
+chart.shape = 4  # Formato das barras
+
+# Adicionar rótulos de dados
+chart.dataLabels = DataLabelList()
+chart.dataLabels.showVal = True  # Mostrar valores
+
+# Adicionar o gráfico à planilha na célula E1
+ws.add_chart(chart, "E1")</pre>
+                    
+                    <h3>Criando um gráfico de pizza</h3>
+                    <pre># Criar um gráfico de pizza
+pie = PieChart()
+pie.title = "Distribuição de Vendas"
+
+# Definir dados
+data = Reference(ws, min_row=2, max_row=5, min_col=2, max_col=2)
+labels = Reference(ws, min_row=2, max_row=5, min_col=1, max_col=1)
+
+# Adicionar dados
+pie.add_data(data)
+pie.set_categories(labels)
+
+# Mostrar valores e porcentagens
+pie.dataLabels = DataLabelList()
+pie.dataLabels.showVal = True
+pie.dataLabels.showPercent = True
+
+# Adicionar à planilha
+ws.add_chart(pie, "E15")</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                Os gráficos são uma forma poderosa de visualizar dados e tornar os relatórios mais impactantes. O OpenPyXL oferece uma variedade de tipos de gráficos, embora com menos opções de personalização que o Excel nativo.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 6: Trabalhando com Planilhas usando OpenPyXL</div>
+            <div class="slide-number">Slide 5</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre a criação de diferentes tipos de gráficos e como eles aparecem na planilha. Explique o conceito de Reference para selecionar dados e rótulos. Mencione que, embora o OpenPyXL ofereça bons recursos para gráficos, para visualizações mais complexas ou personalizadas, bibliotecas como Matplotlib ou Plotly podem ser melhores opções, gerando imagens que podem ser inseridas na planilha.
+        </div>
+    </div>
+
+    <!-- Slide 6: Adição de Imagens e Elementos Visuais -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Adição de Imagens e Elementos Visuais</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Adicionando imagens</h3>
+                    <pre>from openpyxl.drawing.image import Image
+
+# Adicionar uma imagem
+img = Image("logo.png")
+
+# Redimensionar a imagem (opcional)
+img.width = 150
+img.height = 75
+
+# Adicionar à planilha na célula A1
+ws.add_image(img, "A1")</pre>
+                    
+                    <h3>Posicionamento preciso</h3>
+                    <pre># Posicionamento mais preciso
+from openpyxl.drawing.spreadsheet_drawing import (
+    OneCellAnchor, AnchorMarker
+)
+from openpyxl.utils.units import pixels_to_EMU
+
+# Criar marcador de âncora
+marker = AnchorMarker(
+    col=0,  # Coluna A
+    colOff=pixels_to_EMU(10),  # Deslocamento de 10px
+    row=0,  # Linha 1
+    rowOff=pixels_to_EMU(10)   # Deslocamento de 10px
+)
+
+# Aplicar âncora à imagem
+img.anchor = OneCellAnchor(_from=marker, ext=img.drawing.ext)
+ws.add_image(img)</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Adicionando formas e caixas de texto</h3>
+                    <pre># Nota: Formas e caixas de texto têm suporte limitado
+# no OpenPyXL. Para elementos complexos, considere
+# criar imagens com outras bibliotecas.
+
+# Alternativa: Usar células com formatação
+cell = ws["A10"]
+cell.value = "IMPORTANTE!"
+cell.font = Font(bold=True, color="FF0000", size=14)
+cell.alignment = Alignment(horizontal="center")
+cell.fill = PatternFill(
+    start_color="FFFF00",
+    end_color="FFFF00",
+    fill_type="solid"
+)
+
+# Mesclar células para criar uma "caixa"
+ws.merge_cells("A10:D10")</pre>
+                    
+                    <h3>Adicionando hiperlinks</h3>
+                    <pre>from openpyxl.worksheet.hyperlink import Hyperlink
+
+# Adicionar um hiperlink a uma célula
+cell = ws["A15"]
+cell.value = "Clique aqui para mais informações"
+cell.font = Font(color="0000FF", underline="single")
+cell.hyperlink = Hyperlink(
+    target="https://www.exemplo.com.br",
+    tooltip="Visite nosso site"
+)
+
+# Hiperlink para outra planilha
+cell = ws["A16"]
+cell.value = "Ver resumo"
+cell.hyperlink = Hyperlink(
+    target="'Resumo'!A1",  # Formato: 'NomeDaPlanilha'!Célula
+    location="'Resumo'!A1",
+    tooltip="Ir para o resumo"
+)</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                A adição de elementos visuais como logos, imagens de produtos e hiperlinks torna os relatórios mais profissionais e interativos. Para elementos visuais complexos, considere combinar o OpenPyXL com bibliotecas de geração de imagens como Pillow ou Matplotlib.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 6: Trabalhando com Planilhas usando OpenPyXL</div>
+            <div class="slide-number">Slide 6</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre como adicionar imagens e hiperlinks a uma planilha. Explique que o OpenPyXL tem algumas limitações em relação a elementos visuais complexos, mas que é possível contornar isso usando células formatadas ou gerando imagens com outras bibliotecas. Mencione que os hiperlinks podem apontar tanto para URLs externas quanto para outras planilhas ou células dentro do mesmo arquivo.
+        </div>
+    </div>
+
+    <!-- Slide 7: Fórmulas e Funções -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Fórmulas e Funções</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Adicionando fórmulas simples</h3>
+                    <pre># Fórmulas são inseridas como strings
+ws["D2"] = "=A2+B2"
+ws["E2"] = "=SUM(A2:C2)"
+
+# Exemplo com dados
+ws["A2"] = 10
+ws["B2"] = 20
+ws["C2"] = 30
+ws["D2"] = "=A2+B2"  # Resultado: 30
+ws["E2"] = "=SUM(A2:C2)"  # Resultado: 60</pre>
+                    
+                    <h3>Fórmulas comuns</h3>
+                    <pre># Soma
+ws["A10"] = "=SUM(A1:A9)"
+
+# Média
+ws["B10"] = "=AVERAGE(B1:B9)"
+
+# Máximo e mínimo
+ws["C10"] = "=MAX(C1:C9)"
+ws["D10"] = "=MIN(D1:D9)"
+
+# Contagem
+ws["E10"] = "=COUNT(E1:E9)"
+
+# Condicionais
+ws["F10"] = "=COUNTIF(F1:F9,\"Aprovado\")"
+
+# Procurar valor
+ws["G10"] = "=VLOOKUP(A10,A1:C9,3,FALSE)"</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Fórmulas com referências entre planilhas</h3>
+                    <pre># Referência a outra planilha
+ws["A15"] = "=Dados!A1"
+
+# Soma de intervalo em outra planilha
+ws["B15"] = "=SUM(Dados!A1:A10)"</pre>
+                    
+                    <h3>Funções avançadas</h3>
+                    <pre># Funções IF
+ws["C15"] = "=IF(A15>100,\"Alto\",\"Baixo\")"
+
+# Funções aninhadas
+ws["D15"] = "=IF(A15>100,\"Alto\",IF(A15>50,\"Médio\",\"Baixo\"))"
+
+# Funções de texto
+ws["E15"] = "=CONCATENATE(A15,\" - \",B15)"
+
+# Funções de data
+ws["F15"] = "=TODAY()"
+ws["G15"] = "=NETWORKDAYS(A15,TODAY())"</pre>
+                    
+                    <h3>Limitações</h3>
+                    <ul>
+                        <li>O OpenPyXL apenas insere as fórmulas como texto</li>
+                        <li>Os cálculos são realizados pelo Excel quando o arquivo é aberto</li>
+                        <li>Não é possível obter o resultado calculado diretamente no Python</li>
+                        <li>Para cálculos no Python, use as bibliotecas matemáticas nativas</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="note">
+                As fórmulas tornam as planilhas dinâmicas, permitindo que os valores sejam recalculados automaticamente quando os dados mudam. Isso é especialmente útil para relatórios que serão atualizados regularmente.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 6: Trabalhando com Planilhas usando OpenPyXL</div>
+            <div class="slide-number">Slide 7</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre como adicionar diferentes tipos de fórmulas a uma planilha. Explique que o OpenPyXL apenas insere as fórmulas como texto, e que os cálculos são realizados pelo Excel quando o arquivo é aberto. Mencione que, para cálculos no Python, é melhor usar as bibliotecas matemáticas nativas ou o Pandas. Mostre exemplos de fórmulas comuns e como elas podem ser úteis em relatórios.
+        </div>
+    </div>
+
+    <!-- Slide 8: Exemplo Prático Completo -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Exemplo Prático Completo</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Criando um relatório de produtos formatado</h2>
+            
+            <pre>from openpyxl import Workbook
+from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
+from openpyxl.chart import BarChart, Reference
+from openpyxl.utils import get_column_letter
+import json
+
+def criar_relatorio_produtos():
+    # Carregar dados (simulando dados processados pelo Pandas)
+    try:
+        with open('produtos_processados.json', 'r', encoding='utf-8') as f:
+            produtos = json.load(f)
+    except FileNotFoundError:
+        # Dados de exemplo caso o arquivo não exista
+        produtos = [
+            {"nome": "Notebook Dell", "preco": 3599.90, "desconto": 0.15, "categoria": "Informática"},
+            {"nome": "Mouse Logitech", "preco": 89.90, "desconto": 0.25, "categoria": "Informática"},
+            {"nome": "Teclado Redragon", "preco": 199.90, "desconto": 0.20, "categoria": "Informática"},
+            {"nome": "Headset HyperX", "preco": 299.90, "desconto": 0.10, "categoria": "Áudio"},
+            {"nome": "Monitor LG", "preco": 799.90, "desconto": 0.12, "categoria": "Informática"}
+        ]
+    
+    # Criar um novo workbook
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Catálogo de Produtos"
+    
+    # Criar planilha de resumo
+    ws_resumo = wb.create_sheet("Resumo")
+    
+    # Definir estilos
+    header_font = Font(name='Arial', size=12, bold=True, color="FFFFFF")
+    header_fill = PatternFill(start_color="4472C4", end_color="4472C4", fill_type="solid")
+    header_alignment = Alignment(horizontal="center", vertical="center")
+    
+    normal_font = Font(name='Arial', size=11)
+    money_format = "R$ #,##0.00"
+    percent_format = "0.0%"
+    
+    thin_border = Border(
+        left=Side(style='thin'),
+        right=Side(style='thin'),
+        top=Side(style='thin'),
+        bottom=Side(style='thin')
+    )
+    
+    # Configurar cabeçalhos
+    headers = ["Produto", "Categoria", "Preço Original", "Desconto", "Preço Final", "Economia"]
+    for col_num, header in enumerate(headers, 1):
+        cell = ws.cell(row=1, column=col_num)
+        cell.value = header
+        cell.font = header_font
+        cell.fill = header_fill
+        cell.alignment = header_alignment
+        cell.border = thin_border
+        
+        # Ajustar largura da coluna
+        ws.column_dimensions[get_column_letter(col_num)].width = 18
+    
+    # Adicionar dados
+    for row_num, produto in enumerate(produtos, 2):
+        # Calcular valores
+        preco_original = produto["preco"] / (1 - produto["desconto"])
+        preco_final = produto["preco"]
+        economia = preco_original - preco_final
+        
+        # Inserir dados
+        ws.cell(row=row_num, column=1).value = produto["nome"]
+        ws.cell(row=row_num, column=2).value = produto.get("categoria", "Sem categoria")
+        ws.cell(row=row_num, column=3).value = preco_original
+        ws.cell(row=row_num, column=4).value = produto["desconto"]
+        ws.cell(row=row_num, column=5).value = preco_final
+        ws.cell(row=row_num, column=6).value = economia
+        
+        # Aplicar formatação
+        for col_num in range(1, 7):
+            cell = ws.cell(row=row_num, column=col_num)
+            cell.font = normal_font
+            cell.border = thin_border
+            
+            # Formatar números
+            if col_num in [3, 5, 6]:  # Colunas de valores monetários
+                cell.number_format = money_format
+            elif col_num == 4:  # Coluna de desconto
+                cell.number_format = percent_format
+                
+                # Destacar descontos altos
+                if produto["desconto"] >= 0.2:
+                    cell.fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
+    
+    # Adicionar linha de totais
+    row_total = len(produtos) + 2
+    ws.cell(row=row_total, column=1).value = "TOTAL"
+    ws.cell(row=row_total, column=1).font = Font(bold=True)
+    
+    # Adicionar fórmulas para totais
+    ws.cell(row=row_total, column=3).value = f"=SUM(C2:C{row_total-1})"
+    ws.cell(row=row_total, column=5).value = f"=SUM(E2:E{row_total-1})"
+    ws.cell(row=row_total, column=6).value = f"=SUM(F2:F{row_total-1})"
+    
+    # Formatar células de totais
+    for col in [3, 5, 6]:
+        cell = ws.cell(row=row_total, column=col)
+        cell.font = Font(bold=True)
+        cell.number_format = money_format
+        cell.border = Border(top=Side(style='double'), bottom=Side(style='double'))
+    
+    # Criar gráfico de barras para preços por produto
+    chart = BarChart()
+    chart.title = "Preços por Produto"
+    chart.y_axis.title = "Preço (R$)"
+    chart.x_axis.title = "Produto"
+    
+    data = Reference(ws, min_row=1, max_row=row_total-1, min_col=5, max_col=5)
+    cats = Reference(ws, min_row=2, max_row=row_total-1, min_col=1, max_col=1)
+    
+    chart.add_data(data, titles_from_data=True)
+    chart.set_categories(cats)
+    
+    ws.add_chart(chart, "H2")
+    
+    # Criar planilha de resumo
+    ws_resumo["A1"] = "RESUMO DO CATÁLOGO"
+    ws_resumo["A1"].font = Font(size=16, bold=True)
+    ws_resumo.merge_cells("A1:C1")
+    ws_resumo["A1"].alignment = Alignment(horizontal="center")
+    
+    # Adicionar estatísticas ao resumo
+    resumo_data = [
+        ("Total de Produtos", len(produtos)),
+        ("Preço Médio", f"=AVERAGE('Catálogo de Produtos'!E2:E{row_total-1})"),
+        ("Maior Desconto", f"=MAX('Catálogo de Produtos'!D2:D{row_total-1})"),
+        ("Economia Total", f"='Catálogo de Produtos'!F{row_total}")
+    ]
+    
+    for row_num, (label, value) in enumerate(resumo_data, 3):
+        ws_resumo.cell(row=row_num, column=1).value = label
+        ws_resumo.cell(row=row_num, column=2).value = value
+        
+        if isinstance(value, str) and value.startswith("="):
+            if "Preço Médio" in label:
+                ws_resumo.cell(row=row_num, column=2).number_format = money_format
+            elif "Maior Desconto" in label:
+                ws_resumo.cell(row=row_num, column=2).number_format = percent_format
+            elif "Economia" in label:
+                ws_resumo.cell(row=row_num, column=2).number_format = money_format
+    
+    # Ajustar larguras das colunas no resumo
+    ws_resumo.column_dimensions["A"].width = 20
+    ws_resumo.column_dimensions["B"].width = 15
+    
+    # Salvar o workbook
+    wb.save("relatorio_produtos.xlsx")
+    print("Relatório criado com sucesso: relatorio_produtos.xlsx")
+    
+    return "relatorio_produtos.xlsx"
+
+if __name__ == "__main__":
+    criar_relatorio_produtos()</pre>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 6: Trabalhando com Planilhas usando OpenPyXL</div>
+            <div class="slide-number">Slide 8</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Analise este exemplo linha por linha, destacando as técnicas de formatação, a criação de múltiplas planilhas, a adição de fórmulas e a criação de gráficos. Explique como este script se conecta com o módulo anterior (Pandas) e como ele cria um relatório profissional a partir dos dados processados. Se possível, execute o código para demonstrar o resultado em tempo real, mostrando o arquivo Excel gerado.
+        </div>
+    </div>
+
+    <!-- Slide 9: Próximos Passos -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Próximos Passos</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content" style="text-align: center;">
+            <h2 class="slide-subtitle">Relatórios em Excel criados com sucesso!</h2>
+            
+            <p style="font-size: 20px; margin: 30px 0;">
+                Agora que aprendemos a criar planilhas Excel formatadas e profissionais, vamos explorar outra forma de apresentação de dados: documentos PDF!
+            </p>
+            
+            <div style="margin: 40px 0;">
+                <h3>No próximo módulo:</h3>
+                <p style="font-size: 24px; color: var(--secondary-color);">
+                    Geração de Documentos PDF
+                </p>
+                <p>Aprenderemos a criar catálogos, relatórios e documentos em PDF com formatação profissional e elementos visuais.</p>
+            </div>
+            
+            <div class="note" style="text-align: left; max-width: 80%; margin: 40px auto;">
+                <strong>Dica:</strong> O OpenPyXL é uma biblioteca poderosa com muitos recursos além do que vimos aqui. Para aprofundar seus conhecimentos, consulte a documentação oficial em <a href="https://openpyxl.readthedocs.io/">openpyxl.readthedocs.io</a>.
+            </div>
+            
+            <p style="font-size: 24px; margin-top: 40px; color: var(--accent-color);">
+                Alguma dúvida sobre criação de planilhas com OpenPyXL?
+            </p>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 6: Trabalhando com Planilhas usando OpenPyXL</div>
+            <div class="slide-number">Slide 9</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Reserve um tempo para responder dúvidas sobre o OpenPyXL e criação de planilhas. Enfatize a importância desta etapa no fluxo de automação, pois relatórios bem formatados são essenciais para a apresentação profissional dos dados. Faça uma transição suave para o próximo módulo, explicando como os PDFs oferecem outra opção de apresentação, especialmente para documentos que precisam ser impressos ou compartilhados em formato fixo.
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+# Boas-vindas e Introdução (10 min)
+
+## 1. Saudação inicial:
+"Olá a todos! É um prazer estar aqui com vocês hoje. Espero que este minicurso seja uma experiência enriquecedora e que vocês saiam daqui com novas habilidades que possam aplicar no dia a dia."
+
+## 2. Apresentação pessoal:
+- Nome e breve introdução sobre você.
+- Sua experiência com programação e automação.
+- Por que você decidiu oferecer este minicurso.
+
+## 3. Objetivo do minicurso:
+"Nosso objetivo hoje é aprender como automatizar tarefas rotineiras usando programação. Vamos explorar conceitos básicos e avançados, aplicando tudo em um projeto prático ao final."
+
+## 4. Motivação:
+- Exemplos de tarefas que podem ser automatizadas (e.g., envio de e-mails, organização de dados, preenchimento de formulários).
+- Explicação sobre o impacto da automação na produtividade e economia de tempo.
+
+## 5. Estrutura do minicurso:
+"Dividimos nosso tempo em três partes principais:
+1. Uma introdução rápida ao Python e às ferramentas que usaremos.
+2. Uma parte prática com exemplos reais de automação.
+3. Um projeto final para aplicar os conceitos aprendidos."
+
+## 6. Expectativas:
+- "Vocês não precisam ser especialistas em programação; vamos começar do básico."
+- "Espero que vocês participem, perguntem e aproveitem ao máximo este tempo."
+
+## 7. Regras básicas:
+- Pedir para os participantes desligarem notificações e manterem o foco.
+- Explicar que haverá momentos para perguntas e resolução de dúvidas.
+
+## 8. Energizar a turma:
+"Vamos nos divertir enquanto aprendemos! Automação pode parecer complexa no início, mas prometo que é mais fácil do que parece."
+
+"Estão prontos para começar? Vamos lá!"

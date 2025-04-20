@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 2: Preparando o Ambiente de Desenvolvimento</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --dark-bg: #2c3e50;
+            --code-bg: #f8f8f8;
+            --code-border: #ddd;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        .slide {
+            width: 100%;
+            max-width: 1024px;
+            margin: 0 auto 40px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            page-break-after: always;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .slide-title {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .slide-subtitle {
+            font-size: 22px;
+            color: var(--secondary-color);
+            margin: 10px 0 20px;
+        }
+        
+        .slide-content {
+            flex-grow: 1;
+        }
+        
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #777;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        
+        .logo {
+            height: 40px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .slide-number {
+            font-weight: bold;
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .note {
+            background-color: #fff8dc;
+            border-left: 4px solid #ffeb3b;
+            padding: 10px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .code-comment {
+            color: #6a9955;
+        }
+        
+        .code-keyword {
+            color: #569cd6;
+        }
+        
+        .code-string {
+            color: #ce9178;
+        }
+        
+        .code-function {
+            color: #dcdcaa;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .presenter-notes {
+            background-color: #f9f9f9;
+            border: 1px dashed #ccc;
+            padding: 10px;
+            margin-top: 30px;
+            font-style: italic;
+            color: #555;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+            }
+            
+            .slide {
+                box-shadow: none;
+                page-break-after: always;
+                min-height: auto;
+                margin-bottom: 0;
+            }
+            
+            .presenter-notes {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Título do Módulo -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Preparando o Ambiente de Desenvolvimento</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Configurando as ferramentas para nossa jornada</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Objetivo do Módulo</h3>
+                    <p>Configurar corretamente todas as ferramentas necessárias para o desenvolvimento de scripts de automação em Python.</p>
+                    
+                    <h3>O que vamos aprender:</h3>
+                    <ul>
+                        <li>Por que Python é ideal para automação</li>
+                        <li>Instalação e configuração do Python</li>
+                        <li>Configuração do VS Code como ambiente de desenvolvimento</li>
+                        <li>Instalação das bibliotecas necessárias</li>
+                        <li>Configuração do WebDriver para Selenium</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <div class="note">
+                        "Uma boa configuração inicial economiza horas de depuração no futuro."
+                    </div>
+                    
+                    <h3>Duração estimada:</h3>
+                    <p>20 minutos</p>
+                    
+                    <h3>Pré-requisitos:</h3>
+                    <ul>
+                        <li>Computador com acesso à internet</li>
+                        <li>Permissões de administrador para instalação</li>
+                        <li>Espaço em disco: ~500MB</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 2: Preparando o Ambiente de Desenvolvimento</div>
+            <div class="slide-number">Slide 1</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Enfatize a importância de uma configuração correta do ambiente. Muitos problemas que os iniciantes enfrentam são relacionados a configurações incorretas. Pergunte se todos têm acesso de administrador em seus computadores.
+        </div>
+    </div>
+
+    <!-- Slide 2: Por que Python para Automação? -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Por que Python para Automação?</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Vantagens do Python</h3>
+                    <ul>
+                        <li><span class="highlight">Sintaxe clara e legível:</span> Código mais fácil de entender e manter</li>
+                        <li><span class="highlight">Curva de aprendizado suave:</span> Ideal para iniciantes em programação</li>
+                        <li><span class="highlight">Multiplataforma:</span> Funciona em Windows, macOS e Linux</li>
+                        <li><span class="highlight">Tipagem dinâmica:</span> Menos código boilerplate</li>
+                        <li><span class="highlight">Comunidade ativa:</span> Fácil encontrar soluções para problemas</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Ecossistema para Automação</h3>
+                    <ul>
+                        <li><span class="highlight">Selenium:</span> Automação de navegadores web</li>
+                        <li><span class="highlight">Pandas:</span> Manipulação e análise de dados</li>
+                        <li><span class="highlight">OpenPyXL:</span> Manipulação de planilhas Excel</li>
+                        <li><span class="highlight">FPDF:</span> Geração de documentos PDF</li>
+                        <li><span class="highlight">Requests:</span> Requisições HTTP simplificadas</li>
+                        <li><span class="highlight">Beautiful Soup:</span> Parsing de HTML e XML</li>
+                        <li><span class="highlight">PyAutoGUI:</span> Automação de GUI</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="note">
+                Python é consistentemente classificado entre as 3 linguagens de programação mais populares no mundo, segundo o índice TIOBE e o Stack Overflow Developer Survey.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 2: Preparando o Ambiente de Desenvolvimento</div>
+            <div class="slide-number">Slide 2</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Compare brevemente com outras linguagens como JavaScript ou Java, mas sem depreciar outras opções. Enfatize que Python é particularmente adequado para iniciantes e para automação devido à sua simplicidade e ao rico ecossistema de bibliotecas.
+        </div>
+    </div>
+
+    <!-- Slide 3: Instalação do Python -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Instalação do Python</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Passo a passo para diferentes sistemas operacionais</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Windows</h3>
+                    <ol>
+                        <li>Acesse <a href="https://www.python.org/downloads/">python.org/downloads</a></li>
+                        <li>Baixe a versão mais recente (3.10+)</li>
+                        <li><span class="highlight">Importante:</span> Marque a opção "Add Python to PATH"</li>
+                        <li>Clique em "Install Now" para instalação padrão</li>
+                        <li>Verifique a instalação abrindo o Prompt de Comando e digitando:
+                            <pre>python --version</pre>
+                        </li>
+                    </ol>
+                    
+                    <h3>macOS</h3>
+                    <ol>
+                        <li>Acesse <a href="https://www.python.org/downloads/">python.org/downloads</a></li>
+                        <li>Baixe a versão mais recente para macOS</li>
+                        <li>Execute o instalador .pkg e siga as instruções</li>
+                        <li>Verifique a instalação abrindo o Terminal e digitando:
+                            <pre>python3 --version</pre>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="column">
+                    <h3>Linux (Ubuntu/Debian)</h3>
+                    <ol>
+                        <li>Abra o Terminal</li>
+                        <li>Atualize os repositórios:
+                            <pre>sudo apt update</pre>
+                        </li>
+                        <li>Instale o Python e o pip:
+                            <pre>sudo apt install python3 python3-pip</pre>
+                        </li>
+                        <li>Verifique a instalação:
+                            <pre>python3 --version
+pip3 --version</pre>
+                        </li>
+                    </ol>
+                    
+                    <div class="note">
+                        <p><strong>Dica:</strong> Para verificar se o Python foi instalado corretamente, tente executar o interpretador interativo:</p>
+                        <pre>python</pre> ou <pre>python3</pre>
+                        <p>Você deverá ver o prompt >>> indicando que o interpretador está funcionando.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 2: Preparando o Ambiente de Desenvolvimento</div>
+            <div class="slide-number">Slide 3</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Enfatize a importância de marcar "Add Python to PATH" no Windows, pois é um erro comum que causa problemas mais tarde. Se possível, demonstre a instalação em tempo real ou use capturas de tela do processo. Mencione que no macOS e Linux, o Python 3 geralmente é acessado com o comando "python3" em vez de "python".
+        </div>
+    </div>
+
+    <!-- Slide 4: Configuração do VS Code -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Configuração do VS Code</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Preparando nosso ambiente de desenvolvimento</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Instalação do VS Code</h3>
+                    <ol>
+                        <li>Acesse <a href="https://code.visualstudio.com/">code.visualstudio.com</a></li>
+                        <li>Baixe a versão para seu sistema operacional</li>
+                        <li>Execute o instalador e siga as instruções</li>
+                        <li>Inicie o VS Code após a instalação</li>
+                    </ol>
+                    
+                    <h3>Extensões Recomendadas</h3>
+                    <ul>
+                        <li><span class="highlight">Python</span> (Microsoft): Suporte essencial para Python</li>
+                        <li><span class="highlight">Pylance</span>: Servidor de linguagem para melhor IntelliSense</li>
+                        <li><span class="highlight">Python Indent</span>: Melhora a indentação automática</li>
+                        <li><span class="highlight">Jupyter</span>: Para notebooks interativos</li>
+                        <li><span class="highlight">Rainbow Brackets</span>: Facilita a visualização de parênteses</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Configuração Básica</h3>
+                    <ol>
+                        <li>Abra o VS Code</li>
+                        <li>Acesse a aba de extensões (Ctrl+Shift+X)</li>
+                        <li>Pesquise e instale as extensões recomendadas</li>
+                        <li>Crie uma pasta para o projeto:
+                            <pre>mkdir automacao_python
+cd automacao_python
+code .</pre>
+                        </li>
+                        <li>Crie um novo arquivo Python (File > New File)</li>
+                        <li>Salve como "teste.py" (Ctrl+S)</li>
+                    </ol>
+                    
+                    <h3>Atalhos Úteis</h3>
+                    <ul>
+                        <li><code>Ctrl+`</code>: Abrir/fechar terminal integrado</li>
+                        <li><code>F5</code>: Executar o script atual</li>
+                        <li><code>Ctrl+/</code>: Comentar/descomentar linha</li>
+                        <li><code>Ctrl+Space</code>: Ativar sugestões de código</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 2: Preparando o Ambiente de Desenvolvimento</div>
+            <div class="slide-number">Slide 4</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre a interface do VS Code e como instalar extensões. Mostre como o terminal integrado facilita o trabalho. Mencione que o VS Code é altamente personalizável, mas que as configurações padrão são adequadas para iniciantes.
+        </div>
+    </div>
+
+    <!-- Slide 5: Instalação das Bibliotecas -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Instalação das Bibliotecas</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Preparando as ferramentas para automação</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Usando o pip</h3>
+                    <p>O pip é o gerenciador de pacotes do Python que permite instalar bibliotecas facilmente.</p>
+                    
+                    <h4>Instalação das bibliotecas principais:</h4>
+                    <pre>pip install selenium
+pip install pandas
+pip install openpyxl
+pip install fpdf
+pip install colorama</pre>
+                    
+                    <p>Ou instale tudo de uma vez:</p>
+                    <pre>pip install selenium pandas openpyxl fpdf colorama</pre>
+                    
+                    <h4>Verificando as instalações:</h4>
+                    <pre>pip list</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Sobre as Bibliotecas</h3>
+                    <ul>
+                        <li><span class="highlight">Selenium</span>: Automação de navegadores web</li>
+                        <li><span class="highlight">Pandas</span>: Manipulação e análise de dados</li>
+                        <li><span class="highlight">OpenPyXL</span>: Manipulação de planilhas Excel</li>
+                        <li><span class="highlight">FPDF</span>: Geração de documentos PDF</li>
+                        <li><span class="highlight">Colorama</span>: Saídas coloridas no terminal</li>
+                    </ul>
+                    
+                    <h3>Ambientes Virtuais (Opcional)</h3>
+                    <p>Recomendado para isolar dependências entre projetos:</p>
+                    <pre># Criar ambiente virtual
+python -m venv venv
+
+# Ativar ambiente (Windows)
+venv\Scripts\activate
+
+# Ativar ambiente (macOS/Linux)
+source venv/bin/activate
+
+# Instalar bibliotecas no ambiente
+pip install selenium pandas openpyxl fpdf</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                Se você encontrar erros de permissão no Linux ou macOS, tente usar <code>pip3</code> em vez de <code>pip</code> ou adicione <code>--user</code> ao comando: <code>pip install --user selenium</code>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 2: Preparando o Ambiente de Desenvolvimento</div>
+            <div class="slide-number">Slide 5</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Explique brevemente o que cada biblioteca faz e por que a estamos usando. Mencione que ambientes virtuais são uma boa prática, mas que para simplificar o minicurso, podemos instalar as bibliotecas globalmente. Se houver tempo, demonstre a criação de um ambiente virtual.
+        </div>
+    </div>
+
+    <!-- Slide 6: Configuração do WebDriver -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Configuração do WebDriver</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Preparando o Selenium para automação web</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>O que é o WebDriver?</h3>
+                    <p>O WebDriver é uma interface que permite ao Selenium controlar navegadores web. Cada navegador requer seu próprio driver.</p>
+                    
+                    <h3>Método Simplificado (Recomendado)</h3>
+                    <p>Usando o ChromeDriverManager (instalação automática):</p>
+                    <pre>pip install webdriver-manager</pre>
+                    
+                    <p>No seu código:</p>
+                    <pre>from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Método Manual</h3>
+                    <ol>
+                        <li>Verifique a versão do seu navegador Chrome</li>
+                        <li>Baixe o ChromeDriver compatível em:
+                            <a href="https://sites.google.com/chromium.org/driver/">sites.google.com/chromium.org/driver</a>
+                        </li>
+                        <li>Extraia o arquivo executável</li>
+                        <li>Adicione ao PATH do sistema ou especifique o caminho no código:
+                            <pre>from selenium import webdriver
+
+driver = webdriver.Chrome(executable_path='/caminho/para/chromedriver')</pre>
+                        </li>
+                    </ol>
+                    
+                    <div class="note">
+                        <p>Para outros navegadores:</p>
+                        <ul>
+                            <li>Firefox: GeckoDriver</li>
+                            <li>Edge: EdgeDriver</li>
+                            <li>Safari: SafariDriver</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Teste Rápido</h3>
+            <p>Crie um arquivo <code>teste_selenium.py</code> com o seguinte código:</p>
+            <pre>from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+
+# Inicializar o driver
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
+# Abrir uma página
+driver.get('https://www.python.org')
+
+# Aguardar para visualização
+time.sleep(3)
+
+# Fechar o navegador
+driver.quit()
+
+print("Teste concluído com sucesso!")</pre>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 2: Preparando o Ambiente de Desenvolvimento</div>
+            <div class="slide-number">Slide 6</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Enfatize que o método simplificado com webdriver-manager é mais fácil para iniciantes, pois gerencia automaticamente a compatibilidade de versões. Se possível, demonstre o teste rápido para mostrar o Selenium em ação. Mencione que problemas com o WebDriver são comuns, então é importante configurá-lo corretamente.
+        </div>
+    </div>
+
+    <!-- Slide 7: Verificação do Ambiente -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Verificação do Ambiente</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Confirmando que tudo está funcionando</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Script de Verificação</h3>
+                    <p>Crie um arquivo <code>verificar_ambiente.py</code> com o seguinte código:</p>
+                    <pre>import sys
+import pkg_resources
+import platform
+
+# Verificar versão do Python
+print(f"Python: {platform.python_version()}")
+
+# Verificar bibliotecas instaladas
+bibliotecas = [
+    "selenium",
+    "pandas",
+    "openpyxl",
+    "fpdf",
+    "colorama",
+    "webdriver_manager"
+]
+
+print("\nBibliotecas instaladas:")
+for biblioteca in bibliotecas:
+    try:
+        versao = pkg_resources.get_distribution(biblioteca).version
+        print(f"✓ {biblioteca}: {versao}")
+    except pkg_resources.DistributionNotFound:
+        print(f"✗ {biblioteca}: Não instalada")
+
+# Testar importação do Selenium
+try:
+    from selenium import webdriver
+    from selenium.webdriver.chrome.service import Service
+    from webdriver_manager.chrome import ChromeDriverManager
+    print("\n✓ Importação do Selenium bem-sucedida")
+except ImportError as e:
+    print(f"\n✗ Erro ao importar Selenium: {e}")
+
+print("\nVerificação concluída!")</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Problemas Comuns e Soluções</h3>
+                    
+                    <h4>Python não encontrado no PATH</h4>
+                    <ul>
+                        <li>Windows: Reinstale o Python marcando "Add Python to PATH"</li>
+                        <li>macOS/Linux: Verifique se está usando <code>python3</code> em vez de <code>python</code></li>
+                    </ul>
+                    
+                    <h4>Erro ao instalar bibliotecas</h4>
+                    <ul>
+                        <li>Tente usar <code>--user</code>: <code>pip install --user selenium</code></li>
+                        <li>Verifique a conexão com a internet</li>
+                        <li>Atualize o pip: <code>python -m pip install --upgrade pip</code></li>
+                    </ul>
+                    
+                    <h4>Erro com o WebDriver</h4>
+                    <ul>
+                        <li>Verifique se o navegador está atualizado</li>
+                        <li>Tente usar o webdriver-manager</li>
+                        <li>Verifique permissões do arquivo do driver</li>
+                    </ul>
+                    
+                    <div class="note">
+                        Se encontrar problemas persistentes, não hesite em pedir ajuda. Configurar o ambiente corretamente é crucial para o sucesso do minicurso.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 2: Preparando o Ambiente de Desenvolvimento</div>
+            <div class="slide-number">Slide 7</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Execute o script de verificação em tempo real para mostrar como deve ser a saída esperada. Reserve um tempo para ajudar participantes com problemas de configuração. Enfatize que é normal encontrar alguns obstáculos nesta fase, mas que superá-los agora economizará tempo depois.
+        </div>
+    </div>
+
+    <!-- Slide 8: Próximos Passos -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Próximos Passos</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content" style="text-align: center;">
+            <h2 class="slide-subtitle">Ambiente configurado com sucesso!</h2>
+            
+            <p style="font-size: 20px; margin: 30px 0;">
+                Agora que temos nosso ambiente de desenvolvimento configurado, estamos prontos para começar a programar e automatizar tarefas!
+            </p>
+            
+            <div style="margin: 40px 0;">
+                <h3>No próximo módulo:</h3>
+                <p style="font-size: 24px; color: var(--secondary-color);">
+                    Fundamentos de Python para Automação
+                </p>
+                <p>Aprenderemos os conceitos básicos de Python necessários para criar scripts de automação eficientes.</p>
+            </div>
+            
+            <div class="note" style="text-align: left; max-width: 80%; margin: 40px auto;">
+                <strong>Dica:</strong> Se você quiser se familiarizar mais com o VS Code antes do próximo módulo, explore os menus e configurações. Experimente criar e executar um script Python simples para se acostumar com o ambiente.
+            </div>
+            
+            <p style="font-size: 24px; margin-top: 40px; color: var(--accent-color);">
+                Alguma dúvida sobre a configuração do ambiente?
+            </p>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 2: Preparando o Ambiente de Desenvolvimento</div>
+            <div class="slide-number">Slide 8</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Este é um bom momento para uma pausa curta e para verificar se todos conseguiram configurar o ambiente corretamente. Ofereça ajuda individual para quem ainda estiver com problemas. Faça uma transição suave para o próximo módulo, criando expectativa para o aprendizado de Python.
+        </div>
+    </div>
+</body>
+</html>

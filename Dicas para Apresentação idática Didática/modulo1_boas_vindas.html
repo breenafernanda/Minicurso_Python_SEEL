@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 1: Boas-vindas e Contextualização</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --dark-bg: #2c3e50;
+            --code-bg: #f8f8f8;
+            --code-border: #ddd;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        .slide {
+            width: 100%;
+            max-width: 1024px;
+            margin: 0 auto 40px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            page-break-after: always;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .slide-title {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .slide-subtitle {
+            font-size: 22px;
+            color: var(--secondary-color);
+            margin: 10px 0 20px;
+        }
+        
+        .slide-content {
+            flex-grow: 1;
+        }
+        
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #777;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        
+        .logo {
+            height: 40px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .slide-number {
+            font-weight: bold;
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .note {
+            background-color: #fff8dc;
+            border-left: 4px solid #ffeb3b;
+            padding: 10px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .code-comment {
+            color: #6a9955;
+        }
+        
+        .code-keyword {
+            color: #569cd6;
+        }
+        
+        .code-string {
+            color: #ce9178;
+        }
+        
+        .code-function {
+            color: #dcdcaa;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .presenter-notes {
+            background-color: #f9f9f9;
+            border: 1px dashed #ccc;
+            padding: 10px;
+            margin-top: 30px;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .cover-slide {
+            text-align: center;
+            justify-content: center;
+        }
+        
+        .cover-slide .slide-title {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .cover-slide .slide-subtitle {
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+        
+        .cover-slide .author {
+            font-size: 20px;
+            margin-top: 60px;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+            }
+            
+            .slide {
+                box-shadow: none;
+                page-break-after: always;
+                min-height: auto;
+                margin-bottom: 0;
+            }
+            
+            .presenter-notes {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Capa -->
+    <div class="slide cover-slide">
+        <div class="slide-content">
+            <h1 class="slide-title">Automatizando Tarefas com Python</h1>
+            <h2 class="slide-subtitle">Do Básico à Prática</h2>
+            
+            <p>Um minicurso prático sobre automação de tarefas cotidianas</p>
+            
+            <p class="author">Seu Nome</p>
+            <p>Data: Abril 2025</p>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 1: Boas-vindas e Contextualização</div>
+            <div class="slide-number">Slide 1</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Dê as boas-vindas aos participantes com entusiasmo. Agradeça a presença de todos e demonstre sua empolgação com o tema do minicurso.
+        </div>
+    </div>
+
+    <!-- Slide 2: Apresentação Pessoal -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Quem sou eu?</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Minha Trajetória</h3>
+                    <ul>
+                        <li>Formação acadêmica</li>
+                        <li>Experiência profissional</li>
+                        <li>Projetos relevantes</li>
+                    </ul>
+                    
+                    <h3>Por que automação?</h3>
+                    <p>Compartilhe sua história pessoal com automação e como isso transformou sua produtividade.</p>
+                </div>
+                
+                <div class="column">
+                    <h3>Minha Experiência com Python</h3>
+                    <ul>
+                        <li>Quando e como começou</li>
+                        <li>Principais projetos desenvolvidos</li>
+                        <li>Desafios superados</li>
+                    </ul>
+                    
+                    <div class="note">
+                        "A automação me permitiu focar no que realmente importa, eliminando tarefas repetitivas do meu dia a dia."
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 1: Boas-vindas e Contextualização</div>
+            <div class="slide-number">Slide 2</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Personalize esta parte com sua própria história. Seja autêntico e mostre sua paixão pelo tema. Isso ajuda a criar conexão com os participantes.
+        </div>
+    </div>
+
+    <!-- Slide 3: O Poder da Automação -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">O Poder da Automação</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Por que automatizar?</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Benefícios</h3>
+                    <ul>
+                        <li><span class="highlight">Economia de tempo:</span> Redução de até 90% em tarefas repetitivas</li>
+                        <li><span class="highlight">Redução de erros:</span> Eliminação de falhas humanas em processos manuais</li>
+                        <li><span class="highlight">Escalabilidade:</span> Execute a mesma tarefa 1 ou 1000 vezes com o mesmo esforço</li>
+                        <li><span class="highlight">Consistência:</span> Resultados padronizados e previsíveis</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Exemplos Reais</h3>
+                    <ul>
+                        <li>Extração de dados de sites (web scraping)</li>
+                        <li>Preenchimento automático de formulários</li>
+                        <li>Geração de relatórios periódicos</li>
+                        <li>Processamento e análise de grandes volumes de dados</li>
+                        <li>Envio automatizado de e-mails e mensagens</li>
+                        <li>Monitoramento de preços e ofertas</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="note">
+                Um profissional que domina automação pode economizar, em média, 3 horas diárias de trabalho manual.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 1: Boas-vindas e Contextualização</div>
+            <div class="slide-number">Slide 3</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Compartilhe exemplos concretos de como a automação transformou processos em sua experiência. Se possível, mencione estatísticas ou casos reais que demonstrem o impacto da automação.
+        </div>
+    </div>
+
+    <!-- Slide 4: Antes e Depois da Automação -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Antes vs. Depois da Automação</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <table>
+                <tr>
+                    <th>Tarefa</th>
+                    <th>Processo Manual</th>
+                    <th>Processo Automatizado</th>
+                    <th>Economia</th>
+                </tr>
+                <tr>
+                    <td>Extração de dados de 100 páginas web</td>
+                    <td>5 horas</td>
+                    <td>10 minutos</td>
+                    <td>97% do tempo</td>
+                </tr>
+                <tr>
+                    <td>Geração de relatórios mensais</td>
+                    <td>3 horas</td>
+                    <td>5 minutos</td>
+                    <td>97% do tempo</td>
+                </tr>
+                <tr>
+                    <td>Organização de planilhas de dados</td>
+                    <td>2 horas</td>
+                    <td>30 segundos</td>
+                    <td>99% do tempo</td>
+                </tr>
+                <tr>
+                    <td>Envio de e-mails personalizados</td>
+                    <td>4 horas</td>
+                    <td>2 minutos</td>
+                    <td>99% do tempo</td>
+                </tr>
+                <tr>
+                    <td>Monitoramento de preços</td>
+                    <td>Diário: 1 hora</td>
+                    <td>Contínuo e automático</td>
+                    <td>100% do tempo</td>
+                </tr>
+            </table>
+            
+            <div class="note">
+                Além da economia de tempo, a automação reduz significativamente a taxa de erros e permite que você foque em tarefas que realmente exigem criatividade e pensamento crítico.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 1: Boas-vindas e Contextualização</div>
+            <div class="slide-number">Slide 4</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Enfatize o contraste entre o antes e depois. Se possível, compartilhe uma história pessoal de como a automação transformou algum processo específico em sua rotina.
+        </div>
+    </div>
+
+    <!-- Slide 5: Visão Geral do Minicurso -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Nossa Jornada de Aprendizado</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">O que vamos aprender?</h2>
+            
+            <ol>
+                <li><span class="highlight">Módulo 1:</span> Boas-vindas e Contextualização (15 min)</li>
+                <li><span class="highlight">Módulo 2:</span> Preparando o Ambiente de Desenvolvimento (20 min)</li>
+                <li><span class="highlight">Módulo 3:</span> Fundamentos de Python para Automação (30 min)</li>
+                <li><span class="highlight">Módulo 4:</span> Automação Web com Selenium (35 min)</li>
+                <li><span class="highlight">Módulo 5:</span> Manipulação de Dados com Pandas (25 min)</li>
+                <li><span class="highlight">Módulo 6:</span> Trabalhando com Planilhas usando OpenPyXL (20 min)</li>
+                <li><span class="highlight">Módulo 7:</span> Geração de Documentos PDF (20 min)</li>
+                <li><span class="highlight">Módulo 8:</span> Projeto Integrador - Catálogo Automatizado de Ofertas (15 min)</li>
+            </ol>
+            
+            <div class="note">
+                Cada módulo foi projetado para construir sobre o anterior, culminando em um projeto prático que integra todas as tecnologias aprendidas.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 1: Boas-vindas e Contextualização</div>
+            <div class="slide-number">Slide 5</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Explique brevemente como os módulos se conectam e formam uma jornada coerente de aprendizado. Destaque que o curso foi estruturado para que mesmo iniciantes possam acompanhar e obter resultados práticos.
+        </div>
+    </div>
+
+    <!-- Slide 6: Projeto Final -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Nosso Projeto Final</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Catálogo Automatizado de Ofertas</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>O que vamos construir:</h3>
+                    <p>Um sistema automatizado que:</p>
+                    <ol>
+                        <li>Extrai informações de produtos em promoção de sites de e-commerce</li>
+                        <li>Organiza os dados em planilhas estruturadas</li>
+                        <li>Gera um catálogo em PDF com imagens e informações dos produtos</li>
+                    </ol>
+                    
+                    <h3>Tecnologias utilizadas:</h3>
+                    <ul>
+                        <li>Selenium para automação web</li>
+                        <li>Pandas para processamento de dados</li>
+                        <li>OpenPyXL para manipulação de planilhas</li>
+                        <li>FPDF para geração de documentos PDF</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Fluxo do Projeto:</h3>
+                    <pre>
+Web (Amazon) → Selenium → Dados → Pandas
+    → Excel (OpenPyXL) → PDF (FPDF)
+                    </pre>
+                    
+                    <h3>Benefícios práticos:</h3>
+                    <ul>
+                        <li>Monitoramento automático de ofertas</li>
+                        <li>Comparação de preços entre diferentes sites</li>
+                        <li>Compartilhamento fácil de ofertas via PDF</li>
+                        <li>Base para outros projetos de automação</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 1: Boas-vindas e Contextualização</div>
+            <div class="slide-number">Slide 6</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Mostre entusiasmo ao falar sobre o projeto final. Enfatize que este é um projeto real com aplicações práticas, não apenas um exercício acadêmico. Se possível, mostre rapidamente um exemplo do resultado final para motivar os participantes.
+        </div>
+    </div>
+
+    <!-- Slide 7: Expectativas e Regras -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Contrato de Aprendizagem</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>O que esperar do minicurso:</h3>
+                    <ul>
+                        <li>Abordagem prática e hands-on</li>
+                        <li>Código-fonte completo disponibilizado</li>
+                        <li>Exemplos reais e aplicáveis</li>
+                        <li>Suporte durante as atividades</li>
+                        <li>Materiais complementares para estudo posterior</li>
+                    </ul>
+                    
+                    <h3>O que <span class="highlight">não</span> esperar:</h3>
+                    <ul>
+                        <li>Domínio completo de Python em poucas horas</li>
+                        <li>Soluções para todos os cenários possíveis</li>
+                        <li>Foco em teoria avançada de programação</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Para aproveitar ao máximo:</h3>
+                    <ul>
+                        <li>Participe ativamente, faça perguntas</li>
+                        <li>Tente acompanhar os exemplos práticos</li>
+                        <li>Não se preocupe com erros - eles fazem parte do aprendizado</li>
+                        <li>Anote dúvidas para os momentos de perguntas</li>
+                        <li>Compartilhe suas experiências e ideias</li>
+                    </ul>
+                    
+                    <h3>Regras básicas:</h3>
+                    <ul>
+                        <li>Respeito mútuo e colaboração</li>
+                        <li>Celulares no silencioso</li>
+                        <li>Momentos específicos para perguntas</li>
+                        <li>Intervalo programado</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 1: Boas-vindas e Contextualização</div>
+            <div class="slide-number">Slide 7</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Estabeleça um ambiente seguro para aprendizado, onde os participantes se sintam confortáveis para fazer perguntas e cometer erros. Enfatize que o objetivo é o aprendizado prático, não a perfeição.
+        </div>
+    </div>
+
+    <!-- Slide 8: Vamos Começar! -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Vamos Começar!</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content" style="text-align: center;">
+            <h2 class="slide-subtitle">Preparados para automatizar?</h2>
+            
+            <p style="font-size: 24px; margin: 40px 0;">
+                "A automação aplicada a uma operação ineficiente aumentará a ineficiência."
+            </p>
+            <p style="font-style: italic;">— Bill Gates</p>
+            
+            <div class="note" style="text-align: left; max-width: 80%; margin: 40px auto;">
+                Vamos aprender não apenas a automatizar, mas a identificar os processos que realmente merecem ser automatizados e como fazê-lo de forma eficiente.
+            </div>
+            
+            <p style="font-size: 28px; margin-top: 40px; color: var(--accent-color);">
+                Alguma pergunta antes de prosseguirmos?
+            </p>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 1: Boas-vindas e Contextualização</div>
+            <div class="slide-number">Slide 8</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Este é um bom momento para uma breve pausa e verificar se há perguntas iniciais. Responda brevemente e mantenha o entusiasmo para o próximo módulo. A citação de Bill Gates serve como um lembrete de que a automação deve ser aplicada com sabedoria.
+        </div>
+    </div>
+</body>
+</html>

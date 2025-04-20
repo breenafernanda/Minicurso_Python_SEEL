@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 4: Automação Web com Selenium</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --dark-bg: #2c3e50;
+            --code-bg: #f8f8f8;
+            --code-border: #ddd;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        .slide {
+            width: 100%;
+            max-width: 1024px;
+            margin: 0 auto 40px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            page-break-after: always;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .slide-title {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .slide-subtitle {
+            font-size: 22px;
+            color: var(--secondary-color);
+            margin: 10px 0 20px;
+        }
+        
+        .slide-content {
+            flex-grow: 1;
+        }
+        
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #777;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        
+        .logo {
+            height: 40px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .slide-number {
+            font-weight: bold;
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .note {
+            background-color: #fff8dc;
+            border-left: 4px solid #ffeb3b;
+            padding: 10px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .code-comment {
+            color: #6a9955;
+        }
+        
+        .code-keyword {
+            color: #569cd6;
+        }
+        
+        .code-string {
+            color: #ce9178;
+        }
+        
+        .code-function {
+            color: #dcdcaa;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .presenter-notes {
+            background-color: #f9f9f9;
+            border: 1px dashed #ccc;
+            padding: 10px;
+            margin-top: 30px;
+            font-style: italic;
+            color: #555;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+            }
+            
+            .slide {
+                box-shadow: none;
+                page-break-after: always;
+                min-height: auto;
+                margin-bottom: 0;
+            }
+            
+            .presenter-notes {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Título do Módulo -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Automação Web com Selenium</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Controlando navegadores de forma programática</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Objetivo do Módulo</h3>
+                    <p>Utilizar o Selenium para automatizar interações com páginas web, extraindo dados e realizando ações como um usuário humano.</p>
+                    
+                    <h3>O que vamos aprender:</h3>
+                    <ul>
+                        <li>Introdução ao Selenium e WebDriver</li>
+                        <li>Navegação básica e localização de elementos</li>
+                        <li>Interação com elementos da página</li>
+                        <li>Esperas e sincronização</li>
+                        <li>Extração de dados estruturados</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <div class="note">
+                        "O Selenium é uma das ferramentas mais poderosas para automação web, permitindo controlar navegadores como se fossem usuários reais."
+                    </div>
+                    
+                    <h3>Duração estimada:</h3>
+                    <p>35 minutos</p>
+                    
+                    <h3>Por que é importante?</h3>
+                    <p>A automação web permite extrair dados de sites, preencher formulários, realizar testes e muito mais, economizando horas de trabalho manual e repetitivo.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 4: Automação Web com Selenium</div>
+            <div class="slide-number">Slide 1</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Comece perguntando quem já ouviu falar do Selenium ou já o utilizou. Explique que este é um dos módulos mais práticos e com aplicações imediatas no dia a dia. Mencione que o Selenium é usado tanto para automação de tarefas quanto para testes automatizados de aplicações web.
+        </div>
+    </div>
+
+    <!-- Slide 2: Introdução ao Selenium e WebDriver -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Introdução ao Selenium e WebDriver</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>O que é o Selenium?</h3>
+                    <ul>
+                        <li>Framework para automação de navegadores web</li>
+                        <li>Permite controlar navegadores programaticamente</li>
+                        <li>Suporta múltiplos navegadores (Chrome, Firefox, Edge, Safari)</li>
+                        <li>Disponível em várias linguagens (Python, Java, C#, JavaScript)</li>
+                    </ul>
+                    
+                    <h3>Componentes principais</h3>
+                    <ul>
+                        <li><span class="highlight">Selenium WebDriver:</span> API para controlar navegadores</li>
+                        <li><span class="highlight">Selenium IDE:</span> Ferramenta de gravação/reprodução (não usaremos)</li>
+                        <li><span class="highlight">Selenium Grid:</span> Para execução distribuída (avançado)</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Arquitetura do WebDriver</h3>
+                    <pre>
+Script Python → Selenium WebDriver → Driver do Navegador → Navegador
+</pre>
+                    
+                    <h3>Casos de uso comuns</h3>
+                    <ul>
+                        <li>Web scraping (extração de dados)</li>
+                        <li>Preenchimento automático de formulários</li>
+                        <li>Testes automatizados de aplicações web</li>
+                        <li>Monitoramento de sites</li>
+                        <li>Captura de screenshots</li>
+                        <li>Automação de tarefas repetitivas em sistemas web</li>
+                    </ul>
+                    
+                    <h3>Considerações éticas e legais</h3>
+                    <ul>
+                        <li>Respeite os termos de serviço dos sites</li>
+                        <li>Verifique robots.txt e políticas de scraping</li>
+                        <li>Adicione delays para não sobrecarregar servidores</li>
+                        <li>Use apenas para fins legítimos</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="note">
+                O Selenium simula ações humanas no navegador, o que o torna ideal para automação de tarefas que normalmente seriam realizadas manualmente através da interface do navegador.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 4: Automação Web com Selenium</div>
+            <div class="slide-number">Slide 2</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Explique a diferença entre o Selenium e outras ferramentas de scraping como Beautiful Soup ou Requests. Enfatize que o Selenium controla um navegador real, o que permite interagir com páginas dinâmicas que usam JavaScript. Aborde brevemente as considerações éticas, destacando a importância de usar a ferramenta de forma responsável.
+        </div>
+    </div>
+
+    <!-- Slide 3: Primeiros Passos com Selenium -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Primeiros Passos com Selenium</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Configuração e script básico</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Importações necessárias</h3>
+                    <pre>from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+import time</pre>
+                    
+                    <h3>Inicialização do WebDriver</h3>
+                    <pre># Método 1: Com webdriver-manager (recomendado)
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
+
+# Método 2: Especificando o caminho do driver
+driver = webdriver.Chrome(executable_path='/caminho/para/chromedriver')
+
+# Método 3: Com opções personalizadas
+options = Options()
+options.add_argument('--headless')  # Modo sem interface
+options.add_argument('--window-size=1920,1080')
+driver = webdriver.Chrome(service=service, options=options)</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Script básico completo</h3>
+                    <pre>from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+import time
+
+# Inicializar o driver
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
+
+try:
+    # Abrir uma URL
+    driver.get('https://www.python.org')
+    
+    # Maximizar a janela
+    driver.maximize_window()
+    
+    # Obter o título da página
+    titulo = driver.title
+    print(f"Título da página: {titulo}")
+    
+    # Aguardar para visualização
+    time.sleep(3)
+    
+finally:
+    # Fechar o navegador
+    driver.quit()
+    print("Navegador fechado")</pre>
+                    
+                    <div class="note">
+                        Sempre use <code>driver.quit()</code> ao final do script para liberar recursos e fechar o navegador corretamente. O bloco <code>try-finally</code> garante que isso aconteça mesmo em caso de erros.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 4: Automação Web com Selenium</div>
+            <div class="slide-number">Slide 3</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Execute este script básico para demonstrar como o Selenium abre um navegador e acessa uma página. Explique a diferença entre driver.close() (fecha apenas a aba atual) e driver.quit() (fecha o navegador inteiro e libera recursos). Mencione que o webdriver-manager facilita muito a manutenção, pois gerencia automaticamente a versão correta do driver.
+        </div>
+    </div>
+
+    <!-- Slide 4: Localização de Elementos -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Localização de Elementos</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Métodos de localização</h3>
+                    <pre># Importação necessária
+from selenium.webdriver.common.by import By
+
+# Por ID (mais rápido e confiável)
+elemento = driver.find_element(By.ID, "id-do-elemento")
+
+# Por nome
+elemento = driver.find_element(By.NAME, "nome-do-elemento")
+
+# Por classe CSS
+elemento = driver.find_element(By.CLASS_NAME, "classe-do-elemento")
+
+# Por seletor CSS (versátil)
+elemento = driver.find_element(By.CSS_SELECTOR, "#id-do-elemento .classe")
+
+# Por XPath (poderoso, mas pode ser frágil)
+elemento = driver.find_element(By.XPATH, "//div[@id='id-do-elemento']")
+
+# Por texto do link
+elemento = driver.find_element(By.LINK_TEXT, "Texto exato do link")
+
+# Por texto parcial do link
+elemento = driver.find_element(By.PARTIAL_LINK_TEXT, "parte do texto")</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Encontrando múltiplos elementos</h3>
+                    <pre># Retorna uma lista de elementos
+elementos = driver.find_elements(By.CSS_SELECTOR, ".item")
+
+# Iterando sobre os elementos encontrados
+for elemento in elementos:
+    texto = elemento.text
+    print(texto)</pre>
+                    
+                    <h3>Estratégias para localização</h3>
+                    <ul>
+                        <li><span class="highlight">Prioridade:</span> ID > Name > CSS Selector > XPath</li>
+                        <li>Use seletores que sejam menos propensos a mudanças</li>
+                        <li>Evite seletores baseados em posição absoluta</li>
+                        <li>Prefira atributos de identificação estáveis</li>
+                    </ul>
+                    
+                    <h3>Ferramentas para identificar seletores</h3>
+                    <ul>
+                        <li>Inspetor de elementos do navegador (F12 ou Ctrl+Shift+I)</li>
+                        <li>Clique com botão direito > Inspecionar</li>
+                        <li>Copiar seletor: Botão direito no elemento > Copy > Copy selector</li>
+                        <li>Copiar XPath: Botão direito no elemento > Copy > Copy XPath</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="note">
+                Quando um elemento não é encontrado, o Selenium lança uma exceção <code>NoSuchElementException</code>. É importante tratar essas exceções para criar scripts robustos.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 4: Automação Web com Selenium</div>
+            <div class="slide-number">Slide 4</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre como usar o inspetor de elementos do navegador para encontrar seletores. Mostre exemplos práticos de como copiar seletores CSS e XPath. Explique a diferença entre find_element (retorna o primeiro elemento encontrado) e find_elements (retorna uma lista, mesmo que vazia). Mencione que a escolha do método de localização depende da estrutura da página e da estabilidade dos seletores.
+        </div>
+    </div>
+
+    <!-- Slide 5: Interação com Elementos -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Interação com Elementos</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Ações básicas</h3>
+                    <pre># Clique em um elemento
+elemento.click()
+
+# Enviar texto para um campo
+elemento.send_keys("Texto a ser digitado")
+
+# Limpar um campo de texto
+elemento.clear()
+
+# Enviar teclas especiais
+from selenium.webdriver.common.keys import Keys
+elemento.send_keys(Keys.ENTER)
+elemento.send_keys(Keys.TAB)
+elemento.send_keys(Keys.CONTROL + 'a')  # Ctrl+A (selecionar tudo)
+
+# Enviar combinação de texto e teclas
+campo_busca.send_keys("Python automação", Keys.ENTER)
+
+# Obter texto de um elemento
+texto = elemento.text
+
+# Obter valor de um atributo
+valor = elemento.get_attribute("href")
+placeholder = elemento.get_attribute("placeholder")</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Interações com formulários</h3>
+                    <pre># Selecionar opção em um dropdown (select)
+from selenium.webdriver.support.ui import Select
+select_elemento = Select(driver.find_element(By.ID, "dropdown-id"))
+
+# Selecionar por texto visível
+select_elemento.select_by_visible_text("Opção 2")
+
+# Selecionar por valor
+select_elemento.select_by_value("valor2")
+
+# Selecionar por índice (base 0)
+select_elemento.select_by_index(1)
+
+# Marcar/desmarcar checkbox
+checkbox = driver.find_element(By.ID, "checkbox-id")
+if not checkbox.is_selected():
+    checkbox.click()
+
+# Trabalhar com radio buttons
+radio = driver.find_element(By.CSS_SELECTOR, "input[value='opcao1']")
+radio.click()
+
+# Submeter um formulário
+formulario = driver.find_element(By.ID, "form-id")
+formulario.submit()</pre>
+                    
+                    <h3>Verificação de estado</h3>
+                    <pre># Verificar se elemento está visível
+elemento.is_displayed()
+
+# Verificar se elemento está habilitado
+elemento.is_enabled()
+
+# Verificar se checkbox/radio está marcado
+elemento.is_selected()</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                Para interações mais complexas como arrastar e soltar (drag and drop), hover, ou clique duplo, use a classe <code>ActionChains</code> do Selenium.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 4: Automação Web com Selenium</div>
+            <div class="slide-number">Slide 5</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre exemplos práticos de interação com elementos em um site real, como preencher um formulário de login ou pesquisa. Explique que o método send_keys() pode ser usado para simular a digitação de texto e também para enviar teclas especiais como Enter ou Tab. Mencione que algumas interações podem requerer esperas explícitas, que serão abordadas no próximo slide.
+        </div>
+    </div>
+
+    <!-- Slide 6: Esperas e Sincronização -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Esperas e Sincronização</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Problema de timing</h3>
+                    <p>Em páginas dinâmicas, elementos podem não estar imediatamente disponíveis após o carregamento da página ou após uma ação.</p>
+                    
+                    <h3>Tipos de espera</h3>
+                    <ol>
+                        <li><span class="highlight">Espera fixa (não recomendada):</span> <code>time.sleep(5)</code></li>
+                        <li><span class="highlight">Espera implícita:</span> Aplica-se a todas as operações</li>
+                        <li><span class="highlight">Espera explícita:</span> Aguarda condições específicas</li>
+                    </ol>
+                    
+                    <h3>Espera implícita</h3>
+                    <pre># Define um tempo máximo de espera para todos os find_element
+driver.implicitly_wait(10)  # segundos
+
+# A partir daqui, o Selenium aguardará até 10 segundos
+# por qualquer elemento antes de lançar NoSuchElementException
+elemento = driver.find_element(By.ID, "elemento-que-demora")</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Espera explícita (recomendada)</h3>
+                    <pre>from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# Aguardar até 10 segundos para o elemento ser clicável
+wait = WebDriverWait(driver, 10)
+elemento = wait.until(
+    EC.element_to_be_clickable((By.ID, "botao-id"))
+)
+elemento.click()
+
+# Outras condições úteis
+wait.until(EC.presence_of_element_located((By.ID, "id")))
+wait.until(EC.visibility_of_element_located((By.ID, "id")))
+wait.until(EC.title_contains("Texto no título"))
+wait.until(EC.url_contains("pagina-esperada"))
+wait.until(EC.alert_is_present())
+
+# Aguardar múltiplos elementos
+elementos = wait.until(
+    EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".item"))
+)</pre>
+                    
+                    <h3>Condição personalizada</h3>
+                    <pre># Criar uma condição personalizada
+def texto_contem(locator, texto):
+    def check(driver):
+        try:
+            elemento = driver.find_element(*locator)
+            return texto in elemento.text
+        except:
+            return False
+    return check
+
+# Usar a condição personalizada
+wait.until(texto_contem((By.ID, "resultado"), "Sucesso"))</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                As esperas explícitas são mais eficientes que as esperas fixas, pois continuam assim que a condição é satisfeita, sem aguardar todo o tempo definido.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 4: Automação Web com Selenium</div>
+            <div class="slide-number">Slide 6</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Explique por que as esperas são cruciais em automação web, especialmente com páginas modernas que carregam conteúdo dinamicamente. Demonstre a diferença entre usar time.sleep() (que sempre espera o tempo completo) e esperas explícitas (que continuam assim que a condição é satisfeita). Mostre exemplos de sites onde as esperas são necessárias, como páginas com carregamento assíncrono ou animações.
+        </div>
+    </div>
+
+    <!-- Slide 7: Navegação e Gerenciamento de Janelas -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Navegação e Gerenciamento de Janelas</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Navegação básica</h3>
+                    <pre># Abrir uma URL
+driver.get("https://www.exemplo.com")
+
+# Obter a URL atual
+url_atual = driver.current_url
+
+# Obter o título da página
+titulo = driver.title
+
+# Navegar para trás e para frente
+driver.back()
+driver.forward()
+
+# Atualizar a página
+driver.refresh()
+
+# Executar JavaScript
+driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+driver.execute_script("alert('Olá do Selenium!');")
+
+# Obter o código-fonte da página
+html = driver.page_source</pre>
+                    
+                    <h3>Cookies e armazenamento</h3>
+                    <pre># Obter todos os cookies
+cookies = driver.get_cookies()
+
+# Adicionar um cookie
+driver.add_cookie({"name": "exemplo", "value": "valor"})
+
+# Obter um cookie específico
+cookie = driver.get_cookie("nome-do-cookie")
+
+# Excluir um cookie
+driver.delete_cookie("nome-do-cookie")
+
+# Excluir todos os cookies
+driver.delete_all_cookies()</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Gerenciamento de janelas e abas</h3>
+                    <pre># Obter o identificador da janela atual
+janela_principal = driver.current_window_handle
+
+# Obter identificadores de todas as janelas abertas
+todas_janelas = driver.window_handles
+
+# Alternar para uma nova janela/aba
+driver.switch_to.window(todas_janelas[1])
+
+# Alternar de volta para a janela principal
+driver.switch_to.window(janela_principal)
+
+# Abrir uma nova aba com JavaScript
+driver.execute_script("window.open('https://www.exemplo.com');")
+
+# Fechar a janela/aba atual (sem fechar o navegador)
+driver.close()
+
+# Maximizar, minimizar e definir tamanho
+driver.maximize_window()
+driver.minimize_window()
+driver.set_window_size(1024, 768)
+driver.set_window_position(0, 0)</pre>
+                    
+                    <h3>Trabalhando com frames e iframes</h3>
+                    <pre># Alternar para um iframe por índice
+driver.switch_to.frame(0)
+
+# Alternar para um iframe por ID ou nome
+driver.switch_to.frame("nome-do-iframe")
+
+# Alternar para um iframe por elemento
+iframe = driver.find_element(By.CSS_SELECTOR, "#meu-iframe")
+driver.switch_to.frame(iframe)
+
+# Voltar ao conteúdo principal
+driver.switch_to.default_content()</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                Ao trabalhar com múltiplas janelas ou iframes, sempre mantenha o controle de onde o WebDriver está focado. Muitos erros ocorrem quando tentamos interagir com elementos no contexto errado.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 4: Automação Web com Selenium</div>
+            <div class="slide-number">Slide 7</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre como alternar entre abas e frames, pois isso é comum em muitos sites modernos. Explique que o Selenium só pode interagir com elementos no contexto atual (janela/frame), então é importante alternar corretamente. Mostre exemplos de sites que usam iframes, como formulários de pagamento incorporados ou widgets de redes sociais.
+        </div>
+    </div>
+
+    <!-- Slide 8: Extração de Dados Estruturados -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Extração de Dados Estruturados</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Web Scraping com Selenium</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Extraindo dados de tabelas</h3>
+                    <pre># Localizar a tabela
+tabela = driver.find_element(By.CSS_SELECTOR, "table.dados")
+
+# Extrair linhas
+linhas = tabela.find_elements(By.TAG_NAME, "tr")
+
+# Processar cada linha
+dados = []
+for linha in linhas[1:]:  # Pular cabeçalho
+    colunas = linha.find_elements(By.TAG_NAME, "td")
+    if colunas:
+        registro = {
+            "nome": colunas[0].text,
+            "idade": colunas[1].text,
+            "cidade": colunas[2].text
+        }
+        dados.append(registro)
+
+# Exibir os dados extraídos
+for registro in dados:
+    print(f"{registro['nome']}, {registro['idade']} anos, {registro['cidade']}")</pre>
+                    
+                    <h3>Extraindo links</h3>
+                    <pre># Encontrar todos os links
+links = driver.find_elements(By.TAG_NAME, "a")
+
+# Extrair URLs e textos
+urls = []
+for link in links:
+    url = link.get_attribute("href")
+    texto = link.text
+    if url and texto:  # Ignorar links vazios
+        urls.append({"url": url, "texto": texto})</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Extraindo dados de produtos</h3>
+                    <pre># Encontrar todos os cards de produtos
+produtos = driver.find_elements(By.CSS_SELECTOR, ".produto")
+
+# Extrair informações de cada produto
+catalogo = []
+for produto in produtos:
+    try:
+        nome = produto.find_element(By.CSS_SELECTOR, ".nome").text
+        preco = produto.find_element(By.CSS_SELECTOR, ".preco").text
+        
+        # Extrair URL da imagem
+        img = produto.find_element(By.TAG_NAME, "img")
+        img_url = img.get_attribute("src")
+        
+        # Extrair link do produto
+        link = produto.find_element(By.CSS_SELECTOR, "a.detalhes")
+        url = link.get_attribute("href")
+        
+        catalogo.append({
+            "nome": nome,
+            "preco": preco,
+            "imagem": img_url,
+            "url": url
+        })
+    except Exception as e:
+        print(f"Erro ao extrair produto: {e}")
+
+# Salvar os dados em formato estruturado
+import json
+with open("produtos.json", "w", encoding="utf-8") as f:
+    json.dump(catalogo, f, ensure_ascii=False, indent=4)</pre>
+                    
+                    <h3>Capturando screenshots</h3>
+                    <pre># Screenshot da página inteira
+driver.save_screenshot("pagina.png")
+
+# Screenshot de um elemento específico
+elemento = driver.find_element(By.ID, "produto-destaque")
+elemento.screenshot("produto.png")</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                Combine o Selenium com bibliotecas como Pandas para processar e analisar os dados extraídos, ou com bibliotecas de armazenamento como JSON, CSV ou bancos de dados para persistir as informações.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 4: Automação Web com Selenium</div>
+            <div class="slide-number">Slide 8</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre um exemplo real de extração de dados de um site de e-commerce ou de notícias. Mostre como os dados extraídos podem ser estruturados em dicionários ou listas para processamento posterior. Mencione que o Selenium é especialmente útil para sites dinâmicos onde outras ferramentas de scraping como Beautiful Soup não funcionariam sozinhas.
+        </div>
+    </div>
+
+    <!-- Slide 9: Exemplo Prático Completo -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Exemplo Prático Completo</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Extração de produtos em promoção</h2>
+            
+            <pre>from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+import time
+import json
+
+def extrair_produtos_amazon():
+    # Configurar o driver
+    options = Options()
+    options.add_argument("--start-maximized")
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+    
+    # Lista para armazenar os produtos
+    produtos = []
+    
+    try:
+        # Acessar a página de ofertas
+        driver.get("https://www.amazon.com.br/deals")
+        
+        # Aguardar o carregamento dos produtos
+        wait = WebDriverWait(driver, 10)
+        wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".a-section.a-spacing-base")))
+        
+        # Encontrar os cards de produtos
+        cards = driver.find_elements(By.CSS_SELECTOR, ".a-section.a-spacing-base")
+        
+        # Processar os primeiros 5 produtos
+        for i, card in enumerate(cards[:5]):
+            try:
+                # Extrair informações do produto
+                nome_elemento = card.find_element(By.CSS_SELECTOR, "a.a-link-normal .a-text-normal")
+                nome = nome_elemento.text
+                
+                # Extrair preço com desconto
+                preco_elemento = card.find_element(By.CSS_SELECTOR, ".a-price .a-offscreen")
+                preco = preco_elemento.get_attribute("innerHTML")
+                
+                # Extrair URL da imagem
+                img_elemento = card.find_element(By.CSS_SELECTOR, "img.s-image")
+                img_url = img_elemento.get_attribute("src")
+                
+                # Extrair link do produto
+                link_elemento = card.find_element(By.CSS_SELECTOR, "a.a-link-normal")
+                link = link_elemento.get_attribute("href")
+                
+                # Adicionar à lista de produtos
+                produto = {
+                    "nome": nome,
+                    "preco": preco,
+                    "imagem": img_url,
+                    "link": link
+                }
+                produtos.append(produto)
+                
+                print(f"Produto {i+1} extraído: {nome}")
+                
+            except Exception as e:
+                print(f"Erro ao extrair produto {i+1}: {e}")
+        
+        # Salvar os dados em um arquivo JSON
+        with open("ofertas_amazon.json", "w", encoding="utf-8") as f:
+            json.dump(produtos, f, ensure_ascii=False, indent=4)
+        
+        print(f"\nTotal de produtos extraídos: {len(produtos)}")
+        print("Dados salvos em 'ofertas_amazon.json'")
+        
+    except Exception as e:
+        print(f"Erro durante a extração: {e}")
+    
+    finally:
+        # Fechar o navegador
+        driver.quit()
+        print("Navegador fechado")
+
+if __name__ == "__main__":
+    extrair_produtos_amazon()</pre>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 4: Automação Web com Selenium</div>
+            <div class="slide-number">Slide 9</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Analise este exemplo linha por linha, destacando as práticas recomendadas: uso de WebDriverWait, tratamento de exceções, organização em funções, etc. Explique que os seletores CSS podem precisar de ajustes conforme o site muda. Se possível, execute o código para demonstrar o resultado em tempo real. Mencione que este exemplo é similar ao que será usado no projeto final do minicurso.
+        </div>
+    </div>
+
+    <!-- Slide 10: Boas Práticas e Próximos Passos -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Boas Práticas e Próximos Passos</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Boas práticas com Selenium</h3>
+                    <ul>
+                        <li>Use esperas explícitas em vez de time.sleep()</li>
+                        <li>Organize o código em funções reutilizáveis</li>
+                        <li>Trate exceções adequadamente</li>
+                        <li>Use seletores estáveis (IDs, atributos data-*)</li>
+                        <li>Adicione logs para depuração</li>
+                        <li>Implemente retentativas para operações instáveis</li>
+                        <li>Feche sempre o navegador com driver.quit()</li>
+                        <li>Considere o modo headless para scripts em produção</li>
+                    </ul>
+                    
+                    <h3>Desafios comuns</h3>
+                    <ul>
+                        <li>Elementos que mudam frequentemente</li>
+                        <li>Conteúdo carregado dinamicamente (AJAX)</li>
+                        <li>Popups e alertas inesperados</li>
+                        <li>CAPTCHAs e verificações anti-bot</li>
+                        <li>Bloqueios de IP por excesso de requisições</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Recursos adicionais</h3>
+                    <ul>
+                        <li>Documentação oficial do Selenium: <a href="https://www.selenium.dev/documentation/">selenium.dev/documentation</a></li>
+                        <li>Selenium com Python: <a href="https://selenium-python.readthedocs.io/">selenium-python.readthedocs.io</a></li>
+                        <li>Cheat sheet de seletores CSS: <a href="https://www.w3schools.com/cssref/css_selectors.asp">w3schools.com/cssref/css_selectors</a></li>
+                    </ul>
+                    
+                    <h3>Próximos passos</h3>
+                    <ul>
+                        <li>Explorar o Page Object Model para scripts mais organizados</li>
+                        <li>Combinar Selenium com APIs para automações híbridas</li>
+                        <li>Implementar sistemas de agendamento para execução periódica</li>
+                        <li>Explorar ferramentas como Selenium Grid para execução distribuída</li>
+                        <li>Aprender sobre frameworks de teste como Pytest para testes automatizados</li>
+                    </ul>
+                    
+                    <div class="note">
+                        No próximo módulo, aprenderemos como processar e analisar os dados extraídos usando a biblioteca Pandas, transformando-os em informações úteis e estruturadas.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 4: Automação Web com Selenium</div>
+            <div class="slide-number">Slide 10</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Reforce as boas práticas e mencione que o Selenium é uma ferramenta poderosa, mas que requer prática para dominar. Incentive os participantes a experimentarem com sites diferentes e a desenvolverem seus próprios projetos de automação. Faça uma transição para o próximo módulo, explicando como os dados extraídos com Selenium serão processados com Pandas.
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+
+# Introdução ao Python (15 min)
+
+## 1. Estrutura Básica do Python
+Python é uma linguagem muito intuitiva. Vamos começar com os fundamentos: variáveis, tipos de dados e controle de fluxo.
+
+### Variáveis:
+Variáveis são usadas para armazenar dados que podemos reutilizar.
+Exemplo:
+    nome = "Mario"
+    idade = 23
+    print(f"Olá, meu nome é {nome} e eu tenho {idade} anos.")
+
+### Tipos de dados:
+Os principais tipos em Python são: inteiros (`int`), números decimais (`float`), textos (`str`), e booleanos (`bool`).
+Exemplo:
+    numero = 10          # int
+    pi = 3.14            # float
+    texto = "Automação"  # str
+    verdadeiro = True    # bool
+
+### Controle de fluxo:
+Controle de fluxo é como tomamos decisões no código.
+Exemplo:
+    idade = 23
+    if idade >= 18:
+        print("Você é maior de idade.")
+    else:
+        print("Você é menor de idade.")
+
+## 2. Funções e boas práticas
+Funções são blocos de código reutilizáveis que nos ajudam a organizar nossos programas.
+
+### Definição de funções:
+Aqui está um exemplo básico de uma função:
+    def saudacao(nome):
+        return f"Olá, {nome}! Bem-vindo ao minicurso."
+
+    print(saudacao("Mario"))
+
+### Boas práticas:
+- Use nomes de variáveis e funções claros e descritivos.
+- Comente seu código onde necessário.
+- Organize seu código em funções para torná-lo mais legível.
+
+## 3. Execução de um pequeno script simples
+Vamos juntar tudo em um exemplo prático.
+
+### Exemplo:
+    # Definindo variáveis
+    nome = input("Digite seu nome: ")
+    idade = int(input("Digite sua idade: "))
+
+    # Função para verificar maioridade
+    def verificar_maioridade(idade):
+        if idade >= 18:
+            return "Você é maior de idade."
+        else:
+            return "Você é menor de idade."
+
+    # Resultado
+    print(f"Olá, {nome}!")
+    print(verificar_maioridade(idade))
+
+Esse script utiliza entrada de dados, controle de fluxo e funções. Agora que dominamos o básico, podemos avançar para aplicações práticas!

@@ -1,0 +1,55 @@
+# Ferramentas Necessárias (10 min)
+
+## 1. Introdução ao Python como linguagem principal
+"Python é uma das linguagens de programação mais populares do mundo, especialmente quando se trata de automação. É simples, versátil e possui uma enorme variedade de bibliotecas que facilitam nosso trabalho."
+
+- Breve destaque sobre a popularidade do Python e sua facilidade de aprendizado.
+- Exemplos de automação com Python: web scraping, manipulação de dados, envio de e-mails.
+
+## 2. Apresentação das bibliotecas usadas
+"Hoje, usaremos algumas bibliotecas específicas que nos ajudarão a implementar a automação de processos. Vamos conhecer rapidamente o que cada uma faz."
+
+### Selenium:
+- "É uma ferramenta poderosa para automação de navegadores web. Permite interagir com sites como se fosse um humano: clicando em botões, preenchendo formulários, e muito mais."
+
+### Pandas:
+- "Uma biblioteca essencial para manipulação e análise de dados. Com ela, conseguimos organizar e processar informações de forma eficiente."
+
+### OpenPyXL:
+- "Uma biblioteca para trabalhar com planilhas Excel. Podemos criar, editar e formatar arquivos Excel de maneira programática."
+
+**Outras dependências**:
+- "Durante a configuração, vamos instalar essas bibliotecas usando o `pip`, o gerenciador de pacotes do Python."
+
+## 3. Instalação e configuração do ambiente
+"Vamos agora preparar nosso ambiente de trabalho para o minicurso."
+
+### Passo a passo:
+1. **Instalar o Python**:
+   - Link para download: [https://www.python.org/downloads/](https://www.python.org/downloads/).
+   - Certifique-se de marcar a opção `Add Python to PATH` durante a instalação.
+
+2. **Instalar o VS Code**:
+   - Link para download: [https://code.visualstudio.com/](https://code.visualstudio.com/).
+   - Mostrar como configurar o Python no VS Code com a extensão oficial.
+
+3. **Instalar bibliotecas necessárias**:
+   - Abrir o terminal do VS Code.
+   - Executar os comandos:
+     ```bash
+     pip install selenium pandas openpyxl
+     ```
+   - Explicar o que cada comando faz.
+
+4. **Configurar o WebDriver para Selenium**:
+   - Baixar o ChromeDriver (ou outro WebDriver compatível com o navegador em uso).
+   - Instruir como colocar o executável no PATH do sistema.
+
+5. **Testar a instalação**:
+   - Criar um script simples de teste, como:
+     ```python
+     import pandas as pd
+     print("Ambiente configurado com sucesso!")
+     ```
+
+"Agora que temos tudo pronto, estamos prontos para começar a programar e automatizar!"

@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 5: Manipulação de Dados com Pandas</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --dark-bg: #2c3e50;
+            --code-bg: #f8f8f8;
+            --code-border: #ddd;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        .slide {
+            width: 100%;
+            max-width: 1024px;
+            margin: 0 auto 40px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            page-break-after: always;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .slide-title {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .slide-subtitle {
+            font-size: 22px;
+            color: var(--secondary-color);
+            margin: 10px 0 20px;
+        }
+        
+        .slide-content {
+            flex-grow: 1;
+        }
+        
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #777;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        
+        .logo {
+            height: 40px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .slide-number {
+            font-weight: bold;
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .note {
+            background-color: #fff8dc;
+            border-left: 4px solid #ffeb3b;
+            padding: 10px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .code-comment {
+            color: #6a9955;
+        }
+        
+        .code-keyword {
+            color: #569cd6;
+        }
+        
+        .code-string {
+            color: #ce9178;
+        }
+        
+        .code-function {
+            color: #dcdcaa;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .presenter-notes {
+            background-color: #f9f9f9;
+            border: 1px dashed #ccc;
+            padding: 10px;
+            margin-top: 30px;
+            font-style: italic;
+            color: #555;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+            }
+            
+            .slide {
+                box-shadow: none;
+                page-break-after: always;
+                min-height: auto;
+                margin-bottom: 0;
+            }
+            
+            .presenter-notes {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Título do Módulo -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Manipulação de Dados com Pandas</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Processando e analisando dados extraídos</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Objetivo do Módulo</h3>
+                    <p>Processar e analisar dados extraídos da web utilizando a biblioteca Pandas para transformá-los em informações úteis e estruturadas.</p>
+                    
+                    <h3>O que vamos aprender:</h3>
+                    <ul>
+                        <li>Introdução ao Pandas e suas estruturas de dados</li>
+                        <li>Limpeza e transformação de dados</li>
+                        <li>Filtragem e seleção de dados</li>
+                        <li>Análise básica e agregações</li>
+                        <li>Exportação de dados processados</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <div class="note">
+                        "Pandas é uma das bibliotecas mais poderosas do ecossistema Python para análise de dados, permitindo transformar dados brutos em informações valiosas."
+                    </div>
+                    
+                    <h3>Duração estimada:</h3>
+                    <p>25 minutos</p>
+                    
+                    <h3>Por que é importante?</h3>
+                    <p>Após extrair dados com o Selenium, precisamos processá-los para obter insights, remover inconsistências e prepará-los para apresentação ou armazenamento.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 5: Manipulação de Dados com Pandas</div>
+            <div class="slide-number">Slide 1</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Comece perguntando quem já ouviu falar do Pandas ou já o utilizou. Explique que o Pandas é uma ferramenta essencial para cientistas de dados, analistas e qualquer pessoa que trabalhe com dados estruturados. Mencione que este módulo faz a ponte entre a extração de dados (Selenium) e a apresentação final (Excel/PDF).
+        </div>
+    </div>
+
+    <!-- Slide 2: Introdução ao Pandas -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Introdução ao Pandas</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>O que é o Pandas?</h3>
+                    <ul>
+                        <li>Biblioteca Python para análise e manipulação de dados</li>
+                        <li>Construída sobre NumPy (computação numérica)</li>
+                        <li>Oferece estruturas de dados flexíveis e eficientes</li>
+                        <li>Amplamente utilizada em ciência de dados, finanças, análise estatística</li>
+                    </ul>
+                    
+                    <h3>Importação e convenções</h3>
+                    <pre># Importação padrão
+import pandas as pd
+import numpy as np  # Frequentemente usado junto</pre>
+                    
+                    <h3>Principais recursos</h3>
+                    <ul>
+                        <li>Leitura e escrita de diversos formatos (CSV, Excel, JSON, SQL)</li>
+                        <li>Manipulação de dados com operações intuitivas</li>
+                        <li>Tratamento de dados ausentes</li>
+                        <li>Agregação e transformação de dados</li>
+                        <li>Mesclagem e junção de conjuntos de dados</li>
+                        <li>Funcionalidades estatísticas integradas</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Estruturas de dados fundamentais</h3>
+                    
+                    <h4>Series</h4>
+                    <pre># Array unidimensional rotulado
+s = pd.Series([1, 3, 5, np.nan, 6, 8])
+print(s)
+# 0    1.0
+# 1    3.0
+# 2    5.0
+# 3    NaN
+# 4    6.0
+# 5    8.0
+# dtype: float64
+
+# Series com índices personalizados
+s = pd.Series([1, 2, 3, 4], index=['a', 'b', 'c', 'd'])
+print(s['a'])  # 1</pre>
+                    
+                    <h4>DataFrame</h4>
+                    <pre># Tabela bidimensional com linhas e colunas rotuladas
+data = {
+    'Nome': ['Ana', 'Bruno', 'Carlos'],
+    'Idade': [25, 30, 22],
+    'Cidade': ['São Paulo', 'Rio', 'Belo Horizonte']
+}
+df = pd.DataFrame(data)
+print(df)
+#      Nome  Idade           Cidade
+# 0     Ana     25        São Paulo
+# 1   Bruno     30              Rio
+# 2  Carlos     22  Belo Horizonte</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                O DataFrame é a estrutura mais utilizada e pode ser pensado como uma planilha Excel ou uma tabela SQL em memória, com recursos avançados de manipulação.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 5: Manipulação de Dados com Pandas</div>
+            <div class="slide-number">Slide 2</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre a criação de Series e DataFrames com exemplos simples. Explique a diferença entre as duas estruturas e quando usar cada uma. Mencione que o DataFrame é a estrutura mais comum e será o foco principal deste módulo. Se possível, mostre a saída real dos comandos para que os participantes se familiarizem com a aparência dos objetos Pandas.
+        </div>
+    </div>
+
+    <!-- Slide 3: Criação e Leitura de DataFrames -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Criação e Leitura de DataFrames</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Criação a partir de diferentes fontes</h3>
+                    <pre># A partir de um dicionário
+data = {
+    'produto': ['Notebook', 'Mouse', 'Teclado'],
+    'preco': [3500, 120, 200],
+    'estoque': [5, 15, 8]
+}
+df = pd.DataFrame(data)
+
+# A partir de uma lista de dicionários
+produtos = [
+    {'nome': 'Notebook', 'preco': 3500},
+    {'nome': 'Mouse', 'preco': 120},
+    {'nome': 'Teclado', 'preco': 200}
+]
+df = pd.DataFrame(produtos)
+
+# A partir de arrays NumPy
+import numpy as np
+array = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+df = pd.DataFrame(array, columns=['A', 'B', 'C'])</pre>
+                    
+                    <h3>Visualização básica</h3>
+                    <pre># Primeiras linhas
+df.head()  # Por padrão, mostra 5 linhas
+df.head(10)  # Especifica o número de linhas
+
+# Últimas linhas
+df.tail()
+
+# Informações sobre o DataFrame
+df.info()
+
+# Estatísticas descritivas
+df.describe()</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Leitura de arquivos</h3>
+                    <pre># CSV
+df = pd.read_csv('dados.csv')
+df = pd.read_csv('dados.csv', sep=';', encoding='utf-8')
+
+# Excel
+df = pd.read_excel('dados.xlsx')
+df = pd.read_excel('dados.xlsx', sheet_name='Planilha1')
+
+# JSON
+df = pd.read_json('dados.json')
+
+# HTML (tabelas de páginas web)
+dfs = pd.read_html('https://exemplo.com/tabela')
+df = dfs[0]  # Primeira tabela encontrada
+
+# SQL (requer biblioteca adicional como SQLAlchemy)
+from sqlalchemy import create_engine
+engine = create_engine('sqlite:///banco.db')
+df = pd.read_sql('SELECT * FROM tabela', engine)</pre>
+                    
+                    <h3>Exemplo com dados do Selenium</h3>
+                    <pre># Convertendo lista de dicionários (do Selenium) para DataFrame
+produtos_extraidos = [
+    {"nome": "Produto A", "preco": "R$ 99,90", "desconto": "20%"},
+    {"nome": "Produto B", "preco": "R$ 149,90", "desconto": "15%"},
+    {"nome": "Produto C", "preco": "R$ 79,90", "desconto": "25%"}
+]
+
+# Criar DataFrame
+df_produtos = pd.DataFrame(produtos_extraidos)
+print(df_produtos)</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                Ao trabalhar com automação, frequentemente convertemos dados extraídos (como listas de dicionários) em DataFrames para facilitar a manipulação e análise.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 5: Manipulação de Dados com Pandas</div>
+            <div class="slide-number">Slide 3</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre a criação de DataFrames a partir de diferentes fontes, especialmente a partir de listas de dicionários, que é o formato mais comum quando trabalhamos com dados extraídos via Selenium. Mostre como visualizar os dados usando head(), info() e describe(). Se possível, use um exemplo real de dados extraídos no módulo anterior.
+        </div>
+    </div>
+
+    <!-- Slide 4: Limpeza e Transformação de Dados -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Limpeza e Transformação de Dados</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Tratamento de valores ausentes</h3>
+                    <pre># Verificar valores ausentes
+df.isna()  # Retorna DataFrame de booleanos
+df.isna().sum()  # Conta valores ausentes por coluna
+
+# Remover linhas com valores ausentes
+df_limpo = df.dropna()  # Remove qualquer linha com NaN
+df_limpo = df.dropna(subset=['coluna1', 'coluna2'])  # Apenas nestas colunas
+
+# Preencher valores ausentes
+df_preenchido = df.fillna(0)  # Preenche com zero
+df_preenchido = df.fillna({
+    'coluna1': 0,
+    'coluna2': 'Desconhecido',
+    'coluna3': df['coluna3'].mean()
+})
+
+# Interpolação
+df['coluna'] = df['coluna'].interpolate()</pre>
+                    
+                    <h3>Remoção de duplicatas</h3>
+                    <pre># Verificar duplicatas
+df.duplicated().sum()  # Conta linhas duplicadas
+
+# Remover duplicatas
+df_sem_duplicatas = df.drop_duplicates()
+df_sem_duplicatas = df.drop_duplicates(subset=['coluna1'])  # Baseado em uma coluna</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Conversão de tipos</h3>
+                    <pre># Verificar tipos de dados
+df.dtypes
+
+# Converter tipos
+df['preco'] = df['preco'].astype(float)
+df['data'] = pd.to_datetime(df['data'])
+df['categoria'] = df['categoria'].astype('category')
+
+# Converter colunas com valores monetários
+df['preco'] = df['preco'].str.replace('R$', '')
+df['preco'] = df['preco'].str.replace('.', '')
+df['preco'] = df['preco'].str.replace(',', '.')
+df['preco'] = df['preco'].astype(float)
+
+# Converter porcentagens
+df['desconto'] = df['desconto'].str.replace('%', '')
+df['desconto'] = df['desconto'].astype(float) / 100</pre>
+                    
+                    <h3>Renomeando e reorganizando</h3>
+                    <pre># Renomear colunas
+df = df.rename(columns={
+    'nome': 'nome_produto',
+    'preco': 'preco_produto'
+})
+
+# Reordenar colunas
+df = df[['id', 'nome_produto', 'preco_produto', 'desconto']]
+
+# Resetar índices
+df = df.reset_index(drop=True)</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                A limpeza de dados é uma etapa crucial em qualquer projeto de análise. Dados extraídos da web frequentemente precisam de tratamento para remover inconsistências, converter formatos e padronizar valores.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 5: Manipulação de Dados com Pandas</div>
+            <div class="slide-number">Slide 4</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Enfatize a importância da limpeza de dados, especialmente quando trabalhamos com dados extraídos da web. Demonstre exemplos práticos de conversão de valores monetários (R$ 1.234,56 para float) e porcentagens, que são comuns em projetos de automação. Explique que a qualidade da análise depende diretamente da qualidade dos dados após a limpeza.
+        </div>
+    </div>
+
+    <!-- Slide 5: Filtragem e Seleção de Dados -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Filtragem e Seleção de Dados</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Seleção de colunas</h3>
+                    <pre># Selecionar uma coluna (retorna Series)
+nomes = df['nome']
+
+# Selecionar múltiplas colunas (retorna DataFrame)
+df_selecionado = df[['nome', 'preco', 'desconto']]
+
+# Usando dot notation (apenas para nomes sem espaços)
+nomes = df.nome  # Equivalente a df['nome']</pre>
+                    
+                    <h3>Seleção de linhas por índice</h3>
+                    <pre># Selecionar por posição (iloc)
+primeira_linha = df.iloc[0]  # Primeira linha
+tres_primeiras = df.iloc[0:3]  # Linhas 0, 1 e 2
+especificas = df.iloc[[0, 2, 5]]  # Linhas 0, 2 e 5
+
+# Selecionar por rótulo (loc)
+linha = df.loc[5]  # Linha com índice 5
+intervalo = df.loc[1:3]  # Linhas com índices 1, 2 e 3
+
+# Selecionar linhas e colunas
+valor = df.iloc[0, 1]  # Linha 0, coluna 1
+bloco = df.iloc[0:3, 1:3]  # Linhas 0-2, colunas 1-2</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Filtragem por condições</h3>
+                    <pre># Filtro simples
+produtos_caros = df[df['preco'] > 100]
+
+# Múltiplas condições
+filtro = (df['preco'] > 100) & (df['desconto'] > 0.1)
+produtos_filtrados = df[filtro]
+
+# Operadores: &(and), |(or), ~(not)
+filtro_complexo = (df['categoria'] == 'Eletrônicos') | \
+                 ((df['preco'] < 50) & (df['estoque'] > 10))
+resultado = df[filtro_complexo]
+
+# Verificar se valor está em uma lista
+produtos_selecionados = df[df['categoria'].isin(['Eletrônicos', 'Informática'])]
+
+# Filtrar por texto
+contem_mouse = df[df['nome'].str.contains('mouse', case=False)]
+
+# Método query (sintaxe mais legível)
+caros_com_desconto = df.query('preco > 100 and desconto > 0.1')</pre>
+                    
+                    <h3>Ordenação</h3>
+                    <pre># Ordenar por uma coluna
+df_ordenado = df.sort_values('preco')  # Crescente
+df_ordenado = df.sort_values('preco', ascending=False)  # Decrescente
+
+# Ordenar por múltiplas colunas
+df_ordenado = df.sort_values(['categoria', 'preco'])</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                A filtragem eficiente de dados é essencial para encontrar informações relevantes em grandes conjuntos de dados. O Pandas oferece múltiplas formas de selecionar e filtrar dados de maneira intuitiva.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 5: Manipulação de Dados com Pandas</div>
+            <div class="slide-number">Slide 5</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre exemplos práticos de filtragem, como encontrar produtos com maior desconto ou dentro de uma faixa de preço. Explique a diferença entre loc (seleção baseada em rótulos) e iloc (seleção baseada em posição). Mostre como combinar múltiplas condições de filtragem para obter resultados específicos.
+        </div>
+    </div>
+
+    <!-- Slide 6: Análise Básica e Agregações -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Análise Básica e Agregações</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Estatísticas descritivas</h3>
+                    <pre># Resumo estatístico
+df.describe()  # Apenas colunas numéricas
+df.describe(include='all')  # Todas as colunas
+
+# Estatísticas individuais
+df['preco'].mean()  # Média
+df['preco'].median()  # Mediana
+df['preco'].min()  # Mínimo
+df['preco'].max()  # Máximo
+df['preco'].std()  # Desvio padrão
+df['preco'].quantile(0.25)  # Primeiro quartil
+
+# Contagens
+df['categoria'].value_counts()  # Frequência de cada valor
+df['categoria'].nunique()  # Número de valores únicos</pre>
+                    
+                    <h3>Agrupamento</h3>
+                    <pre># Agrupar por uma coluna
+por_categoria = df.groupby('categoria')
+
+# Aplicar agregações
+resumo = por_categoria.agg({
+    'preco': ['mean', 'min', 'max', 'count'],
+    'desconto': 'mean',
+    'estoque': 'sum'
+})
+
+# Forma simplificada para agregações comuns
+media_por_categoria = df.groupby('categoria')['preco'].mean()
+contagem_por_categoria = df.groupby('categoria').size()</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Operações em colunas</h3>
+                    <pre># Criar novas colunas baseadas em cálculos
+df['preco_com_desconto'] = df['preco'] * (1 - df['desconto'])
+df['valor_total'] = df['preco'] * df['quantidade']
+
+# Aplicar função a uma coluna
+df['preco_formatado'] = df['preco'].apply(lambda x: f'R$ {x:.2f}')
+
+# Aplicar função a múltiplas colunas
+def calcular_lucro(row):
+    return row['preco_venda'] - row['custo'] - row['imposto']
+
+df['lucro'] = df.apply(calcular_lucro, axis=1)
+
+# Categorizar valores
+def categorizar_preco(preco):
+    if preco < 50:
+        return 'Baixo'
+    elif preco < 200:
+        return 'Médio'
+    else:
+        return 'Alto'
+
+df['faixa_preco'] = df['preco'].apply(categorizar_preco)</pre>
+                    
+                    <h3>Tabelas dinâmicas</h3>
+                    <pre># Criar tabela dinâmica (similar ao Excel)
+tabela_dinamica = pd.pivot_table(
+    df,
+    values='preco',
+    index='categoria',
+    columns='faixa_preco',
+    aggfunc='mean'
+)
+
+# Tabela de contingência
+tabela_contagem = pd.crosstab(df['categoria'], df['faixa_preco'])</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                As agregações permitem resumir grandes volumes de dados em informações significativas, facilitando a identificação de padrões e tendências.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 5: Manipulação de Dados com Pandas</div>
+            <div class="slide-number">Slide 6</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre exemplos práticos de análise, como calcular o preço médio por categoria ou encontrar os produtos com maior desconto. Explique como o groupby funciona (similar ao GROUP BY do SQL) e como ele pode ser combinado com diferentes funções de agregação. Mostre como criar novas colunas baseadas em cálculos, o que é muito útil para análise de dados.
+        </div>
+    </div>
+
+    <!-- Slide 7: Exportação de Dados -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Exportação de Dados</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Exportar para CSV</h3>
+                    <pre># Exportação básica
+df.to_csv('dados_processados.csv')
+
+# Com opções
+df.to_csv('dados_processados.csv',
+          index=False,  # Não incluir índice
+          sep=';',  # Separador personalizado
+          decimal=',',  # Usar vírgula como decimal
+          encoding='utf-8-sig')  # Encoding para acentos</pre>
+                    
+                    <h3>Exportar para Excel</h3>
+                    <pre># Exportação básica
+df.to_excel('dados_processados.xlsx')
+
+# Com opções
+df.to_excel('dados_processados.xlsx',
+            sheet_name='Produtos',
+            index=False)
+
+# Múltiplas planilhas
+with pd.ExcelWriter('relatorio.xlsx') as writer:
+    df_produtos.to_excel(writer, sheet_name='Produtos', index=False)
+    df_resumo.to_excel(writer, sheet_name='Resumo', index=False)
+    df_graficos.to_excel(writer, sheet_name='Gráficos')</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Exportar para JSON</h3>
+                    <pre># Exportação básica
+df.to_json('dados.json')
+
+# Formatos diferentes
+df.to_json('dados_registros.json', orient='records')
+df.to_json('dados_colunas.json', orient='columns')
+
+# Converter para lista de dicionários (para uso em Python)
+registros = df.to_dict(orient='records')
+
+# Exemplo:
+# [{'nome': 'Produto A', 'preco': 99.9, 'desconto': 0.2},
+#  {'nome': 'Produto B', 'preco': 149.9, 'desconto': 0.15}]</pre>
+                    
+                    <h3>Outros formatos</h3>
+                    <pre># HTML
+df.to_html('tabela.html')
+
+# LaTeX
+df.to_latex('tabela.tex')
+
+# SQL (requer SQLAlchemy)
+from sqlalchemy import create_engine
+engine = create_engine('sqlite:///banco.db')
+df.to_sql('tabela_produtos', engine, if_exists='replace')
+
+# Clipboard (útil para colar em Excel/Sheets)
+df.to_clipboard()</pre>
+                    
+                    <h3>Integração com outras bibliotecas</h3>
+                    <pre># Matplotlib para visualização
+import matplotlib.pyplot as plt
+df.plot(kind='bar', x='categoria', y='preco')
+plt.savefig('grafico.png')
+
+# Seaborn para visualizações estatísticas
+import seaborn as sns
+sns.boxplot(x='categoria', y='preco', data=df)
+plt.savefig('boxplot.png')</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                A exportação de dados é o elo final no fluxo de automação, permitindo que os dados processados sejam utilizados em outras ferramentas ou apresentados em relatórios.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 5: Manipulação de Dados com Pandas</div>
+            <div class="slide-number">Slide 7</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre exemplos práticos de exportação para diferentes formatos, especialmente Excel e JSON, que serão utilizados nos próximos módulos. Explique as opções mais importantes, como index=False (para não incluir o índice na exportação) e encoding (para lidar corretamente com caracteres especiais). Mencione que a conversão para lista de dicionários (to_dict) é particularmente útil para integração com outras partes do código.
+        </div>
+    </div>
+
+    <!-- Slide 8: Exemplo Prático Completo -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Exemplo Prático Completo</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Processando dados de produtos extraídos</h2>
+            
+            <pre>import pandas as pd
+import json
+import matplotlib.pyplot as plt
+from datetime import datetime
+
+def processar_dados_produtos():
+    # Carregar dados extraídos pelo Selenium (simulado aqui)
+    try:
+        with open('ofertas_amazon.json', 'r', encoding='utf-8') as f:
+            produtos_extraidos = json.load(f)
+    except FileNotFoundError:
+        # Dados de exemplo caso o arquivo não exista
+        produtos_extraidos = [
+            {"nome": "Notebook Dell Inspiron", "preco": "R$ 3.599,90", "desconto": "15%", 
+             "preco_original": "R$ 4.199,90", "categoria": "Informática"},
+            {"nome": "Mouse sem fio Logitech", "preco": "R$ 89,90", "desconto": "25%", 
+             "preco_original": "R$ 119,90", "categoria": "Informática"},
+            {"nome": "Teclado mecânico Redragon", "preco": "R$ 199,90", "desconto": "20%", 
+             "preco_original": "R$ 249,90", "categoria": "Informática"},
+            {"nome": "Headset Gamer HyperX", "preco": "R$ 299,90", "desconto": "10%", 
+             "preco_original": "R$ 329,90", "categoria": "Áudio"},
+            {"nome": "Monitor LG 24 polegadas", "preco": "R$ 799,90", "desconto": "12%", 
+             "preco_original": "R$ 899,90", "categoria": "Informática"}
+        ]
+    
+    print(f"Processando {len(produtos_extraidos)} produtos...")
+    
+    # Criar DataFrame
+    df = pd.DataFrame(produtos_extraidos)
+    
+    # Limpeza e transformação de dados
+    # 1. Converter preços para valores numéricos
+    df['preco'] = df['preco'].str.replace('R$ ', '').str.replace('.', '').str.replace(',', '.').astype(float)
+    df['preco_original'] = df['preco_original'].str.replace('R$ ', '').str.replace('.', '').str.replace(',', '.').astype(float)
+    
+    # 2. Converter desconto para valor decimal
+    df['desconto'] = df['desconto'].str.replace('%', '').astype(float) / 100
+    
+    # 3. Calcular economia absoluta
+    df['economia'] = df['preco_original'] - df['preco']
+    
+    # 4. Categorizar por faixa de preço
+    def categorizar_preco(preco):
+        if preco < 100:
+            return 'Baixo custo'
+        elif preco < 500:
+            return 'Custo médio'
+        else:
+            return 'Alto custo'
+    
+    df['faixa_preco'] = df['preco'].apply(categorizar_preco)
+    
+    # Análise dos dados
+    # 1. Estatísticas gerais
+    estatisticas = df.describe()
+    
+    # 2. Produto com maior desconto
+    maior_desconto = df.loc[df['desconto'].idxmax()]
+    
+    # 3. Produto com maior economia absoluta
+    maior_economia = df.loc[df['economia'].idxmax()]
+    
+    # 4. Média de preços por categoria
+    if 'categoria' in df.columns:
+        media_por_categoria = df.groupby('categoria')['preco'].mean()
+    
+    # 5. Contagem por faixa de preço
+    contagem_faixa = df['faixa_preco'].value_counts()
+    
+    # Exportação dos resultados
+    # 1. Salvar DataFrame processado
+    df.to_excel('produtos_processados.xlsx', index=False)
+    
+    # 2. Criar relatório de resumo
+    resumo = pd.DataFrame({
+        'Métrica': ['Total de produtos', 'Preço médio', 'Desconto médio', 'Economia média',
+                   'Produto com maior desconto', 'Valor do maior desconto',
+                   'Produto com maior economia', 'Valor da maior economia'],
+        'Valor': [len(df), f'R$ {df["preco"].mean():.2f}', f'{df["desconto"].mean():.1%}',
+                 f'R$ {df["economia"].mean():.2f}', maior_desconto['nome'],
+                 f'{maior_desconto["desconto"]:.1%}', maior_economia['nome'],
+                 f'R$ {maior_economia["economia"]:.2f}']
+    })
+    
+    resumo.to_excel('resumo_ofertas.xlsx', index=False)
+    
+    # 3. Criar visualização
+    plt.figure(figsize=(10, 6))
+    df.sort_values('desconto', ascending=False).head(10).plot(
+        kind='bar', x='nome', y='desconto', color='green', 
+        title='Top 10 Produtos com Maior Desconto'
+    )
+    plt.tight_layout()
+    plt.savefig('grafico_descontos.png')
+    
+    print("Processamento concluído!")
+    print(f"Arquivos gerados: produtos_processados.xlsx, resumo_ofertas.xlsx, grafico_descontos.png")
+    
+    return df, resumo
+
+if __name__ == "__main__":
+    df, resumo = processar_dados_produtos()</pre>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 5: Manipulação de Dados com Pandas</div>
+            <div class="slide-number">Slide 8</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Analise este exemplo linha por linha, destacando as etapas principais: carregamento dos dados, limpeza e transformação, análise e exportação. Explique como este script se conecta com o módulo anterior (Selenium) e com os próximos módulos (Excel e PDF). Se possível, execute o código para demonstrar o resultado em tempo real, mostrando os arquivos gerados.
+        </div>
+    </div>
+
+    <!-- Slide 9: Próximos Passos -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Próximos Passos</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content" style="text-align: center;">
+            <h2 class="slide-subtitle">Dados processados com sucesso!</h2>
+            
+            <p style="font-size: 20px; margin: 30px 0;">
+                Agora que aprendemos a processar e analisar dados com Pandas, estamos prontos para apresentá-los em formatos mais amigáveis e profissionais!
+            </p>
+            
+            <div style="margin: 40px 0;">
+                <h3>No próximo módulo:</h3>
+                <p style="font-size: 24px; color: var(--secondary-color);">
+                    Trabalhando com Planilhas usando OpenPyXL
+                </p>
+                <p>Aprenderemos a criar e manipular planilhas Excel de forma programática, com formatação profissional e recursos avançados.</p>
+            </div>
+            
+            <div class="note" style="text-align: left; max-width: 80%; margin: 40px auto;">
+                <strong>Dica:</strong> O Pandas é uma biblioteca extremamente poderosa com muitos recursos além do que vimos aqui. Para aprofundar seus conhecimentos, consulte a documentação oficial em <a href="https://pandas.pydata.org/docs/">pandas.pydata.org/docs</a>.
+            </div>
+            
+            <p style="font-size: 24px; margin-top: 40px; color: var(--accent-color);">
+                Alguma dúvida sobre manipulação de dados com Pandas?
+            </p>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 5: Manipulação de Dados com Pandas</div>
+            <div class="slide-number">Slide 9</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Reserve um tempo para responder dúvidas sobre o Pandas e manipulação de dados. Enfatize a importância desta etapa no fluxo de automação, pois dados bem processados facilitam a geração de relatórios de qualidade. Faça uma transição suave para o próximo módulo, explicando como os dados processados serão utilizados para criar planilhas Excel formatadas.
+        </div>
+    </div>
+</body>
+</html>

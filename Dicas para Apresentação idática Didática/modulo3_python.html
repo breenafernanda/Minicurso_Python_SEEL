@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3: Fundamentos de Python para Automação</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --dark-bg: #2c3e50;
+            --code-bg: #f8f8f8;
+            --code-border: #ddd;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        .slide {
+            width: 100%;
+            max-width: 1024px;
+            margin: 0 auto 40px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            page-break-after: always;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .slide-title {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .slide-subtitle {
+            font-size: 22px;
+            color: var(--secondary-color);
+            margin: 10px 0 20px;
+        }
+        
+        .slide-content {
+            flex-grow: 1;
+        }
+        
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #777;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        
+        .logo {
+            height: 40px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .slide-number {
+            font-weight: bold;
+        }
+        
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .note {
+            background-color: #fff8dc;
+            border-left: 4px solid #ffeb3b;
+            padding: 10px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .code-comment {
+            color: #6a9955;
+        }
+        
+        .code-keyword {
+            color: #569cd6;
+        }
+        
+        .code-string {
+            color: #ce9178;
+        }
+        
+        .code-function {
+            color: #dcdcaa;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .presenter-notes {
+            background-color: #f9f9f9;
+            border: 1px dashed #ccc;
+            padding: 10px;
+            margin-top: 30px;
+            font-style: italic;
+            color: #555;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+            }
+            
+            .slide {
+                box-shadow: none;
+                page-break-after: always;
+                min-height: auto;
+                margin-bottom: 0;
+            }
+            
+            .presenter-notes {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Título do Módulo -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Fundamentos de Python para Automação</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Dominando os conceitos essenciais</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Objetivo do Módulo</h3>
+                    <p>Dominar os conceitos básicos de Python necessários para criar scripts de automação eficientes.</p>
+                    
+                    <h3>O que vamos aprender:</h3>
+                    <ul>
+                        <li>Sintaxe básica e estrutura de um script Python</li>
+                        <li>Variáveis, tipos de dados e operações</li>
+                        <li>Estruturas de controle de fluxo</li>
+                        <li>Funções e modularização</li>
+                        <li>Manipulação de erros e exceções</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <div class="note">
+                        "Python é uma linguagem que prioriza a legibilidade e a simplicidade, tornando-a ideal para automação."
+                    </div>
+                    
+                    <h3>Duração estimada:</h3>
+                    <p>30 minutos</p>
+                    
+                    <h3>Por que é importante?</h3>
+                    <p>Entender os fundamentos de Python é essencial para criar scripts de automação robustos e eficientes. Estes conceitos serão a base para todos os módulos seguintes.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 3: Fundamentos de Python para Automação</div>
+            <div class="slide-number">Slide 1</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Enfatize que este módulo é fundamental mesmo para quem já tem alguma experiência com Python, pois revisaremos conceitos específicos que serão utilizados nos scripts de automação. Pergunte quantos participantes já têm experiência com Python para ajustar o ritmo da apresentação.
+        </div>
+    </div>
+
+    <!-- Slide 2: Sintaxe Básica e Estrutura -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Sintaxe Básica e Estrutura</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Características da Sintaxe Python</h3>
+                    <ul>
+                        <li><span class="highlight">Indentação:</span> Usa espaços (geralmente 4) para definir blocos de código</li>
+                        <li><span class="highlight">Sem ponto e vírgula:</span> Linhas terminam naturalmente</li>
+                        <li><span class="highlight">Case-sensitive:</span> <code>nome</code> e <code>Nome</code> são variáveis diferentes</li>
+                        <li><span class="highlight">Dinâmico:</span> Tipos de dados são inferidos automaticamente</li>
+                    </ul>
+                    
+                    <h3>Comentários</h3>
+                    <pre># Comentário de uma linha
+
+"""
+Comentário de
+múltiplas linhas
+(docstring)
+"""</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Estrutura de um Script Python</h3>
+                    <pre># 1. Importações
+import os
+import time
+
+# 2. Constantes e configurações
+DIRETORIO = "/caminho/para/arquivos"
+MAX_TENTATIVAS = 3
+
+# 3. Definição de funções
+def processar_arquivo(nome_arquivo):
+    """Processa um arquivo e retorna o resultado."""
+    # Código da função aqui
+    return resultado
+
+# 4. Código principal (ponto de entrada)
+if __name__ == "__main__":
+    # Código principal aqui
+    arquivos = os.listdir(DIRETORIO)
+    for arquivo in arquivos:
+        resultado = processar_arquivo(arquivo)
+        print(f"Resultado: {resultado}")</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                A indentação em Python não é apenas uma questão de estilo, mas parte da sintaxe da linguagem. Um erro de indentação pode causar erros de execução ou comportamentos inesperados.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 3: Fundamentos de Python para Automação</div>
+            <div class="slide-number">Slide 2</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Explique a importância da indentação em Python, que é diferente de muitas outras linguagens. Mostre como a estrutura organizada de um script facilita a manutenção e compreensão do código. Mencione que o bloco "if __name__ == '__main__':" permite que o script seja importado como módulo sem executar o código principal.
+        </div>
+    </div>
+
+    <!-- Slide 3: Variáveis e Tipos de Dados -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Variáveis e Tipos de Dados</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Armazenando e manipulando informações</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>Declaração de Variáveis</h3>
+                    <pre># Não é necessário declarar o tipo
+nome = "Maria"
+idade = 30
+altura = 1.65
+ativo = True
+
+# Múltiplas atribuições
+x, y, z = 1, 2, 3
+
+# Constantes (por convenção)
+PI = 3.14159
+MAX_USUARIOS = 100</pre>
+                    
+                    <h3>Tipos de Dados Básicos</h3>
+                    <ul>
+                        <li><code>int</code>: Números inteiros (10, -5, 0)</li>
+                        <li><code>float</code>: Números decimais (3.14, -0.001)</li>
+                        <li><code>str</code>: Texto ("Olá", 'Python')</li>
+                        <li><code>bool</code>: Valores lógicos (True, False)</li>
+                        <li><code>None</code>: Representa ausência de valor</li>
+                    </ul>
+                </div>
+                
+                <div class="column">
+                    <h3>Verificação de Tipos</h3>
+                    <pre># Verificar o tipo de uma variável
+tipo = type(nome)  # retorna &lt;class 'str'&gt;
+
+# Verificar se é de um tipo específico
+if isinstance(idade, int):
+    print("É um número inteiro")</pre>
+                    
+                    <h3>Conversão de Tipos (Type Casting)</h3>
+                    <pre># Conversão para string
+texto = str(idade)  # "30"
+
+# Conversão para inteiro
+numero = int("42")  # 42
+
+# Conversão para float
+decimal = float("3.14")  # 3.14
+
+# Conversão para booleano
+# (0, "", None, False são avaliados como False)
+valor_logico = bool(0)  # False</pre>
+                    
+                    <h3>Formatação de Strings (f-strings)</h3>
+                    <pre># Método moderno (Python 3.6+)
+mensagem = f"Olá, {nome}! Você tem {idade} anos."
+
+# Método .format()
+mensagem = "Olá, {}! Você tem {} anos.".format(nome, idade)</pre>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 3: Fundamentos de Python para Automação</div>
+            <div class="slide-number">Slide 3</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Destaque a simplicidade da declaração de variáveis em Python comparada a outras linguagens. Enfatize a importância das f-strings para formatação, pois serão muito utilizadas nos scripts de automação. Demonstre como verificar o tipo de uma variável usando type() e como isso pode ser útil para depuração.
+        </div>
+    </div>
+
+    <!-- Slide 4: Estruturas de Dados -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Estruturas de Dados</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Listas</h3>
+                    <pre># Criação de listas
+frutas = ["maçã", "banana", "laranja"]
+numeros = [1, 2, 3, 4, 5]
+misturado = [1, "texto", True, 3.14]
+
+# Acessando elementos (índice começa em 0)
+primeira_fruta = frutas[0]  # "maçã"
+ultima_fruta = frutas[-1]  # "laranja"
+
+# Modificando elementos
+frutas[1] = "morango"  # ["maçã", "morango", "laranja"]
+
+# Métodos comuns
+frutas.append("uva")  # Adiciona ao final
+frutas.insert(1, "pera")  # Insere na posição 1
+frutas.remove("maçã")  # Remove elemento
+frutas.pop()  # Remove e retorna o último elemento
+tamanho = len(frutas)  # Retorna o tamanho da lista</pre>
+                    
+                    <h3>Tuplas (Imutáveis)</h3>
+                    <pre># Criação de tuplas
+coordenadas = (10, 20)
+pessoa = ("João", 25, "Engenheiro")
+
+# Acessando elementos
+nome = pessoa[0]  # "João"
+
+# Desempacotamento
+x, y = coordenadas
+nome, idade, profissao = pessoa</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Dicionários</h3>
+                    <pre># Criação de dicionários
+pessoa = {
+    "nome": "Ana",
+    "idade": 28,
+    "cidade": "São Paulo"
+}
+
+# Acessando valores
+nome = pessoa["nome"]  # "Ana"
+idade = pessoa.get("idade")  # 28
+# .get() não gera erro se a chave não existir
+telefone = pessoa.get("telefone", "Não informado")
+
+# Modificando valores
+pessoa["idade"] = 29
+pessoa["telefone"] = "123456789"
+
+# Métodos comuns
+chaves = pessoa.keys()  # Retorna as chaves
+valores = pessoa.values()  # Retorna os valores
+itens = pessoa.items()  # Retorna pares (chave, valor)</pre>
+                    
+                    <h3>Conjuntos (Sets)</h3>
+                    <pre># Criação de conjuntos (elementos únicos)
+cores = {"vermelho", "verde", "azul"}
+numeros = {1, 2, 3, 2, 1}  # {1, 2, 3}
+
+# Operações
+cores.add("amarelo")
+cores.remove("verde")
+uniao = cores | {"preto", "branco"}  # União
+intersecao = cores & {"vermelho", "preto"}  # Interseção</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                Dicionários são extremamente úteis em automação para armazenar dados estruturados, como informações extraídas de páginas web ou configurações de scripts.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 3: Fundamentos de Python para Automação</div>
+            <div class="slide-number">Slide 4</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Explique como escolher a estrutura de dados adequada para cada situação. Destaque que listas e dicionários serão as estruturas mais utilizadas nos nossos scripts de automação. Mostre exemplos práticos de como os dicionários são úteis para armazenar dados extraídos de sites.
+        </div>
+    </div>
+
+    <!-- Slide 5: Estruturas de Controle de Fluxo -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Estruturas de Controle de Fluxo</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Condicionais</h3>
+                    <pre># if, elif, else
+idade = 18
+
+if idade < 18:
+    print("Menor de idade")
+elif idade == 18:
+    print("Acabou de completar 18 anos")
+else:
+    print("Maior de idade")
+
+# Operadores de comparação
+# ==, !=, >, <, >=, <=
+
+# Operadores lógicos
+# and, or, not
+if idade >= 18 and idade <= 65:
+    print("Idade ativa")
+
+# Operador ternário
+status = "Maior" if idade >= 18 else "Menor"</pre>
+                    
+                    <h3>Loop while</h3>
+                    <pre># Executa enquanto a condição for verdadeira
+contador = 0
+while contador < 5:
+    print(contador)
+    contador += 1
+
+# break e continue
+while True:
+    resposta = input("Digite 'sair' para encerrar: ")
+    if resposta == "sair":
+        break  # Sai do loop
+    if resposta == "":
+        continue  # Volta ao início do loop</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Loop for</h3>
+                    <pre># Iterando sobre uma lista
+frutas = ["maçã", "banana", "laranja"]
+for fruta in frutas:
+    print(fruta)
+
+# Iterando com índices
+for i in range(len(frutas)):
+    print(f"{i}: {frutas[i]}")
+
+# Função range()
+for i in range(5):  # 0, 1, 2, 3, 4
+    print(i)
+
+for i in range(2, 8):  # 2, 3, 4, 5, 6, 7
+    print(i)
+
+for i in range(1, 10, 2):  # 1, 3, 5, 7, 9
+    print(i)
+
+# Iterando sobre dicionários
+pessoa = {"nome": "Ana", "idade": 28}
+for chave in pessoa:
+    print(f"{chave}: {pessoa[chave]}")
+
+# Desempacotando itens
+for chave, valor in pessoa.items():
+    print(f"{chave}: {valor}")
+
+# Enumerate para obter índice e valor
+for i, fruta in enumerate(frutas):
+    print(f"{i}: {fruta}")</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                Em scripts de automação, loops são frequentemente usados para processar múltiplos elementos, como itens em uma página web ou linhas em uma planilha.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 3: Fundamentos de Python para Automação</div>
+            <div class="slide-number">Slide 5</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Demonstre como as estruturas de controle de fluxo permitem que os scripts tomem decisões e processem dados de forma iterativa. Enfatize a importância do loop for para automação, especialmente ao trabalhar com coleções de dados. Mostre exemplos práticos de como usar break e continue para controlar o fluxo de execução.
+        </div>
+    </div>
+
+    <!-- Slide 6: Funções e Modularização -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Funções e Modularização</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Definição de Funções</h3>
+                    <pre># Função básica
+def saudacao(nome):
+    return f"Olá, {nome}!"
+
+# Chamada da função
+mensagem = saudacao("Maria")
+
+# Função com múltiplos parâmetros
+def calcular_media(numeros):
+    total = sum(numeros)
+    return total / len(numeros)
+
+# Parâmetros com valores padrão
+def conectar_bd(host="localhost", porta=3306):
+    print(f"Conectando a {host}:{porta}")
+    # Código de conexão aqui
+
+# Chamadas com diferentes argumentos
+conectar_bd()  # Usa valores padrão
+conectar_bd("servidor.exemplo.com")
+conectar_bd(porta=5432)
+conectar_bd("servidor.exemplo.com", 5432)</pre>
+                    
+                    <h3>Docstrings</h3>
+                    <pre>def extrair_dados(url, seletor):
+    """
+    Extrai dados de uma página web.
+    
+    Args:
+        url (str): URL da página a ser acessada
+        seletor (str): Seletor CSS para localizar elementos
+        
+    Returns:
+        list: Lista de elementos encontrados
+    """
+    # Código da função aqui</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Escopo de Variáveis</h3>
+                    <pre># Variáveis globais e locais
+contador = 0  # Variável global
+
+def incrementar():
+    global contador  # Declara uso da variável global
+    contador += 1
+    
+    local = 10  # Variável local
+    print(f"Local: {local}, Global: {contador}")
+
+# Variável local só existe dentro da função
+incrementar()
+print(contador)  # 1
+# print(local)  # Erro: local não está definido</pre>
+                    
+                    <h3>Importação de Módulos</h3>
+                    <pre># Importar módulo completo
+import os
+caminho = os.path.join("pasta", "arquivo.txt")
+
+# Importar funções específicas
+from datetime import datetime
+agora = datetime.now()
+
+# Importar com alias
+import pandas as pd
+df = pd.DataFrame()
+
+# Importar tudo (não recomendado)
+from math import *
+resultado = sqrt(16)  # 4.0
+
+# Importar módulo próprio
+from meu_modulo import minha_funcao</pre>
+                    
+                    <h3>Organização de Código</h3>
+                    <p>Divida seu código em funções pequenas e específicas, cada uma com uma única responsabilidade.</p>
+                </div>
+            </div>
+            
+            <div class="note">
+                Funções bem definidas são a chave para scripts de automação reutilizáveis e fáceis de manter. Invista tempo criando funções que possam ser reaproveitadas em diferentes projetos.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 3: Fundamentos de Python para Automação</div>
+            <div class="slide-number">Slide 6</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Enfatize a importância da modularização para criar scripts de automação organizados e reutilizáveis. Explique como funções bem documentadas facilitam a manutenção do código. Demonstre como a organização em módulos permite reutilizar código entre diferentes projetos de automação.
+        </div>
+    </div>
+
+    <!-- Slide 7: Manipulação de Erros e Exceções -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Manipulação de Erros e Exceções</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <div class="two-column">
+                <div class="column">
+                    <h3>Estrutura try-except</h3>
+                    <pre># Tratamento básico de exceções
+try:
+    numero = int(input("Digite um número: "))
+    resultado = 10 / numero
+    print(f"Resultado: {resultado}")
+except ValueError:
+    print("Entrada inválida. Digite um número.")
+except ZeroDivisionError:
+    print("Não é possível dividir por zero.")
+except:
+    print("Ocorreu um erro inesperado.")
+
+# Capturando a exceção
+try:
+    # Código que pode gerar erro
+    arquivo = open("dados.txt", "r")
+except Exception as e:
+    print(f"Erro: {e}")
+
+# Bloco else (executado se não houver exceção)
+try:
+    dados = [1, 2, 3]
+    valor = dados[1]
+except IndexError:
+    print("Índice inválido")
+else:
+    print(f"Valor obtido: {valor}")</pre>
+                </div>
+                
+                <div class="column">
+                    <h3>Bloco finally</h3>
+                    <pre># Executado sempre, independente de exceção
+try:
+    arquivo = open("log.txt", "w")
+    arquivo.write("Teste")
+except IOError:
+    print("Erro ao manipular o arquivo")
+finally:
+    # Garantir que o arquivo seja fechado
+    arquivo.close()</pre>
+                    
+                    <h3>Gerenciador de contexto (with)</h3>
+                    <pre># Forma mais segura de trabalhar com recursos
+with open("dados.txt", "r") as arquivo:
+    conteudo = arquivo.read()
+# Arquivo é fechado automaticamente</pre>
+                    
+                    <h3>Exceções comuns em automação</h3>
+                    <ul>
+                        <li><code>FileNotFoundError</code>: Arquivo não encontrado</li>
+                        <li><code>PermissionError</code>: Sem permissão para acessar</li>
+                        <li><code>TimeoutError</code>: Operação excedeu o tempo limite</li>
+                        <li><code>ConnectionError</code>: Erro de conexão</li>
+                        <li><code>KeyError</code>: Chave não encontrada em dicionário</li>
+                        <li><code>IndexError</code>: Índice fora dos limites</li>
+                    </ul>
+                    
+                    <h3>Criando exceções personalizadas</h3>
+                    <pre>class ErroDeAutomacao(Exception):
+    """Exceção personalizada para erros de automação."""
+    pass
+
+# Lançando a exceção
+if not elemento_encontrado:
+    raise ErroDeAutomacao("Elemento não encontrado na página")</pre>
+                </div>
+            </div>
+            
+            <div class="note">
+                Em scripts de automação, o tratamento adequado de erros é crucial, pois estamos lidando com elementos externos (sites, arquivos, APIs) que podem falhar por diversos motivos fora do nosso controle.
+            </div>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 3: Fundamentos de Python para Automação</div>
+            <div class="slide-number">Slide 7</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Enfatize a importância do tratamento de erros em scripts de automação, que frequentemente interagem com sistemas externos sujeitos a falhas. Demonstre como um bom tratamento de exceções pode tornar os scripts mais robustos. Explique que em automação web, por exemplo, elementos podem não estar disponíveis ou mudar de estrutura, e o código deve lidar com essas situações graciosamente.
+        </div>
+    </div>
+
+    <!-- Slide 8: Exemplo Prático Integrado -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Exemplo Prático Integrado</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content">
+            <h2 class="slide-subtitle">Aplicando os conceitos aprendidos</h2>
+            
+            <pre># Script para processar arquivos de dados
+import os
+import csv
+from datetime import datetime
+
+def listar_arquivos(diretorio, extensao=".csv"):
+    """
+    Lista todos os arquivos com a extensão especificada em um diretório.
+    
+    Args:
+        diretorio (str): Caminho do diretório a ser pesquisado
+        extensao (str): Extensão dos arquivos a serem listados
+        
+    Returns:
+        list: Lista de caminhos completos dos arquivos encontrados
+    """
+    arquivos = []
+    try:
+        for arquivo in os.listdir(diretorio):
+            if arquivo.endswith(extensao):
+                caminho_completo = os.path.join(diretorio, arquivo)
+                arquivos.append(caminho_completo)
+        return arquivos
+    except FileNotFoundError:
+        print(f"Diretório não encontrado: {diretorio}")
+        return []
+
+def processar_arquivo(caminho_arquivo):
+    """
+    Processa um arquivo CSV e retorna estatísticas básicas.
+    
+    Args:
+        caminho_arquivo (str): Caminho do arquivo a ser processado
+        
+    Returns:
+        dict: Dicionário com estatísticas do arquivo
+    """
+    try:
+        with open(caminho_arquivo, 'r', encoding='utf-8') as arquivo:
+            leitor = csv.reader(arquivo)
+            cabecalho = next(leitor)  # Pula o cabeçalho
+            
+            linhas = list(leitor)
+            total_linhas = len(linhas)
+            
+            # Calcular estatísticas (exemplo simples)
+            estatisticas = {
+                "arquivo": os.path.basename(caminho_arquivo),
+                "total_linhas": total_linhas,
+                "colunas": cabecalho,
+                "processado_em": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }
+            
+            return estatisticas
+    except Exception as e:
+        print(f"Erro ao processar {caminho_arquivo}: {e}")
+        return None
+
+def main():
+    # Configurações
+    DIRETORIO_DADOS = "./dados"
+    
+    # Listar arquivos
+    arquivos = listar_arquivos(DIRETORIO_DADOS)
+    
+    if not arquivos:
+        print("Nenhum arquivo CSV encontrado.")
+        return
+    
+    # Processar cada arquivo
+    resultados = []
+    for arquivo in arquivos:
+        print(f"Processando {os.path.basename(arquivo)}...")
+        estatisticas = processar_arquivo(arquivo)
+        if estatisticas:
+            resultados.append(estatisticas)
+    
+    # Exibir resultados
+    print("\nResumo do processamento:")
+    for resultado in resultados:
+        print(f"Arquivo: {resultado['arquivo']}")
+        print(f"  Linhas: {resultado['total_linhas']}")
+        print(f"  Colunas: {', '.join(resultado['colunas'])}")
+        print(f"  Processado em: {resultado['processado_em']}")
+        print("-" * 40)
+    
+    print(f"Total de arquivos processados: {len(resultados)}")
+
+if __name__ == "__main__":
+    main()</pre>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 3: Fundamentos de Python para Automação</div>
+            <div class="slide-number">Slide 8</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Analise este exemplo linha por linha, destacando como ele incorpora os conceitos aprendidos: funções bem definidas com docstrings, tratamento de exceções, estruturas de controle de fluxo, etc. Explique como este exemplo pode ser adaptado para diferentes cenários de automação. Se possível, execute o código com alguns arquivos CSV de exemplo para demonstrar seu funcionamento.
+        </div>
+    </div>
+
+    <!-- Slide 9: Próximos Passos -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">Próximos Passos</h1>
+            <div class="logo">Python Automação</div>
+        </div>
+        
+        <div class="slide-content" style="text-align: center;">
+            <h2 class="slide-subtitle">Fundamentos concluídos!</h2>
+            
+            <p style="font-size: 20px; margin: 30px 0;">
+                Agora que dominamos os conceitos básicos de Python, estamos prontos para aplicá-los em cenários reais de automação!
+            </p>
+            
+            <div style="margin: 40px 0;">
+                <h3>No próximo módulo:</h3>
+                <p style="font-size: 24px; color: var(--secondary-color);">
+                    Automação Web com Selenium
+                </p>
+                <p>Aprenderemos a automatizar interações com páginas web, extraindo dados e realizando ações como um usuário humano.</p>
+            </div>
+            
+            <div class="note" style="text-align: left; max-width: 80%; margin: 40px auto;">
+                <strong>Exercício prático:</strong> Tente criar um script Python simples que leia um arquivo de texto, conte o número de palavras e linhas, e salve essas estatísticas em um novo arquivo. Isso ajudará a consolidar os conceitos aprendidos neste módulo.
+            </div>
+            
+            <p style="font-size: 24px; margin-top: 40px; color: var(--accent-color);">
+                Alguma dúvida sobre os fundamentos de Python?
+            </p>
+        </div>
+        
+        <div class="slide-footer">
+            <div>Módulo 3: Fundamentos de Python para Automação</div>
+            <div class="slide-number">Slide 9</div>
+        </div>
+        
+        <div class="presenter-notes">
+            Notas para o apresentador: Reserve um tempo para responder dúvidas sobre os conceitos básicos de Python. Enfatize que estes fundamentos serão aplicados constantemente nos próximos módulos. Sugira recursos adicionais para quem quiser aprofundar o conhecimento em Python. Faça uma transição suave para o próximo módulo, criando expectativa para a automação web com Selenium.
+        </div>
+    </div>
+</body>
+</html>
