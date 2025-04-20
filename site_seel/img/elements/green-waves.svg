@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300">
+  <!-- Green Waves -->
+  <g id="green-waves">
+    <!-- Bottom Wave -->
+    <path d="M0,150 C200,50 400,250 600,150 C800,50 1000,250 1200,150 L1200,300 L0,300 Z" fill="#8CC63F"/>
+    
+    <!-- Middle Wave -->
+    <path d="M0,180 C200,80 400,280 600,180 C800,80 1000,280 1200,180 L1200,300 L0,300 Z" fill="#6AAD3D" opacity="0.7"/>
+    
+    <!-- Top Wave -->
+    <path d="M0,210 C200,110 400,310 600,210 C800,110 1000,310 1200,210 L1200,300 L0,300 Z" fill="#4A9336" opacity="0.5"/>
+  </g>
+</svg>

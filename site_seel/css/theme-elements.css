@@ -1,0 +1,401 @@
+/* Estilos para o fundo padrão com padrão de ícones de engenharia elétrica */
+.bg-pattern {
+    background-color: var(--verde-escuro);
+    background-image: url('../img/bg-pattern.svg');
+    background-repeat: repeat;
+    background-size: 300px;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+    opacity: 0.1;
+}
+
+/* Estilos para ondas e curvas decorativas */
+.wave-shape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.wave-shape svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 70px;
+}
+
+.wave-shape .shape-fill {
+    fill: var(--branco);
+}
+
+/* Estilos para o mascote Game Boy */
+.mascot {
+    animation: float 3s ease-in-out infinite;
+    max-width: 100%;
+    height: auto;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Estilos para ícones de energia elétrica */
+.energy-icon {
+    color: var(--amarelo);
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+/* Estilos para cards com efeito de brilho */
+.glow-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--raio-borda);
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+    padding: 30px;
+    box-shadow: var(--sombra-media);
+    transition: all 0.3s;
+}
+
+.glow-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 215, 0, 0.3),
+        rgba(140, 198, 63, 0.3),
+        rgba(255, 215, 0, 0.3)
+    );
+    transform: rotate(30deg);
+    animation: glowEffect 6s linear infinite;
+    z-index: 0;
+}
+
+.glow-card-content {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes glowEffect {
+    0% {
+        transform: rotate(30deg) translateX(-30%);
+    }
+    100% {
+        transform: rotate(30deg) translateX(30%);
+    }
+}
+
+/* Estilos para botões com efeito de energia */
+.energy-btn {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--verde-escuro);
+    color: var(--amarelo);
+    border: 2px solid var(--amarelo);
+    padding: 12px 25px;
+    border-radius: var(--raio-borda-pequeno);
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    z-index: 1;
+}
+
+.energy-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 215, 0, 0.4),
+        transparent
+    );
+    transition: all 0.6s;
+    z-index: -1;
+}
+
+.energy-btn:hover::before {
+    left: 100%;
+}
+
+.energy-btn:hover {
+    background-color: var(--verde-medio);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para seções com fundo de circuito */
+.circuit-bg {
+    background-color: var(--verde-escuro);
+    background-image: url('../img/circuit-pattern.svg');
+    background-repeat: repeat;
+    background-size: 200px;
+    background-attachment: fixed;
+    position: relative;
+    color: var(--branco);
+    padding: 80px 0;
+    overflow: hidden;
+}
+
+.circuit-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 92, 54, 0.85);
+    z-index: 0;
+}
+
+.circuit-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Estilos para ícones de lâmpada e raios */
+.bulb-icon {
+    color: var(--amarelo);
+    font-size: 2.5rem;
+    animation: pulse 2s infinite;
+}
+
+.lightning-icon {
+    color: var(--amarelo);
+    font-size: 2rem;
+    animation: flash 3s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+}
+
+@keyframes flash {
+    0%, 50%, 100% {
+        opacity: 0.7;
+    }
+    25%, 75% {
+        opacity: 1;
+    }
+}
+
+/* Estilos para badges de tecnologia */
+.tech-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    background-color: var(--verde-claro);
+    color: var(--branco);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    transition: all 0.3s;
+}
+
+.tech-badge:hover {
+    background-color: var(--amarelo);
+    color: var(--verde-escuro);
+    transform: translateY(-2px);
+}
+
+/* Estilos para timeline com cores SEEL */
+.seel-timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.seel-timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: var(--verde-claro);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+    border-radius: 10px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -12px;
+    background-color: var(--branco);
+    border: 4px solid var(--amarelo);
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timeline-item.left {
+    left: 0;
+}
+
+.timeline-item.right {
+    left: 50%;
+}
+
+.timeline-item.right::after {
+    left: -12px;
+}
+
+.timeline-content {
+    padding: 20px;
+    background-color: var(--branco);
+    position: relative;
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-suave);
+}
+
+.timeline-date {
+    font-weight: bold;
+    color: var(--verde-escuro);
+    margin-bottom: 10px;
+}
+
+.timeline-title {
+    color: var(--verde-escuro);
+    margin-bottom: 10px;
+}
+
+.timeline-text {
+    color: var(--cinza-escuro);
+}
+
+/* Estilos para contador animado */
+.counter-container {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.counter {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--amarelo);
+    margin-bottom: 10px;
+}
+
+.counter-label {
+    font-size: 1.2rem;
+    color: var(--branco);
+}
+
+/* Estilos para cards de minicurso com tema SEEL */
+.seel-card {
+    background-color: var(--branco);
+    border-radius: var(--raio-borda);
+    overflow: hidden;
+    box-shadow: var(--sombra-suave);
+    transition: all 0.3s;
+    border-top: 5px solid var(--verde-claro);
+}
+
+.seel-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--sombra-media);
+    border-top-color: var(--amarelo);
+}
+
+.seel-card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.seel-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.seel-card:hover .seel-card-image img {
+    transform: scale(1.1);
+}
+
+.seel-card-content {
+    padding: 25px;
+}
+
+.seel-card-title {
+    font-size: 1.5rem;
+    color: var(--verde-escuro);
+    margin-bottom: 15px;
+}
+
+.seel-card-text {
+    color: var(--cinza-escuro);
+    margin-bottom: 20px;
+}
+
+.seel-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid var(--cinza-medio);
+}
+
+.seel-card-date {
+    color: var(--cinza-escuro);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+.seel-card-date i {
+    color: var(--verde-medio);
+    margin-right: 5px;
+}
+
+.seel-card-link {
+    color: var(--verde-medio);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.seel-card-link:hover {
+    color: var(--verde-escuro);
+}

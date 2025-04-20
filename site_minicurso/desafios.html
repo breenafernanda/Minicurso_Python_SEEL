@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafios Interativos - Minicurso Python SEEL</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- CodeMirror para editor de código -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Barra lateral com navegação -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="img/logo_eletrica.png" alt="Logo Engenharia Elétrica">
+                <h3>Minicurso Python</h3>
+            </div>
+            <div class="sidebar-menu">
+                <a href="index.html" class="menu-item">
+                    <div class="menu-number">01</div>
+                    <span>Início</span>
+                </a>
+                <a href="introducao.html" class="menu-item">
+                    <div class="menu-number">02</div>
+                    <span>Introdução ao Python</span>
+                </a>
+                <a href="selenium.html" class="menu-item">
+                    <div class="menu-number">03</div>
+                    <span>Automação com Selenium</span>
+                </a>
+                <a href="pandas.html" class="menu-item">
+                    <div class="menu-number">04</div>
+                    <span>Análise com Pandas</span>
+                </a>
+                <a href="openpyxl.html" class="menu-item">
+                    <div class="menu-number">05</div>
+                    <span>Planilhas com Openpyxl</span>
+                </a>
+                <a href="pdf.html" class="menu-item">
+                    <div class="menu-number">06</div>
+                    <span>Manipulação de PDF</span>
+                </a>
+                <a href="desafios.html" class="menu-item active">
+                    <div class="menu-number">07</div>
+                    <span>Desafios Interativos</span>
+                </a>
+                <a href="beecrowd.html" class="menu-item">
+                    <div class="menu-number">08</div>
+                    <span>Resoluções Beecrowd</span>
+                </a>
+                <a href="documentacao.html" class="menu-item">
+                    <div class="menu-number">09</div>
+                    <span>Documentação</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Conteúdo principal -->
+        <div class="main-content">
+            <div class="content-header">
+                <h1>Desafios Interativos</h1>
+                <p>Pratique seus conhecimentos com desafios de programação. Escreva seu código e veja a solução quando precisar de ajuda.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>Como Funcionam os Desafios</h2>
+                <p>Cada desafio apresenta um problema de programação relacionado aos tópicos do minicurso. Você deve escrever o código Python para resolver o problema.</p>
+                
+                <ul>
+                    <li><strong>Botão Ver Solução:</strong> Mostra uma solução possível para o problema.</li>
+                    <li><strong>Botão Reiniciar:</strong> Limpa seu código e volta ao estado inicial.</li>
+                </ul>
+                
+                <p>Os desafios são uma ótima maneira de praticar e fixar o conhecimento adquirido durante o minicurso.</p>
+            </div>
+
+            <!-- Desafio 1: Introdução ao Python -->
+            <div class="challenge-container">
+                <div class="challenge-header">
+                    <h3>Desafio 1: Olá, Mundo!</h3>
+                </div>
+                <div class="challenge-content">
+                    <div class="challenge-description">
+                        <p>Escreva um programa que imprima a mensagem "Olá, mundo!" na tela.</p>
+                        <p>Este é um desafio simples para praticar a sintaxe básica do Python.</p>
+                    </div>
+                    <textarea id="editor-intro-1" class="challenge-editor"># Escreva um código que imprima "Olá, mundo!"</textarea>
+                    <div class="challenge-actions">
+                        <button class="btn-solution" data-challenge="intro-1">Ver Solução</button>
+                        <button class="btn-reset" data-challenge="intro-1">Reiniciar</button>
+                    </div>
+                    <div id="result-intro-1" class="challenge-result"></div>
+                </div>
+            </div>
+
+            <!-- Desafio 2: Verificação de Maioridade -->
+            <div class="challenge-container">
+                <div class="challenge-header">
+                    <h3>Desafio 2: Verificação de Maioridade</h3>
+                </div>
+                <div class="challenge-content">
+                    <div class="challenge-description">
+                        <p>Crie uma função chamada <code>verificar_maioridade</code> que recebe a idade como parâmetro e retorna uma mensagem indicando se a pessoa é maior ou menor de idade.</p>
+                        <p>A função deve retornar "Você é maior de idade." se a idade for maior ou igual a 18, e "Você é menor de idade." caso contrário.</p>
+                    </div>
+                    <textarea id="editor-intro-2" class="challenge-editor"># Crie uma função que verifica se uma pessoa é maior de idade
+# A função deve receber a idade como parâmetro e retornar uma mensagem
+
+def verificar_maioridade(idade):
+    # Seu código aqui
+    pass
+
+# Teste da função
+idade = int(input("Digite sua idade: "))
+print(verificar_maioridade(idade))</textarea>
+                    <div class="challenge-actions">
+                        <button class="btn-solution" data-challenge="intro-2">Ver Solução</button>
+                        <button class="btn-reset" data-challenge="intro-2">Reiniciar</button>
+                    </div>
+                    <div id="result-intro-2" class="challenge-result"></div>
+                </div>
+            </div>
+
+            <!-- Desafio 3: Automação com Selenium -->
+            <div class="challenge-container">
+                <div class="challenge-header">
+                    <h3>Desafio 3: Automação com Selenium</h3>
+                </div>
+                <div class="challenge-content">
+                    <div class="challenge-description">
+                        <p>Escreva um código que use o Selenium para:</p>
+                        <ol>
+                            <li>Inicializar o Chrome WebDriver</li>
+                            <li>Acessar uma URL</li>
+                            <li>Encontrar um elemento na página</li>
+                            <li>Fechar o navegador</li>
+                        </ol>
+                    </div>
+                    <textarea id="editor-selenium-1" class="challenge-editor"># Importe as bibliotecas necessárias
+# Crie um código que:
+# 1. Inicialize o Chrome WebDriver
+# 2. Acesse uma URL
+# 3. Encontre um elemento na página
+# 4. Feche o navegador
+
+# Seu código aqui</textarea>
+                    <div class="challenge-actions">
+                        <button class="btn-solution" data-challenge="selenium-1">Ver Solução</button>
+                        <button class="btn-reset" data-challenge="selenium-1">Reiniciar</button>
+                    </div>
+                    <div id="result-selenium-1" class="challenge-result"></div>
+                </div>
+            </div>
+
+            <!-- Desafio 4: Análise de Dados com Pandas -->
+            <div class="challenge-container">
+                <div class="challenge-header">
+                    <h3>Desafio 4: Análise de Dados com Pandas</h3>
+                </div>
+                <div class="challenge-content">
+                    <div class="challenge-description">
+                        <p>Escreva um código que use o Pandas para:</p>
+                        <ol>
+                            <li>Ler um arquivo Excel ou CSV</li>
+                            <li>Exibir as primeiras linhas do DataFrame</li>
+                            <li>Realizar uma análise básica dos dados</li>
+                        </ol>
+                    </div>
+                    <textarea id="editor-pandas-1" class="challenge-editor"># Importe a biblioteca pandas
+# Crie um código que:
+# 1. Leia um arquivo Excel ou CSV
+# 2. Exiba as primeiras linhas
+# 3. Realize uma análise básica
+
+# Seu código aqui</textarea>
+                    <div class="challenge-actions">
+                        <button class="btn-solution" data-challenge="pandas-1">Ver Solução</button>
+                        <button class="btn-reset" data-challenge="pandas-1">Reiniciar</button>
+                    </div>
+                    <div id="result-pandas-1" class="challenge-result"></div>
+                </div>
+            </div>
+
+            <!-- Desafio 5: Manipulação de Planilhas com Openpyxl -->
+            <div class="challenge-container">
+                <div class="challenge-header">
+                    <h3>Desafio 5: Manipulação de Planilhas com Openpyxl</h3>
+                </div>
+                <div class="challenge-content">
+                    <div class="challenge-description">
+                        <p>Escreva um código que use o Openpyxl para:</p>
+                        <ol>
+                            <li>Criar um novo Workbook</li>
+                            <li>Adicionar dados a uma planilha</li>
+                            <li>Salvar o arquivo</li>
+                        </ol>
+                    </div>
+                    <textarea id="editor-openpyxl-1" class="challenge-editor"># Importe as bibliotecas necessárias
+# Crie um código que:
+# 1. Crie um novo Workbook
+# 2. Adicione dados a uma planilha
+# 3. Salve o arquivo
+
+# Seu código aqui</textarea>
+                    <div class="challenge-actions">
+                        <button class="btn-solution" data-challenge="openpyxl-1">Ver Solução</button>
+                        <button class="btn-reset" data-challenge="openpyxl-1">Reiniciar</button>
+                    </div>
+                    <div id="result-openpyxl-1" class="challenge-result"></div>
+                </div>
+            </div>
+
+            <!-- Desafio 6: Manipulação de PDF -->
+            <div class="challenge-container">
+                <div class="challenge-header">
+                    <h3>Desafio 6: Manipulação de PDF</h3>
+                </div>
+                <div class="challenge-content">
+                    <div class="challenge-description">
+                        <p>Escreva um código que use uma biblioteca para manipulação de PDF para:</p>
+                        <ol>
+                            <li>Criar um novo PDF</li>
+                            <li>Adicionar texto ao PDF</li>
+                            <li>Salvar o arquivo</li>
+                        </ol>
+                    </div>
+                    <textarea id="editor-pdf-1" class="challenge-editor"># Importe as bibliotecas necessárias
+# Crie um código que:
+# 1. Crie um novo PDF
+# 2. Adicione texto ao PDF
+# 3. Salve o arquivo
+
+# Seu código aqui</textarea>
+                    <div class="challenge-actions">
+                        <button class="btn-solution" data-challenge="pdf-1">Ver Solução</button>
+                        <button class="btn-reset" data-challenge="pdf-1">Reiniciar</button>
+                    </div>
+                    <div id="result-pdf-1" class="challenge-result"></div>
+                </div>
+            </div>
+
+            <!-- Desafio 7: Projeto Integrado -->
+            <div class="challenge-container">
+                <div class="challenge-header">
+                    <h3>Desafio 7: Projeto Integrado</h3>
+                </div>
+                <div class="challenge-content">
+                    <div class="challenge-description">
+                        <p>Este é um desafio mais complexo que integra várias tecnologias vistas no minicurso. Crie um script que:</p>
+                        <ol>
+                            <li>Use o Selenium para extrair dados de um site (pode ser simulado)</li>
+                            <li>Armazene os dados em um DataFrame do Pandas</li>
+                            <li>Salve os dados em uma planilha Excel usando Openpyxl</li>
+                            <li>Gere um relatório em PDF com os dados coletados</li>
+                        </ol>
+                        <p>Este desafio é mais avançado e pode ser adaptado conforme seu nível de conhecimento.</p>
+                    </div>
+                    <textarea id="editor-projeto" class="challenge-editor"># Importe as bibliotecas necessárias
+# Crie um código que integre Selenium, Pandas, Openpyxl e manipulação de PDF
+# para extrair, processar e apresentar dados.
+
+# Seu código aqui</textarea>
+                    <div class="challenge-actions">
+                        <button class="btn-solution" data-challenge="projeto">Ver Solução</button>
+                        <button class="btn-reset" data-challenge="projeto">Reiniciar</button>
+                    </div>
+                    <div id="result-projeto" class="challenge-result"></div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Próximos Passos</h2>
+                <p>Agora que você praticou com os desafios, está pronto para aplicar esses conhecimentos em seus próprios projetos de automação.</p>
+                
+                <p>Lembre-se de que a prática é fundamental para o aprendizado. Continue experimentando com diferentes cenários e problemas para aprimorar suas habilidades.</p>
+                
+                <p>Se tiver dúvidas ou precisar de ajuda, não hesite em entrar em contato!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/syntax-highlight.js"></script>
+</body>
+</html>

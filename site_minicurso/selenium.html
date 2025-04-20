@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automação com Selenium - Minicurso Python SEEL</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- CodeMirror para editor de código -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Barra lateral com navegação -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="img/logo_eletrica.png" alt="Logo Engenharia Elétrica">
+                <h3>Minicurso Python</h3>
+            </div>
+            <div class="sidebar-menu">
+                <a href="index.html" class="menu-item">
+                    <div class="menu-number">01</div>
+                    <span>Início</span>
+                </a>
+                <a href="introducao.html" class="menu-item">
+                    <div class="menu-number">02</div>
+                    <span>Introdução ao Python</span>
+                </a>
+                <a href="selenium.html" class="menu-item active">
+                    <div class="menu-number">03</div>
+                    <span>Automação com Selenium</span>
+                </a>
+                <a href="pandas.html" class="menu-item">
+                    <div class="menu-number">04</div>
+                    <span>Análise com Pandas</span>
+                </a>
+                <a href="openpyxl.html" class="menu-item">
+                    <div class="menu-number">05</div>
+                    <span>Planilhas com Openpyxl</span>
+                </a>
+                <a href="pdf.html" class="menu-item">
+                    <div class="menu-number">06</div>
+                    <span>Manipulação de PDF</span>
+                </a>
+                <a href="desafios.html" class="menu-item">
+                    <div class="menu-number">07</div>
+                    <span>Desafios Interativos</span>
+                </a>
+                <a href="beecrowd.html" class="menu-item">
+                    <div class="menu-number">08</div>
+                    <span>Resoluções Beecrowd</span>
+                </a>
+                <a href="documentacao.html" class="menu-item">
+                    <div class="menu-number">09</div>
+                    <span>Documentação</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Conteúdo principal -->
+        <div class="main-content">
+            <div class="content-header">
+                <h1>Automação com Selenium</h1>
+                <p>Aprenda a automatizar navegadores web para extrair dados, preencher formulários e muito mais usando o Selenium com Python.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>O que é o Selenium?</h2>
+                <p>O Selenium é uma ferramenta poderosa para automação de navegadores web. Ele permite que você controle um navegador programaticamente, simulando interações humanas como cliques, preenchimento de formulários, navegação entre páginas e extração de dados.</p>
+                
+                <p>Principais usos do Selenium:</p>
+                <ul>
+                    <li>Web scraping (extração de dados de sites)</li>
+                    <li>Automação de tarefas repetitivas em sites</li>
+                    <li>Testes automatizados de aplicações web</li>
+                    <li>Preenchimento automático de formulários</li>
+                    <li>Captura de screenshots de páginas web</li>
+                </ul>
+                
+                <h3>Por que usar o Selenium?</h3>
+                <p>Existem várias bibliotecas para web scraping em Python, como BeautifulSoup e Requests, mas o Selenium se destaca quando você precisa:</p>
+                <ul>
+                    <li>Interagir com elementos dinâmicos (JavaScript)</li>
+                    <li>Navegar entre páginas</li>
+                    <li>Preencher formulários e clicar em botões</li>
+                    <li>Lidar com autenticação e cookies</li>
+                    <li>Executar ações que requerem um navegador real</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2>Instalação e Configuração</h2>
+                <p>Para começar a usar o Selenium, você precisa instalar a biblioteca Python e o WebDriver correspondente ao navegador que deseja automatizar.</p>
+                
+                <h3>1. Instalar a biblioteca Selenium</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Instalação via pip</div>
+                    </div>
+                    <pre>
+pip install selenium
+                    </pre>
+                </div>
+                
+                <h3>2. Instalar o WebDriver</h3>
+                <p>Cada navegador tem seu próprio WebDriver:</p>
+                <ul>
+                    <li><strong>Chrome:</strong> <a href="https://sites.google.com/chromium.org/driver/" target="_blank">ChromeDriver</a></li>
+                    <li><strong>Firefox:</strong> <a href="https://github.com/mozilla/geckodriver/releases" target="_blank">GeckoDriver</a></li>
+                    <li><strong>Edge:</strong> <a href="https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/" target="_blank">EdgeDriver</a></li>
+                    <li><strong>Safari:</strong> Já vem incluído no macOS</li>
+                </ul>
+                
+                <p>Você pode usar o ChromeDriverManager para instalar automaticamente o ChromeDriver:</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Instalação do ChromeDriverManager</div>
+                    </div>
+                    <pre>
+pip install webdriver-manager
+                    </pre>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Primeiros Passos com Selenium</h2>
+                <p>Vamos começar com um exemplo simples: abrir um navegador e acessar um site.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Exemplo Básico</div>
+                    </div>
+                    <pre>
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+import time
+
+# Inicializar o navegador Chrome
+driver = webdriver.Chrome(Options())
+
+# Acessar um site
+driver.get("https://www.google.com")
+
+# Esperar 5 segundos para visualizar a página
+time.sleep(5)
+
+# Fechar o navegador
+driver.quit()
+                    </pre>
+                </div>
+                
+                <p>Este código simples:</p>
+                <ol>
+                    <li>Importa as bibliotecas necessárias</li>
+                    <li>Inicializa o navegador Chrome</li>
+                    <li>Acessa o Google</li>
+                    <li>Espera 5 segundos</li>
+                    <li>Fecha o navegador</li>
+                </ol>
+                
+                <h3>Usando o WebDriverManager</h3>
+                <p>Para evitar problemas de compatibilidade com o ChromeDriver, você pode usar o WebDriverManager:</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Usando WebDriverManager</div>
+                    </div>
+                    <pre>
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
+
+# Configurar o serviço com o ChromeDriverManager
+service = Service(ChromeDriverManager().install())
+
+# Inicializar o navegador Chrome
+driver = webdriver.Chrome(service=service, options=Options())
+
+# Acessar um site
+driver.get("https://www.google.com")
+
+# Fechar o navegador
+driver.quit()
+                    </pre>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Localizando Elementos na Página</h2>
+                <p>Para interagir com elementos na página, você precisa localizá-los primeiro. O Selenium oferece vários métodos para isso:</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Métodos para Localizar Elementos</div>
+                    </div>
+                    <pre>
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+
+driver = webdriver.Chrome(Options())
+driver.get("https://www.exemplo.com.br")
+
+# Localizar por ID
+elemento_por_id = driver.find_element(By.ID, "meu-id")
+
+# Localizar por nome da classe
+elemento_por_classe = driver.find_element(By.CLASS_NAME, "minha-classe")
+
+# Localizar por nome da tag
+elemento_por_tag = driver.find_element(By.TAG_NAME, "div")
+
+# Localizar por seletor CSS
+elemento_por_css = driver.find_element(By.CSS_SELECTOR, "#meu-id .minha-classe")
+
+# Localizar por XPath
+elemento_por_xpath = driver.find_element(By.XPATH, "//div[@id='meu-id']")
+
+# Localizar por texto do link
+elemento_por_link = driver.find_element(By.LINK_TEXT, "Clique aqui")
+
+# Localizar por texto parcial do link
+elemento_por_link_parcial = driver.find_element(By.PARTIAL_LINK_TEXT, "Clique")
+
+driver.quit()
+                    </pre>
+                </div>
+                
+                <p>Para encontrar múltiplos elementos, use <code>find_elements</code> em vez de <code>find_element</code>:</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Encontrando Múltiplos Elementos</div>
+                    </div>
+                    <pre>
+# Encontrar todos os links da página
+todos_links = driver.find_elements(By.TAG_NAME, "a")
+
+# Iterar sobre os elementos encontrados
+for link in todos_links:
+    print(link.text)
+                    </pre>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Interagindo com Elementos</h2>
+                <p>Depois de localizar os elementos, você pode interagir com eles de várias maneiras:</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Interações com Elementos</div>
+                    </div>
+                    <pre>
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
+
+driver = webdriver.Chrome(Options())
+driver.get("https://www.google.com")
+
+# Encontrar o campo de pesquisa
+campo_pesquisa = driver.find_element(By.NAME, "q")
+
+# Digitar no campo
+campo_pesquisa.send_keys("Selenium Python tutorial")
+
+# Pressionar Enter
+campo_pesquisa.send_keys(Keys.RETURN)
+
+# Esperar os resultados carregarem
+time.sleep(2)
+
+# Clicar em um resultado
+primeiro_resultado = driver.find_element(By.CSS_SELECTOR, "h3")
+primeiro_resultado.click()
+
+# Esperar a página carregar
+time.sleep(3)
+
+# Obter o título da página
+titulo = driver.title
+print(f"Título da página: {titulo}")
+
+# Voltar para a página anterior
+driver.back()
+
+# Limpar um campo
+campo_pesquisa = driver.find_element(By.NAME, "q")
+campo_pesquisa.clear()
+campo_pesquisa.send_keys("Nova pesquisa")
+
+driver.quit()
+                    </pre>
+                </div>
+                
+                <h3>Principais Interações</h3>
+                <ul>
+                    <li><code>click()</code>: Clica no elemento</li>
+                    <li><code>send_keys("texto")</code>: Digita texto no elemento</li>
+                    <li><code>clear()</code>: Limpa o conteúdo do elemento</li>
+                    <li><code>submit()</code>: Envia um formulário</li>
+                    <li><code>get_attribute("atributo")</code>: Obtém o valor de um atributo</li>
+                    <li><code>text</code>: Obtém o texto do elemento</li>
+                    <li><code>is_displayed()</code>: Verifica se o elemento está visível</li>
+                    <li><code>is_enabled()</code>: Verifica se o elemento está habilitado</li>
+                    <li><code>is_selected()</code>: Verifica se o elemento está selecionado (para checkboxes e radio buttons)</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2>Esperas (Waits)</h2>
+                <p>Páginas web modernas carregam conteúdo dinamicamente, e você precisa esperar que os elementos estejam disponíveis antes de interagir com eles. O Selenium oferece dois tipos de esperas:</p>
+                
+                <h3>1. Espera Implícita</h3>
+                <p>Define um tempo máximo de espera para todos os elementos:</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Espera Implícita</div>
+                    </div>
+                    <pre>
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+driver = webdriver.Chrome(Options())
+
+# Configurar espera implícita de 10 segundos
+driver.implicitly_wait(10)
+
+driver.get("https://www.exemplo.com.br")
+
+# O Selenium esperará até 10 segundos para encontrar o elemento
+elemento = driver.find_element(By.ID, "elemento-que-demora-a-carregar")
+
+driver.quit()
+                    </pre>
+                </div>
+                
+                <h3>2. Espera Explícita</h3>
+                <p>Espera por uma condição específica:</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Espera Explícita</div>
+                    </div>
+                    <pre>
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+driver = webdriver.Chrome(Options())
+driver.get("https://www.exemplo.com.br")
+
+try:
+    # Esperar até 10 segundos até que o elemento seja clicável
+    elemento = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, "meu-botao"))
+    )
+    elemento.click()
+    
+except:
+    print("Elemento não encontrado ou não clicável")
+    
+finally:
+    driver.quit()
+                    </pre>
+                </div>
+                
+                <p>Algumas condições úteis para esperas explícitas:</p>
+                <ul>
+                    <li><code>presence_of_element_located</code>: Elemento existe no DOM</li>
+                    <li><code>visibility_of_element_located</code>: Elemento existe e está visível</li>
+                    <li><code>element_to_be_clickable</code>: Elemento está visível e clicável</li>
+                    <li><code>text_to_be_present_in_element</code>: Elemento contém um texto específico</li>
+                    <li><code>title_contains</code>: Título da página contém um texto específico</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2>Exemplo Prático: Extração de Dados da Amazon</h2>
+                <p>Vamos criar um exemplo prático que extrai informações de produtos da Amazon:</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Extração de Dados da Amazon</div>
+                    </div>
+                    <pre>
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+import time
+from colorama import Fore, Style
+
+# Função para imprimir colorido no terminal 
+def imprimir(texto, valor):
+    print(f"{Fore.LIGHTMAGENTA_EX}{texto}: {Fore.CYAN}{valor}{Style.RESET_ALL}")
+
+# Inicializa WebDriver Chrome
+def abrir_navegador():
+    driver = webdriver.Chrome(Options())
+    return driver
+
+# Extrair dados de 1 produto - retorna {produto}
+def extrair_dados_selenium(driver, url):
+    try:
+        # acessar url 
+        driver.get(url)
+        time.sleep(5)
+
+        # Identificar seletores de elementos web
+        id_nome_produto = 'productTitle'
+        selector_porcentagem_desconto = '#corePriceDisplay_desktop_feature_div > div.a-section.a-spacing-none.aok-align-center.aok-relative > span.a-size-large.a-color-price.savingPriceOverride.aok-align-center.reinventPriceSavingsPercentageMargin.savingsPercentage'
+        selector_preço_desconto = '#corePriceDisplay_desktop_feature_div > div.a-section.a-spacing-none.aok-align-center.aok-relative > span.a-price.aok-align-center.reinventPricePriceToPayMargin.priceToPay > span:nth-child(2)'
+        selector_preço_original = '#corePriceDisplay_desktop_feature_div > div.a-section.a-spacing-small.aok-align-center > span > span.aok-relative > span.a-size-small.a-color-secondary.aok-align-center.basisPrice > span > span:nth-child(2)'
+        xpath_imagem_produto = '//*[@id="landingImage"]'
+        
+        # extrair nome do produto
+        nome_do_produto = driver.find_element(By.ID, id_nome_produto).text
+        imprimir("Nome do Produto", nome_do_produto)
+
+        # Porcentagem de desconto 
+        porcentagem_desconto = driver.find_element(By.CSS_SELECTOR, selector_porcentagem_desconto).text
+        imprimir("Desconto (%)", porcentagem_desconto)
+
+        # extrair preço original
+        preço_original = driver.find_element(By.CSS_SELECTOR, selector_preço_original).text
+        imprimir("Preço Original", preço_original)
+
+        # extrair preço com desconto
+        preço_desconto = driver.find_element(By.CSS_SELECTOR, selector_preço_desconto).text.replace("\n", ',')
+        imprimir("Preço com Desconto", preço_desconto)
+        
+        # extrair imagem 
+        elemento_imagem = driver.find_element(By.XPATH, xpath_imagem_produto).get_attribute('src')
+        imprimir("Imagem (src)", elemento_imagem)
+
+        # Criar dicionário com todos os dados do Produto
+        produto = {
+            "Nome": nome_do_produto,
+            "Desconto %": porcentagem_desconto,
+            "Preço Original": preço_original,
+            "Preço com Desconto": preço_desconto,
+            "URL da Imagem": elemento_imagem
+        }
+        print(f'{Fore.LIGHTMAGENTA_EX}------------------------------------{Style.RESET_ALL}')
+        return produto
+    
+    except Exception as e: 
+        print(f"Erro ao extrair dados: {e}")
+        
+        # Verificar se há recaptcha
+        img_recaptcha = 'body > div > div.a-row.a-spacing-double-large > div.a-section > div > div > form > div.a-row.a-spacing-large > div > div > div.a-row.a-text-center > img'
+        try: 
+            recaptcha = driver.find_element(By.CSS_SELECTOR, img_recaptcha)
+            print(f'{Fore.RED}Resolva o Recaptcha{Style.RESET_ALL}')
+            time.sleep(30)  # Dar tempo para resolver manualmente
+            return extrair_dados_selenium(driver, url)
+        except:
+            print('Recaptcha não localizado.')
+            return None
+
+# Extrair dados de todos produtos - retorna [produtos]
+def extrair_produtos():
+    # Inicializar webdriver
+    driver = abrir_navegador()
+    
+    # Definir URL's
+    urls = [
+        'https://www.amazon.com.br/Recado-3M-Autoadesivo-Cole%C3%A7%C3%A3o-Supernova/dp/B09YYGCPGV',
+        'https://www.amazon.com.br/Xixaomiro-Teclado-Polegada-1920x1200-8000mAh/dp/B0D1FN49HJ',
+        'https://www.amazon.com.br/GameSir-G7-SE-Controle-Joysticks/dp/B0C7GW9F88'
+    ]
+
+    # Iniciar lista de produtos
+    produtos = []
+
+    for url in urls:
+        produto = extrair_dados_selenium(driver, url)
+        if produto:
+            produtos.append(produto)
+
+    # Fechar webdriver
+    driver.quit()
+    
+    # Retorna o vetor de produtos
+    return produtos
+
+# Executar o script
+if __name__ == "__main__": 
+    produtos = extrair_produtos()
+    print(f"Total de produtos extraídos: {len(produtos)}")
+                    </pre>
+                </div>
+                
+                <p>Este exemplo:</p>
+                <ol>
+                    <li>Inicializa o navegador Chrome</li>
+                    <li>Acessa páginas de produtos da Amazon</li>
+                    <li>Extrai informações como nome, preço e imagem</li>
+                    <li>Lida com possíveis captchas</li>
+                    <li>Armazena os dados em uma lista de dicionários</li>
+                </ol>
+                
+                <p><strong>Observação:</strong> Os seletores CSS e XPath podem mudar se o site for atualizado. Sempre verifique se eles ainda são válidos antes de executar o script.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>Dicas e Boas Práticas</h2>
+                <ul>
+                    <li><strong>Use esperas adequadas:</strong> Evite usar <code>time.sleep()</code> fixo; prefira esperas explícitas.</li>
+                    <li><strong>Trate exceções:</strong> Sites podem mudar ou elementos podem não estar disponíveis.</li>
+                    <li><strong>Respeite os termos de serviço:</strong> Verifique se a automação é permitida no site.</li>
+                    <li><strong>Adicione delays entre requisições:</strong> Para não sobrecarregar o servidor.</li>
+                    <li><strong>Use modo headless para scripts em produção:</strong> Economiza recursos.</li>
+                    <li><strong>Feche sempre o navegador:</strong> Use <code>try/finally</code> para garantir que <code>driver.quit()</code> seja chamado.</li>
+                    <li><strong>Mantenha o WebDriver atualizado:</strong> Compatibilidade com versões recentes do navegador.</li>
+                </ul>
+                
+                <h3>Modo Headless</h3>
+                <p>Para executar o Selenium sem abrir uma janela do navegador (útil para servidores):</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Configurando Modo Headless</div>
+                    </div>
+                    <pre>
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+# Configurar opções
+options = Options()
+options.add_argument("--headless")  # Modo headless
+options.add_argument("--disable-gpu")  # Desativar GPU (necessário em alguns sistemas)
+options.add_argument("--window-size=1920,1080")  # Definir tamanho da janela
+
+# Inicializar o navegador com as opções
+driver = webdriver.Chrome(options=options)
+
+# Resto do código...
+                    </pre>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Próximos Passos</h2>
+                <p>Agora que você conhece os fundamentos do Selenium, pode explorar recursos mais avançados:</p>
+                
+                <ul>
+                    <li>Manipulação de iframes e janelas múltiplas</li>
+                    <li>Automação de uploads de arquivos</li>
+                    <li>Captura de screenshots e gravação de vídeos</li>
+                    <li>Integração com frameworks de teste como pytest</li>
+                    <li>Uso de proxies e rotação de IPs</li>
+                    <li>Contornar detecção de bots</li>
+                </ul>
+                
+                <p>Pratique o que aprendeu com os <a href="desafios.html">Desafios Interativos</a> e explore a integração do Selenium com outras bibliotecas como Pandas e Openpyxl nas próximas seções.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

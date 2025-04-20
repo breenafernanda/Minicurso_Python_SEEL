@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <!-- Background pattern with electrical engineering icons -->
+  <defs>
+    <!-- Base color -->
+    <rect id="base" width="1000" height="1000" fill="#0a5c36"/>
+    
+    <!-- Grid pattern -->
+    <pattern id="grid" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#0d6b3f" stroke-width="1"/>
+    </pattern>
+    
+    <!-- Circuit elements -->
+    <g id="resistor">
+      <rect x="0" y="-5" width="30" height="10" fill="none" stroke="#0d6b3f" stroke-width="1"/>
+    </g>
+    
+    <g id="capacitor">
+      <path d="M0,0 L12,0 M18,0 L30,0" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M12,-10 L12,10 M18,-10 L18,10" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+    </g>
+    
+    <g id="diode">
+      <path d="M0,0 L12,0 M18,0 L30,0" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M12,-7 L18,0 L12,7 Z" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+    </g>
+    
+    <g id="inductor">
+      <path d="M0,0 C5,0 5,-5 10,-5 S15,5 20,5 S25,-5 30,-5" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+    </g>
+    
+    <g id="transistor">
+      <circle cx="15" cy="0" r="10" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M15,-10 L15,10 M5,5 L15,0 L5,-5" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M0,5 L5,5 M0,-5 L5,-5 M25,0 L15,0" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+    </g>
+    
+    <g id="transformer">
+      <path d="M0,0 L10,0" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M20,0 L30,0" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M10,-10 L10,10" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M20,-10 L20,10" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M12,-8 C16,-8 16,8 12,8" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M14,-8 C18,-8 18,8 14,8" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M16,-8 C20,-8 20,8 16,8" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+    </g>
+    
+    <g id="motor">
+      <circle cx="15" cy="0" r="10" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <text x="15" y="4" font-family="Arial" font-size="12" text-anchor="middle" fill="#0d6b3f">M</text>
+    </g>
+    
+    <g id="battery">
+      <path d="M0,0 L10,0" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M20,0 L30,0" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M10,-10 L10,10" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M15,-10 L15,10" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M20,-5 L20,5" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+    </g>
+    
+    <g id="switch">
+      <path d="M0,0 L10,0" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M20,0 L30,0" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <circle cx="10" cy="0" r="2" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M10,0 L22,-8" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <circle cx="20" cy="0" r="2" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+    </g>
+    
+    <g id="lightbulb">
+      <circle cx="15" cy="0" r="8" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M15,-8 L15,-12 M15,8 L15,12" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M9,-6 L7,-10 M21,-6 L23,-10" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M9,6 L7,10 M21,6 L23,10" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+    </g>
+    
+    <g id="voltmeter">
+      <circle cx="15" cy="0" r="10" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <text x="15" y="4" font-family="Arial" font-size="12" text-anchor="middle" fill="#0d6b3f">V</text>
+    </g>
+    
+    <g id="ammeter">
+      <circle cx="15" cy="0" r="10" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <text x="15" y="4" font-family="Arial" font-size="12" text-anchor="middle" fill="#0d6b3f">A</text>
+    </g>
+    
+    <g id="antenna">
+      <path d="M15,-10 L15,10" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M15,-10 L5,-5 M15,-10 L25,-5" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M15,-5 L8,-2 M15,-5 L22,-2" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M15,0 L10,2 M15,0 L20,2" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+    </g>
+    
+    <g id="microchip">
+      <rect x="5" y="-10" width="20" height="20" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M0,0 L5,0 M25,0 L30,0" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M15,-10 L15,-15 M15,10 L15,15" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M10,-10 L10,-5 M20,-10 L20,-5" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M10,10 L10,5 M20,10 L20,5" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+    </g>
+    
+    <g id="windmill">
+      <circle cx="15" cy="0" r="3" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M15,0 L25,10 M15,0 L5,10 M15,0 L5,-10 M15,0 L25,-10" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+    </g>
+    
+    <g id="solarpanel">
+      <rect x="5" y="-10" width="20" height="20" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M5,-10 L25,10 M5,-5 L20,10 M5,0 L15,10 M5,5 L10,10" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+      <path d="M10,-10 L25,5 M15,-10 L25,0 M20,-10 L25,-5" stroke="#0d6b3f" stroke-width="1" fill="none"/>
+    </g>
+  </defs>
+  
+  <!-- Apply base color -->
+  <use href="#base"/>
+  
+  <!-- Apply grid pattern -->
+  <rect width="1000" height="1000" fill="url(#grid)"/>
+  
+  <!-- Place circuit elements -->
+  <!-- Row 1 -->
+  <use href="#resistor" x="50" y="50" transform="rotate(0 50 50)"/>
+  <use href="#capacitor" x="150" y="50" transform="rotate(0 150 50)"/>
+  <use href="#diode" x="250" y="50" transform="rotate(0 250 50)"/>
+  <use href="#inductor" x="350" y="50" transform="rotate(0 350 50)"/>
+  <use href="#transistor" x="450" y="50" transform="rotate(0 450 50)"/>
+  <use href="#transformer" x="550" y="50" transform="rotate(0 550 50)"/>
+  <use href="#motor" x="650" y="50" transform="rotate(0 650 50)"/>
+  <use href="#battery" x="750" y="50" transform="rotate(0 750 50)"/>
+  <use href="#switch" x="850" y="50" transform="rotate(0 850 50)"/>
+  
+  <!-- Row 2 -->
+  <use href="#lightbulb" x="50" y="150" transform="rotate(0 50 150)"/>
+  <use href="#voltmeter" x="150" y="150" transform="rotate(0 150 150)"/>
+  <use href="#ammeter" x="250" y="150" transform="rotate(0 250 150)"/>
+  <use href="#antenna" x="350" y="150" transform="rotate(0 350 150)"/>
+  <use href="#microchip" x="450" y="150" transform="rotate(0 450 150)"/>
+  <use href="#windmill" x="550" y="150" transform="rotate(0 550 150)"/>
+  <use href="#solarpanel" x="650" y="150" transform="rotate(0 650 150)"/>
+  <use href="#resistor" x="750" y="150" transform="rotate(90 750 150)"/>
+  <use href="#capacitor" x="850" y="150" transform="rotate(90 850 150)"/>
+  
+  <!-- Row 3 -->
+  <use href="#diode" x="50" y="250" transform="rotate(90 50 250)"/>
+  <use href="#inductor" x="150" y="250" transform="rotate(90 150 250)"/>
+  <use href="#transistor" x="250" y="250" transform="rotate(90 250 250)"/>
+  <use href="#transformer" x="350" y="250" transform="rotate(90 350 250)"/>
+  <use href="#motor" x="450" y="250" transform="rotate(90 450 250)"/>
+  <use href="#battery" x="550" y="250" transform="rotate(90 550 250)"/>
+  <use href="#switch" x="650" y="250" transform="rotate(90 650 250)"/>
+  <use href="#lightbulb" x="750" y="250" transform="rotate(90 750 250)"/>
+  <use href="#voltmeter" x="850" y="250" transform="rotate(90 850 250)"/>
+  
+  <!-- Row 4 -->
+  <use href="#ammeter" x="50" y="350" transform="rotate(90 50 350)"/>
+  <use href="#antenna" x="150" y="350" transform="rotate(90 150 350)"/>
+  <use href="#microchip" x="250" y="350" transform="rotate(90 250 350)"/>
+  <use href="#windmill" x="350" y="350" transform="rotate(90 350 350)"/>
+  <use href="#solarpanel" x="450" y="350" transform="rotate(90 450 350)"/>
+  <use href="#resistor" x="550" y="350" transform="rotate(180 550 350)"/>
+  <use href="#capacitor" x="650" y="350" transform="rotate(180 650 350)"/>
+  <use href="#diode" x="750" y="350" transform="rotate(180 750 350)"/>
+  <use href="#inductor" x="850" y="350" transform="rotate(180 850 350)"/>
+  
+  <!-- Row 5 -->
+  <use href="#transistor" x="50" y="450" transform="rotate(180 50 450)"/>
+  <use href="#transformer" x="150" y="450" transform="rotate(180 150 450)"/>
+  <use href="#motor" x="250" y="450" transform="rotate(180 250 450)"/>
+  <use href="#battery" x="350" y="450" transform="rotate(180 350 450)"/>
+  <use href="#switch" x="450" y="450" transform="rotate(180 450 450)"/>
+  <use href="#lightbulb" x="550" y="450" transform="rotate(180 550 450)"/>
+  <use href="#voltmeter" x="650" y="450" transform="rotate(180 650 450)"/>
+  <use href="#ammeter" x="750" y="450" transform="rotate(180 750 450)"/>
+  <use href="#antenna" x="850" y="450" transform="rotate(180 850 450)"/>
+  
+  <!-- Row 6 -->
+  <use href="#microchip" x="50" y="550" transform="rotate(180 50 550)"/>
+  <use href="#windmill" x="150" y="550" transform="rotate(180 150 550)"/>
+  <use href="#solarpanel" x="250" y="550" transform="rotate(180 250 550)"/>
+  <use href="#resistor" x="350" y="550" transform="rotate(270 350 550)"/>
+  <use href="#capacitor" x="450" y="550" transform="rotate(270 450 550)"/>
+  <use href="#diode" x="550" y="550" transform="rotate(270 550 550)"/>
+  <use href="#inductor" x="650" y="550" transform="rotate(270 650 550)"/>
+  <use href="#transistor" x="750" y="550" transform="rotate(270 750 550)"/>
+  <use href="#transformer" x="850" y="550" transform="rotate(270 850 550)"/>
+  
+  <!-- Row 7 -->
+  <use href="#motor" x="50" y="650" transform="rotate(270 50 650)"/>
+  <use href="#battery" x="150" y="650" transform="rotate(270 150 650)"/>
+  <use href="#switch" x="250" y="650" transform="rotate(270 250 650)"/>
+  <use href="#lightbulb" x="350" y="650" transform="rotate(270 350 650)"/>
+  <use href="#voltmeter" x="450" y="650" transform="rotate(270 450 650)"/>
+  <use href="#ammeter" x="550" y="650" transform="rotate(270 550 650)"/>
+  <use href="#antenna" x="650" y="650" transform="rotate(270 650 650)"/>
+  <use href="#microchip" x="750" y="650" transform="rotate(270 750 650)"/>
+  <use href="#windmill" x="850" y="650" transform="rotate(270 850 650)"/>
+  
+  <!-- Row 8 -->
+  <use href="#solarpanel" x="50" y="750" transform="rotate(270 50 750)"/>
+  <use href="#resistor" x="150" y="750" transform="rotate(0 150 750)"/>
+  <use href="#capacitor" x="250" y="750" transform="rotate(0 250 750)"/>
+  <use href="#diode" x="350" y="750" transform="rotate(0 350 750)"/>
+  <use href="#inductor" x="450" y="750" transform="rotate(0 450 750)"/>
+  <use href="#transistor" x="550" y="750" transform="rotate(0 550 750)"/>
+  <use href="#transformer" x="650" y="750" transform="rotate(0 650 750)"/>
+  <use href="#motor" x="750" y="750" transform="rotate(0 750 750)"/>
+  <use href="#battery" x="850" y="750" transform="rotate(0 850 750)"/>
+  
+  <!-- Row 9 -->
+  <use href="#switch" x="50" y="850" transform="rotate(0 50 850)"/>
+  <use href="#lightbulb" x="150" y="850" transform="rotate(0 150 850)"/>
+  <use href="#voltmeter" x="250" y="850" transform="rotate(0 250 850)"/>
+  <use href="#ammeter" x="350" y="850" transform="rotate(0 350 850)"/>
+  <use href="#antenna" x="450" y="850" transform="rotate(0 450 850)"/>
+  <use href="#microchip" x="550" y="850" transform="rotate(0 550 850)"/>
+  <use href="#windmill" x="650" y="850" transform="rotate(0 650 850)"/>
+  <use href="#solarpanel" x="750" y="850" transform="rotate(0 750 850)"/>
+  <use href="#resistor" x="850" y="850" transform="rotate(45 850 850)"/>
+</svg>

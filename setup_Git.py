@@ -1,5 +1,6 @@
 import os
 import subprocess
+import sys
 
 def run(cmd):
     result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
@@ -52,6 +53,12 @@ tor_temp_profile/
 if __name__ == "__main__":
     repositorio = "Minicurso_Python_SEEL"
     repositorio_link = f"https://github.com/breenafernanda/{repositorio}.git"
-    commit = 'beecrowd'
     
-    setup_git("breenafernanda", "d201810853@uftm.edu.br", commit,repositorio_link)
+    # Verifica se foi passado um parâmetro de commit via linha de comando
+    if len(sys.argv) > 1:
+        commit = sys.argv[1]
+    else:
+        commit = 'beecrowd'  # Valor padrão caso nenhum parâmetro seja fornecido
+    
+    print(f"📝 Mensagem de commit: {commit}")
+    setup_git("breenafernanda", "d201810853@uftm.edu.br", commit, repositorio_link)

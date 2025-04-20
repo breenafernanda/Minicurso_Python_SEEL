@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <!-- Lightning Bolts -->
+  <g id="lightning-bolts">
+    <!-- Lightning 1 -->
+    <path d="M50,20 L30,80 L60,80 L40,140" stroke="#FFD700" stroke-width="8" fill="none"/>
+    
+    <!-- Lightning 2 -->
+    <path d="M100,10 L80,70 L110,70 L90,130" stroke="#FFD700" stroke-width="8" fill="none"/>
+    
+    <!-- Lightning 3 -->
+    <path d="M150,30 L130,90 L160,90 L140,150" stroke="#FFD700" stroke-width="8" fill="none"/>
+  </g>
+</svg>

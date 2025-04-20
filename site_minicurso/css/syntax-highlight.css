@@ -1,0 +1,107 @@
+/* Estilos para o destaque de sintaxe do código */
+.code-block {
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px 0;
+  overflow-x: auto;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  position: relative;
+  line-height: 1.5;
+}
+
+.code-block pre {
+  margin: 0;
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #252526;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: #f8f8f2;
+  font-family: 'Roboto', Arial, sans-serif;
+  border-bottom: 1px solid #333;
+}
+
+.code-title {
+  font-weight: bold;
+}
+
+.code-actions button {
+  background-color: transparent;
+  border: 1px solid #f8f8f2;
+  color: #f8f8f2;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s;
+}
+
+.code-actions button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Cores de sintaxe Python (estilo VSCode) */
+.python-keyword {
+  color: #569cd6; /* azul para palavras-chave como def, import, if, else */
+}
+
+.python-function {
+  color: #dcdcaa; /* amarelo para nomes de funções */
+}
+
+.python-string {
+  color: #ce9178; /* laranja avermelhado para strings */
+}
+
+.python-comment {
+  color: #6a9955; /* verde para comentários */
+}
+
+.python-number {
+  color: #b5cea8; /* verde claro para números */
+}
+
+.python-class {
+  color: #4ec9b0; /* turquesa para classes */
+}
+
+.python-method {
+  color: #dcdcaa; /* amarelo para métodos */
+}
+
+.python-decorator {
+  color: #569cd6; /* azul para decoradores */
+}
+
+.python-builtin {
+  color: #4ec9b0; /* turquesa para funções built-in */
+}
+
+.python-operator {
+  color: #d4d4d4; /* branco para operadores */
+}
+
+.python-variable {
+  color: #9cdcfe; /* azul claro para variáveis */
+}
+
+.python-parameter {
+  color: #9cdcfe; /* azul claro para parâmetros */
+}
+
+.python-self {
+  color: #569cd6; /* azul para self */
+}
+
+.python-import {
+  color: #c586c0; /* roxo para import, from, as */
+}
+
+/* Adicionar ao seu CSS existente */

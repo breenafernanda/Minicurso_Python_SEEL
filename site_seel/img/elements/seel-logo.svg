@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200">
+  <!-- SEEL Logo baseado exatamente no folder original com maior precisão -->
+  <g id="seel-logo">
+    <!-- S -->
+    <path d="M80,40 C80,40 150,40 150,40 L150,65 L105,65 L105,85 L150,85 L150,140 L80,140 L80,115 L125,115 L125,100 L80,100 Z" fill="#FFFFFF"/>
+    <rect x="80" y="140" width="20" height="15" fill="#FFD700"/>
+    <rect x="105" y="65" width="15" height="15" fill="#8CC63F"/>
+    
+    <!-- E -->
+    <path d="M170,40 L240,40 L240,65 L195,65 L195,85 L235,85 L235,100 L195,100 L195,115 L240,115 L240,140 L170,140 Z" fill="#FFFFFF"/>
+    
+    <!-- E -->
+    <path d="M260,40 L330,40 L330,65 L285,65 L285,85 L325,85 L325,100 L285,100 L285,115 L330,115 L330,140 L260,140 Z" fill="#FFFFFF"/>
+    <rect x="285" y="85" width="15" height="15" fill="#8CC63F"/>
+    
+    <!-- L -->
+    <path d="M350,40 L375,40 L375,115 L425,115 L425,140 L350,140 Z" fill="#FFFFFF"/>
+    <rect x="425" y="40" width="15" height="15" fill="#FFD700"/>
+    <rect x="425" y="125" width="15" height="15" fill="#8CC63F"/>
+  </g>
+  
+  <!-- Subtitle -->
+  <text x="300" y="175" font-family="Arial, sans-serif" font-size="18" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">SEMANA DA ENGENHARIA ELÉTRICA</text>
+</svg>

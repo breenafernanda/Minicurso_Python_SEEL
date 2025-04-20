@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução ao Python - Minicurso Python SEEL</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- CodeMirror para editor de código -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Barra lateral com navegação -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="img/logo_eletrica.png" alt="Logo Engenharia Elétrica">
+                <h3>Minicurso Python</h3>
+            </div>
+            <div class="sidebar-menu">
+                <a href="index.html" class="menu-item">
+                    <div class="menu-number">01</div>
+                    <span>Início</span>
+                </a>
+                <a href="introducao.html" class="menu-item active">
+                    <div class="menu-number">02</div>
+                    <span>Introdução ao Python</span>
+                </a>
+                <a href="selenium.html" class="menu-item">
+                    <div class="menu-number">03</div>
+                    <span>Automação com Selenium</span>
+                </a>
+                <a href="pandas.html" class="menu-item">
+                    <div class="menu-number">04</div>
+                    <span>Análise com Pandas</span>
+                </a>
+                <a href="openpyxl.html" class="menu-item">
+                    <div class="menu-number">05</div>
+                    <span>Planilhas com Openpyxl</span>
+                </a>
+                <a href="pdf.html" class="menu-item">
+                    <div class="menu-number">06</div>
+                    <span>Manipulação de PDF</span>
+                </a>
+                <a href="desafios.html" class="menu-item">
+                    <div class="menu-number">07</div>
+                    <span>Desafios Interativos</span>
+                </a>
+                <a href="beecrowd.html" class="menu-item">
+                    <div class="menu-number">08</div>
+                    <span>Resoluções Beecrowd</span>
+                </a>
+                <a href="documentacao.html" class="menu-item">
+                    <div class="menu-number">09</div>
+                    <span>Documentação</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Conteúdo principal -->
+        <div class="main-content">
+            <div class="content-header">
+                <h1>Introdução ao Python</h1>
+                <p>Aprenda os conceitos básicos da linguagem Python, uma das mais populares e versáteis do mundo da programação.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>Estrutura Básica do Python</h2>
+                <p>Python é uma linguagem muito intuitiva. Vamos começar com os fundamentos: variáveis, tipos de dados e controle de fluxo.</p>
+                
+                <h3>Variáveis</h3>
+                <p>Variáveis são usadas para armazenar dados que podemos reutilizar. Em Python, não é necessário declarar o tipo da variável, pois a linguagem faz isso automaticamente.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Exemplo de Variáveis</div>
+                    </div>
+                    <pre>
+nome = "Mario"
+idade = 23
+print(f"Olá, meu nome é {nome} e eu tenho {idade} anos.")
+                    </pre>
+                </div>
+                
+                <p>No exemplo acima, criamos duas variáveis: <code>nome</code> (que armazena um texto) e <code>idade</code> (que armazena um número). Em seguida, usamos a função <code>print()</code> com uma f-string para exibir essas variáveis.</p>
+                
+                <h3>Tipos de dados</h3>
+                <p>Os principais tipos de dados em Python são:</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Tipos de Dados Básicos</div>
+                    </div>
+                    <pre>
+numero = 10          # int (número inteiro)
+pi = 3.14            # float (número decimal)
+texto = "Automação"  # str (texto/string)
+verdadeiro = True    # bool (booleano: True ou False)
+                    </pre>
+                </div>
+                
+                <p>Python também possui tipos de dados mais complexos como listas, tuplas, dicionários e conjuntos, que veremos mais adiante.</p>
+                
+                <h3>Controle de fluxo</h3>
+                <p>O controle de fluxo permite que seu programa tome decisões com base em condições.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Estrutura Condicional (if-else)</div>
+                    </div>
+                    <pre>
+idade = 23
+if idade >= 18:
+    print("Você é maior de idade.")
+else:
+    print("Você é menor de idade.")
+                    </pre>
+                </div>
+                
+                <p>No exemplo acima, o programa verifica se a idade é maior ou igual a 18. Se for, exibe uma mensagem; caso contrário, exibe outra.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>Funções e Boas Práticas</h2>
+                <p>Funções são blocos de código reutilizáveis que nos ajudam a organizar nossos programas.</p>
+                
+                <h3>Definição de funções</h3>
+                <p>Em Python, usamos a palavra-chave <code>def</code> para definir uma função:</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Definindo uma Função</div>
+                    </div>
+                    <pre>
+def saudacao(nome):
+    texto = (
+        f"Olá, {nome}! "
+        f"Bem-vindo ao minicurso."
+    )
+    return texto
+
+nome = "Bob"
+texto_de_saudacao = saudacao(nome)
+print(texto_de_saudacao)
+                    </pre>
+                </div>
+                
+                <p>A função <code>saudacao</code> recebe um parâmetro <code>nome</code> e retorna um texto personalizado. Observe como podemos quebrar strings longas em várias linhas para melhor legibilidade.</p>
+                
+                <h3>Boas práticas</h3>
+                <ul>
+                    <li><strong>Nomes descritivos:</strong> Use nomes de variáveis e funções claros e descritivos.</li>
+                    <li><strong>Comentários:</strong> Comente seu código onde necessário para explicar partes complexas.</li>
+                    <li><strong>Organização:</strong> Organize seu código em funções para torná-lo mais legível e reutilizável.</li>
+                    <li><strong>Indentação:</strong> Python usa indentação (espaços ou tabs) para definir blocos de código, então seja consistente.</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h2>Exemplo Prático</h2>
+                <p>Vamos juntar tudo em um exemplo prático que utiliza entrada de dados, controle de fluxo e funções.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Verificação de Maioridade</div>
+                    </div>
+                    <pre>
+# Função para verificar maioridade
+def verificar_maioridade(idade):
+    if idade >= 18:
+        return "Você é maior de idade."
+    else:
+        return "Você é menor de idade."
+
+# Definindo variáveis
+nome = input("Digite seu nome: ")
+idade = int(input("Digite sua idade: "))
+
+# Resultado
+print(f"Olá, {nome}!")
+print(verificar_maioridade(idade))
+                    </pre>
+                </div>
+                
+                <p>Neste exemplo:</p>
+                <ol>
+                    <li>Definimos uma função <code>verificar_maioridade</code> que recebe uma idade e retorna uma mensagem.</li>
+                    <li>Usamos a função <code>input()</code> para obter o nome e a idade do usuário.</li>
+                    <li>Convertemos a idade para um número inteiro com <code>int()</code>.</li>
+                    <li>Exibimos uma saudação personalizada e o resultado da verificação de maioridade.</li>
+                </ol>
+                
+                <p>Este é um exemplo simples, mas demonstra como podemos combinar diferentes conceitos para criar programas úteis.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>Estruturas de Dados</h2>
+                <p>Python possui várias estruturas de dados embutidas que são muito úteis para diferentes situações.</p>
+                
+                <h3>Listas</h3>
+                <p>Listas são coleções ordenadas e mutáveis de itens. Podem conter itens de diferentes tipos.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Trabalhando com Listas</div>
+                    </div>
+                    <pre>
+# Criando uma lista
+frutas = ["maçã", "banana", "laranja"]
+
+# Acessando elementos
+primeira_fruta = frutas[0]  # maçã
+
+# Modificando elementos
+frutas[1] = "morango"  # Agora a lista é ["maçã", "morango", "laranja"]
+
+# Adicionando elementos
+frutas.append("uva")  # Adiciona ao final: ["maçã", "morango", "laranja", "uva"]
+
+# Removendo elementos
+frutas.remove("maçã")  # Remove a maçã: ["morango", "laranja", "uva"]
+
+# Iterando sobre uma lista
+for fruta in frutas:
+    print(fruta)
+                    </pre>
+                </div>
+                
+                <h3>Dicionários</h3>
+                <p>Dicionários são coleções de pares chave-valor, onde cada chave é única.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Trabalhando com Dicionários</div>
+                    </div>
+                    <pre>
+# Criando um dicionário
+pessoa = {
+    "nome": "Carlos",
+    "idade": 30,
+    "profissao": "Engenheiro"
+}
+
+# Acessando valores
+nome = pessoa["nome"]  # Carlos
+
+# Modificando valores
+pessoa["idade"] = 31
+
+# Adicionando novos pares
+pessoa["cidade"] = "São Paulo"
+
+# Verificando se uma chave existe
+if "profissao" in pessoa:
+    print(f"Profissão: {pessoa['profissao']}")
+
+# Iterando sobre um dicionário
+for chave, valor in pessoa.items():
+    print(f"{chave}: {valor}")
+                    </pre>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Loops</h2>
+                <p>Python oferece dois tipos principais de loops: <code>for</code> e <code>while</code>.</p>
+                
+                <h3>Loop for</h3>
+                <p>O loop <code>for</code> é usado para iterar sobre uma sequência (como lista, tupla, dicionário, conjunto ou string).</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Exemplos de Loop for</div>
+                    </div>
+                    <pre>
+# Iterando sobre uma lista
+numeros = [1, 2, 3, 4, 5]
+for numero in numeros:
+    print(numero)
+
+# Iterando sobre um range
+for i in range(5):  # 0, 1, 2, 3, 4
+    print(i)
+
+# Iterando sobre uma string
+for letra in "Python":
+    print(letra)
+                    </pre>
+                </div>
+                
+                <h3>Loop while</h3>
+                <p>O loop <code>while</code> executa um bloco de código enquanto uma condição for verdadeira.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-title">Exemplos de Loop while</div>
+                    </div>
+                    <pre>
+# Contagem regressiva
+contador = 5
+while contador > 0:
+    print(contador)
+    contador -= 1  # Equivalente a: contador = contador - 1
+
+# Loop com break
+while True:
+    resposta = input("Digite 'sair' para encerrar: ")
+    if resposta.lower() == "sair":
+        break  # Sai do loop
+    print(f"Você digitou: {resposta}")
+                    </pre>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2>Próximos Passos</h2>
+                <p>Agora que você conhece os conceitos básicos de Python, está pronto para explorar tópicos mais avançados como automação com Selenium, análise de dados com Pandas, manipulação de planilhas com Openpyxl e criação de PDFs.</p>
+                
+                <p>Não se esqueça de praticar o que aprendeu! A programação é uma habilidade que melhora com a prática constante.</p>
+                
+                <p>Confira a seção de <a href="desafios.html">Desafios Interativos</a> para testar seus conhecimentos e a seção de <a href="beecrowd.html">Resoluções Beecrowd</a> para ver exemplos de problemas resolvidos com Python.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <!-- Padrão de fundo com ícones de engenharia elétrica -->
+  <defs>
+    <!-- Padrão de circuito -->
+    <pattern id="circuit-pattern" patternUnits="userSpaceOnUse" width="100" height="100">
+      <rect width="100" height="100" fill="#0a5c36"/>
+      
+      <!-- Linhas de circuito -->
+      <path d="M10,50 L40,50 M60,50 L90,50 M50,10 L50,40 M50,60 L50,90" 
+            stroke="#1a7d46" stroke-width="2" fill="none"/>
+      <path d="M10,20 L30,20 L30,80 L70,80 L70,30 L90,30" 
+            stroke="#1a7d46" stroke-width="2" fill="none"/>
+      
+      <!-- Componentes -->
+      <circle cx="50" cy="50" r="5" fill="#8cc63f"/>
+      <rect x="45" y="45" width="10" height="10" stroke="#ffd700" stroke-width="1" fill="none"/>
+    </pattern>
+    
+    <!-- Ícones -->
+    <g id="lightbulb">
+      <path d="M7,0 C3.13,0 0,3.13 0,7 C0,9.38 1.19,11.5 3,12.74 L3,14 C3,15.11 3.89,16 5,16 L9,16 C10.11,16 11,15.11 11,14 L11,12.74 C12.81,11.5 14,9.38 14,7 C14,3.13 10.87,0 7,0 Z M5,13.5 L9,13.5 L9,12.5 L5,12.5 L5,13.5 Z M7,11 C4.79,11 3,9.21 3,7 C3,4.79 4.79,3 7,3 C9.21,3 11,4.79 11,7 C11,9.21 9.21,11 7,11 Z" 
+            fill="#ffd700"/>
+    </g>
+    
+    <g id="lightning">
+      <path d="M3.5,0 L0,10 L3.5,10 L2,16 L10,6 L6,6 L8,0 Z" 
+            fill="#ffd700"/>
+    </g>
+    
+    <g id="plug">
+      <path d="M10,0 L10,4 L14,4 L14,0 L10,0 Z M0,0 L0,4 L4,4 L4,0 L0,0 Z M6,4 L8,4 L8,12 L6,12 L6,4 Z M2,8 L12,8 L12,10 C12,13.31 9.31,16 6,16 C2.69,16 0,13.31 0,10 L0,8 L2,8 Z" 
+            fill="#8cc63f"/>
+    </g>
+    
+    <g id="battery">
+      <path d="M10,4 L10,0 L6,0 L6,4 L2,4 C0.9,4 0,4.9 0,6 L0,14 C0,15.1 0.9,16 2,16 L14,16 C15.1,16 16,15.1 16,14 L16,6 C16,4.9 15.1,4 14,4 L10,4 Z M11,11 L9,11 L9,13 L7,13 L7,11 L5,11 L5,9 L7,9 L7,7 L9,7 L9,9 L11,9 L11,11 Z" 
+            fill="#8cc63f"/>
+    </g>
+  </defs>
+  
+  <!-- Fundo com padrão de circuito -->
+  <rect width="500" height="500" fill="url(#circuit-pattern)"/>
+  
+  <!-- Ícones espalhados -->
+  <use href="#lightbulb" x="50" y="50" width="20" height="20"/>
+  <use href="#lightning" x="150" y="80" width="20" height="20"/>
+  <use href="#plug" x="250" y="120" width="20" height="20"/>
+  <use href="#battery" x="350" y="70" width="20" height="20"/>
+  <use href="#lightbulb" x="80" y="200" width="20" height="20"/>
+  <use href="#lightning" x="180" y="250" width="20" height="20"/>
+  <use href="#plug" x="280" y="300" width="20" height="20"/>
+  <use href="#battery" x="380" y="220" width="20" height="20"/>
+  <use href="#lightbulb" x="120" y="350" width="20" height="20"/>
+  <use href="#lightning" x="220" y="400" width="20" height="20"/>
+  <use href="#plug" x="320" y="380" width="20" height="20"/>
+  <use href="#battery" x="420" y="330" width="20" height="20"/>
+</svg>

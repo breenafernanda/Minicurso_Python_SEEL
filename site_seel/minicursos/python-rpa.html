@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução ao Python para RPA - SEEL 2025</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- CodeMirror para editor de código -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+    <style>
+        /* Estilos específicos para a página do minicurso */
+        .code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: var(--raio-borda-pequeno);
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            position: relative;
+            line-height: 1.5;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .code-block pre {
+            margin: 0;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #252526;
+            border-top-left-radius: var(--raio-borda-pequeno);
+            border-top-right-radius: var(--raio-borda-pequeno);
+            color: #f8f8f2;
+            font-family: 'Roboto', Arial, sans-serif;
+            border-bottom: 1px solid #333;
+        }
+
+        .code-title {
+            font-weight: bold;
+        }
+
+        .code-actions button {
+            background-color: transparent;
+            border: 1px solid #f8f8f2;
+            color: #f8f8f2;
+            padding: 5px 10px;
+            border-radius: var(--raio-borda-pequeno);
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .code-actions button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Sintaxe Python */
+        .python-keyword { color: #569cd6; }
+        .python-builtin { color: #4ec9b0; }
+        .python-string { color: #ce9178; }
+        .python-comment { color: #6a9955; }
+        .python-number { color: #b5cea8; }
+        .python-decorator { color: #dcdcaa; }
+        .python-operator { color: #d4d4d4; }
+        .python-method { color: #dcdcaa; }
+        .python-self { color: #569cd6; }
+        .python-import { color: #c586c0; }
+        .python-function { color: #dcdcaa; }
+        .python-class { color: #4ec9b0; }
+        .python-parameter { color: #9cdcfe; }
+
+        /* Desafios */
+        .challenge-container {
+            background-color: var(--branco);
+            border-radius: var(--raio-borda);
+            box-shadow: var(--sombra-suave);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .challenge-header {
+            background-color: var(--verde-escuro);
+            color: var(--branco);
+            padding: 15px 20px;
+        }
+
+        .challenge-header h3 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        .challenge-content {
+            padding: 20px;
+        }
+
+        .challenge-description {
+            margin-bottom: 20px;
+        }
+
+        .challenge-editor {
+            width: 100%;
+            height: 200px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            border: 1px solid var(--cinza-medio);
+            border-radius: var(--raio-borda-pequeno);
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .challenge-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn-solution, .btn-reset {
+            padding: 8px 15px;
+            border: none;
+            border-radius: var(--raio-borda-pequeno);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-solution {
+            background-color: var(--amarelo);
+            color: var(--texto-escuro);
+        }
+
+        .btn-solution:hover {
+            background-color: #e6c300;
+        }
+
+        .btn-reset {
+            background-color: var(--cinza-medio);
+            color: var(--texto-escuro);
+        }
+
+        .btn-reset:hover {
+            background-color: #c8c8c8;
+        }
+
+        .challenge-result {
+            background-color: var(--cinza-claro);
+            border-radius: var(--raio-borda-pequeno);
+            padding: 15px;
+            min-height: 50px;
+            white-space: pre-wrap;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        }
+
+        /* Tópicos */
+        .topic-section {
+            margin-bottom: 40px;
+        }
+
+        .topic-section h3 {
+            color: var(--verde-escuro);
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        .topic-section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .topic-section ul, .topic-section ol {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+
+        .topic-section li {
+            margin-bottom: 10px;
+        }
+
+        /* CodeMirror customization */
+        .CodeMirror {
+            height: auto;
+            min-height: 200px;
+            border-radius: var(--raio-borda-pequeno);
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .cm-s-dracula .CodeMirror-gutters {
+            background-color: #282a36;
+            border-right: 0;
+        }
+
+        .cm-s-dracula .CodeMirror-linenumber {
+            color: #6272a4;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="../img/seel_logo_rotated.png" alt="SEEL Logo" style="height: 60px;">
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="../patrocinio.html" class="nav-link">Patrocínio</a></li>
+                    <li class="nav-item"><a href="../patrocinadores.html" class="nav-link">Patrocinadores</a></li>
+                    <li class="nav-item"><a href="../minicursos.html" class="nav-link active">Minicursos</a></li>
+                    <li class="nav-item"><a href="../palestras.html" class="nav-link">Palestras</a></li>
+                    <li class="nav-item"><a href="../cronograma.html" class="nav-link">Cronograma</a></li>
+                    <li class="nav-item"><a href="../quem-somos.html" class="nav-link">Quem Somos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Minicurso Python Header -->
+    <section class="minicurso-python-header">
+        <div class="container minicurso-python-content">
+            <h1 class="minicurso-python-title">Introdução ao Python para RPA</h1>
+            <p class="minicurso-python-subtitle">Aprenda a automatizar tarefas repetitivas utilizando Python e bibliotecas como Selenium, Pandas e PyPDF2.</p>
+            
+            <div class="minicurso-python-details">
+                <div class="minicurso-python-detail">
+                    <i class="far fa-calendar-alt"></i>
+                    <span>15/05/2025</span>
+                </div>
+                <div class="minicurso-python-detail">
+                    <i class="far fa-clock"></i>
+                    <span>14:00 - 17:00</span>
+                </div>
+                <div class="minicurso-python-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Laboratório de Informática</span>
+                </div>
+                <div class="minicurso-python-detail">
+                    <i class="fas fa-users"></i>
+                    <span>20 vagas</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conteúdo do Minicurso -->
+    <section class="section">
+        <div class="container">
+            <div class="minicurso-python-overview">
+                <div class="minicurso-python-description">
+                    <h3>Sobre o Minicurso</h3>
+                    <p>O minicurso "Introdução ao Python para RPA" foi desenvolvido para estudantes de Engenharia Elétrica que desejam aprender a automatizar tarefas repetitivas utilizando Python. RPA (Robotic Process Automation) é uma tecnologia que permite automatizar processos baseados em regras, reduzindo o tempo gasto em tarefas manuais e aumentando a produtividade.</p>
+                    
+                    <p>Durante o minicurso, os participantes aprenderão os fundamentos da linguagem Python e como utilizar bibliotecas específicas para automação, como Selenium para automação web, Pandas para manipulação de dados, Openpyxl para trabalhar com planilhas Excel e PyPDF2 para manipulação de arquivos PDF.</p>
+                    
+                    <p>Não é necessário conhecimento prévio em programação, mas familiaridade com lógica de programação será útil. Todos os participantes devem trazer seus próprios laptops com Python instalado (instruções de instalação serão enviadas previamente).</p>
+                </div>
+                
+                <div class="minicurso-python-info">
+                    <h3>Informações</h3>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-user-graduate"></i></div>
+                        <div class="info-text">Nível: Iniciante</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-laptop-code"></i></div>
+                        <div class="info-text">Pré-requisitos: Nenhum</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-clock"></i></div>
+                        <div class="info-text">Duração: 3 horas</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-users"></i></div>
+                        <div class="info-text">Vagas: 20</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-laptop"></i></div>
+                        <div class="info-text">Material necessário: Laptop com Python instalado</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-certificate"></i></div>
+                        <div class="info-text">Certificado: Sim (3 horas)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="minicurso-python-topics">
+                <h3 class="topics-title">Conteúdo do Minicurso</h3>
+                <div class="topics-list">
+                    <div class="topic-item">
+                        <div class="topic-number">1</div>
+                        <div class="topic-text">Introdução ao Python</div>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-number">2</div>
+                        <div class="topic-text">Automação com Selenium</div>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-number">3</div>
+                        <div class="topic-text">Análise de Dados com Pandas</div>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-number">4</div>
+                        <div class="topic-text">Manipulação de Planilhas com Openpyxl</div>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-number">5</div>
+                        <div class="topic-text">Manipulação de PDFs</div>
+                    </div>
+                    <div class="topic-item">
+                        <div class="topic-number">6</div>
+                        <div class="topic-text">Projeto Prático Integrado</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="minicurso-python-instructor">
+                <div class="instructor-image">
+                    <img src="../img/instrutora.jpg" alt="Breena Fernanda">
+                </div>
+                <div class="instructor-info">
+                    <h3 class="instructor-name">Breena Fernanda</h3>
+                    <p class="instructor-title">Desenvolvedora de Software RPA</p>
+                    <p class="instructor-bio">Breena é desenvolvedora de software especializada em automação de processos (RPA). Com experiência em projetos de automação para diversas empresas, ela utiliza Python e suas bibliotecas para criar soluções eficientes que economizam tempo e recursos. Atualmente, também atua como instrutora de programação, compartilhando seu conhecimento com estudantes e profissionais que desejam ingressar na área de automação.</p>
+                </div>
+            </div>
+
+            <!-- Conteúdo Detalhado -->
+            <div class="content-section">
+                <h2>Conteúdo Detalhado</h2>
+                
+                <div class="topic-section">
+                    <h3>1. Introdução ao Python</h3>
+                    <p>Neste módulo, você aprenderá os fundamentos da linguagem Python, desde variáveis e estruturas de controle até funções e módulos.</p>
+                    
+                    <ul>
+                        <li>Variáveis e tipos de dados</li>
+                        <li>Estruturas de controle (if, else, loops)</li>
+                        <li>Funções e módulos</li>
+                        <li>Estruturas de dados (listas, dicionários, etc.)</li>
+                    </ul>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-title">Exemplo: Olá, Mundo!</div>
+                            <div class="code-actions">
+                                <button class="copy-btn">Copiar</button>
+                            </div>
+                        </div>
+                        <pre><code>
+# Meu primeiro programa em Python
+print("Olá, mundo!")
+
+# Variáveis
+nome = "Estudante"
+idade = 20
+
+# Estrutura condicional
+if idade >= 18:
+    print(f"Olá, {nome}! Você é maior de idade.")
+else:
+    print(f"Olá, {nome}! Você é menor de idade.")
+                        </code></pre>
+                    </div>
+                    
+                    <!-- Desafio Interativo para Introdução ao Python -->
+                    <div class="challenge-container">
+                        <div class="challenge-header">
+                            <h3>Desafio: Calculadora de Média</h3>
+                        </div>
+                        <div class="challenge-content">
+                            <div class="challenge-description">
+                                <p>Crie um programa que calcule a média de três notas e informe se o aluno foi aprovado (média >= 7) ou reprovado.</p>
+                            </div>
+                            <textarea id="editor-intro-1" class="challenge-editor">
+# Escreva seu código aqui
+# Dica: Use input() para receber as notas e float() para converter para números
+                            </textarea>
+                            <div class="challenge-actions">
+                                <button class="btn-solution" data-challenge="intro-1">Ver Solução</button>
+                                <button class="btn-reset" data-challenge="intro-1">Reiniciar</button>
+                            </div>
+                            <div id="result-intro-1" class="challenge-result"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="topic-section">
+                    <h3>2. Automação com Selenium</h3>
+                    <p>Aprenda a automatizar navegadores web utilizando a biblioteca Selenium, permitindo interagir com páginas web, preencher formulários e extrair dados.</p>
+                    
+                    <ul>
+                        <li>Configuração do ambiente</li>
+                        <li>Navegação em páginas web</li>
+                        <li>Localização e interação com elementos</li>
+                        <li>Extração de dados</li>
+                    </ul>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-title">Exemplo: Automação com Selenium</div>
+                            <div class="code-actions">
+                                <button class="copy-btn">Copiar</button>
+                            </div>
+                        </div>
+                        <pre><code>
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+import time
+
+# Inicializar o navegador Chrome
+driver = webdriver.Chrome(Options())
+
+# Acessar uma URL
+driver.get("https://www.google.com")
+
+# Encontrar um elemento na página (campo de pesquisa)
+campo_pesquisa = driver.find_element(By.NAME, "q")
+
+# Interagir com o elemento
+campo_pesquisa.send_keys("Selenium Python")
+
+# Esperar um pouco para visualizar
+time.sleep(2)
+
+# Fechar o navegador
+driver.quit()
+                        </code></pre>
+                    </div>
+                    
+                    <!-- Desafio Interativo para Selenium -->
+                    <div class="challenge-container">
+                        <div class="challenge-header">
+                            <h3>Desafio: Extração de Títulos</h3>
+                        </div>
+                        <div class="challenge-content">
+                            <div class="challenge-description">
+                                <p>Complete o código para acessar um site de notícias e extrair os títulos das principais manchetes.</p>
+                            </div>
+                            <textarea id="editor-selenium-1" class="challenge-editor">
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+
+# Inicializar o navegador
+driver = webdriver.Chrome(Options())
+
+# Acessar um site de notícias (exemplo: G1)
+driver.get("https://g1.globo.com/")
+
+# Complete o código para encontrar e imprimir os títulos das manchetes
+# Dica: Use driver.find_elements() e um seletor CSS apropriado
+
+# Não esqueça de fechar o navegador
+driver.quit()
+                            </textarea>
+                            <div class="challenge-actions">
+                                <button class="btn-solution" data-challenge="selenium-1">Ver Solução</button>
+                                <button class="btn-reset" data-challenge="selenium-1">Reiniciar</button>
+                            </div>
+                            <div id="result-selenium-1" class="challenge-result"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="topic-section">
+                    <h3>3. Análise de Dados com Pandas</h3>
+                    <p>Utilize a biblioteca Pandas para manipular, analisar e visualizar dados de forma eficiente.</p>
+                    
+                    <ul>
+                        <li>Criação e manipulação de DataFrames</li>
+                        <li>Filtragem e seleção de dados</li>
+                        <li>Agregação e estatísticas</li>
+                        <li>Visualização básica</li>
+                    </ul>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-title">Exemplo: Análise com Pandas</div>
+                            <div class="code-actions">
+                                <button class="copy-btn">Copiar</button>
+                            </div>
+                        </div>
+                        <pre><code>
+import pandas as pd
+
+# Criar um DataFrame de exemplo
+dados = {
+    'Nome': ['Ana', 'Bruno', 'Carlos', 'Daniela'],
+    'Idade': [25, 30, 22, 28],
+    'Salário': [3500, 4200, 2800, 5100]
+}
+
+# Criar o DataFrame
+df = pd.DataFrame(dados)
+
+# Exibir as primeiras linhas
+print("Primeiras linhas do DataFrame:")
+print(df.head())
+
+# Análise básica
+print("\nInformações estatísticas:")
+print(df.describe())
+
+# Média de salário por idade
+print("\nMédia de salário:")
+print(df['Salário'].mean())
+                        </code></pre>
+                    </div>
+                    
+                    <!-- Desafio Interativo para Pandas -->
+                    <div class="challenge-container">
+                        <div class="challenge-header">
+                            <h3>Desafio: Análise de Vendas</h3>
+                        </div>
+                        <div class="challenge-content">
+                            <div class="challenge-description">
+                                <p>Complete o código para analisar dados de vendas e encontrar os produtos mais vendidos por região.</p>
+                            </div>
+                            <textarea id="editor-pandas-1" class="challenge-editor">
+import pandas as pd
+
+# Dados de vendas
+dados = {
+    'Produto': ['Notebook', 'Smartphone', 'Tablet', 'Monitor', 'Notebook', 'Smartphone', 'Tablet', 'Monitor'],
+    'Região': ['Sul', 'Sul', 'Sul', 'Sul', 'Nordeste', 'Nordeste', 'Nordeste', 'Nordeste'],
+    'Quantidade': [50, 100, 30, 20, 40, 80, 35, 15],
+    'Valor': [3500, 2000, 1500, 800, 3500, 2000, 1500, 800]
+}
+
+# Criar DataFrame
+df = pd.DataFrame(dados)
+
+# Complete o código para:
+# 1. Calcular o valor total de vendas (Quantidade * Valor)
+# 2. Agrupar por Região e Produto
+# 3. Encontrar o produto mais vendido em cada região
+
+                            </textarea>
+                            <div class="challenge-actions">
+                                <button class="btn-solution" data-challenge="pandas-1">Ver Solução</button>
+                                <button class="btn-reset" data-challenge="pandas-1">Reiniciar</button>
+                            </div>
+                            <div id="result-pandas-1" class="challenge-result"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="topic-section">
+                    <h3>4. Manipulação de Planilhas com Openpyxl</h3>
+                    <p>Aprenda a manipular arquivos Excel usando a biblioteca Openpyxl, permitindo ler, escrever e formatar planilhas.</p>
+                    
+                    <ul>
+                        <li>Leitura e escrita de planilhas</li>
+                        <li>Formatação de células</li>
+                        <li>Criação de fórmulas</li>
+                        <li>Geração de relatórios</li>
+                    </ul>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-title">Exemplo: Manipulação de Excel</div>
+                            <div class="code-actions">
+                                <button class="copy-btn">Copiar</button>
+                            </div>
+                        </div>
+                        <pre><code>
+from openpyxl import Workbook
+from openpyxl.styles import Font, Alignment, PatternFill
+
+# Criar um novo Workbook
+wb = Workbook()
+ws = wb.active
+ws.title = "Relatório"
+
+# Adicionar cabeçalhos
+headers = ["Nome", "Departamento", "Salário"]
+for col_num, header in enumerate(headers, 1):
+    cell = ws.cell(row=1, column=col_num)
+    cell.value = header
+    cell.font = Font(bold=True)
+    cell.alignment = Alignment(horizontal='center')
+    cell.fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+
+# Adicionar dados
+data = [
+    ["João Silva", "TI", 5000],
+    ["Maria Santos", "RH", 4500],
+    ["Pedro Alves", "Vendas", 4800]
+]
+
+for row_num, row_data in enumerate(data, 2):
+    for col_num, cell_value in enumerate(row_data, 1):
+        ws.cell(row=row_num, column=col_num).value = cell_value
+
+# Ajustar largura das colunas
+for col in ws.columns:
+    max_length = 0
+    column = col[0].column_letter
+    for cell in col:
+        if cell.value:
+            max_length = max(max_length, len(str(cell.value)))
+    adjusted_width = (max_length + 2)
+    ws.column_dimensions[column].width = adjusted_width
+
+# Salvar o arquivo
+wb.save("relatorio.xlsx")
+print("Arquivo Excel criado com sucesso!")
+                        </code></pre>
+                    </div>
+                    
+                    <!-- Desafio Interativo para Openpyxl -->
+                    <div class="challenge-container">
+                        <div class="challenge-header">
+                            <h3>Desafio: Relatório de Despesas</h3>
+                        </div>
+                        <div class="challenge-content">
+                            <div class="challenge-description">
+                                <p>Complete o código para criar um relatório de despesas com formatação condicional (valores acima de 1000 em vermelho).</p>
+                            </div>
+                            <textarea id="editor-excel-1" class="challenge-editor">
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment
+
+# Criar um novo Workbook
+wb = Workbook()
+ws = wb.active
+ws.title = "Despesas"
+
+# Dados de despesas
+despesas = [
+    ["Janeiro", "Aluguel", 1200],
+    ["Janeiro", "Energia", 300],
+    ["Janeiro", "Internet", 150],
+    ["Fevereiro", "Aluguel", 1200],
+    ["Fevereiro", "Energia", 350],
+    ["Fevereiro", "Internet", 150],
+]
+
+# Complete o código para:
+# 1. Adicionar cabeçalhos (Mês, Categoria, Valor)
+# 2. Adicionar os dados de despesas
+# 3. Aplicar formatação condicional (valores acima de 1000 em vermelho)
+# 4. Calcular o total de despesas por mês
+
+                            </textarea>
+                            <div class="challenge-actions">
+                                <button class="btn-solution" data-challenge="excel-1">Ver Solução</button>
+                                <button class="btn-reset" data-challenge="excel-1">Reiniciar</button>
+                            </div>
+                            <div id="result-excel-1" class="challenge-result"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="topic-section">
+                    <h3>5. Manipulação de PDFs</h3>
+                    <p>Aprenda a criar e manipular arquivos PDF com Python, permitindo extrair informações, mesclar documentos e criar relatórios.</p>
+                    
+                    <ul>
+                        <li>Criação de documentos PDF</li>
+                        <li>Adição de texto e imagens</li>
+                        <li>Extração de conteúdo de PDFs existentes</li>
+                        <li>Mesclagem e divisão de arquivos</li>
+                    </ul>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-title">Exemplo: Criação de PDF</div>
+                            <div class="code-actions">
+                                <button class="copy-btn">Copiar</button>
+                            </div>
+                        </div>
+                        <pre><code>
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from reportlab.lib import colors
+from reportlab.platypus import Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
+
+# Criar um novo PDF
+c = canvas.Canvas("exemplo.pdf", pagesize=letter)
+width, height = letter
+
+# Adicionar um título
+c.setFont("Helvetica-Bold", 16)
+c.drawString(50, height - 50, "Relatório de Exemplo")
+
+# Adicionar uma linha abaixo do título
+c.setStrokeColor(colors.blue)
+c.line(50, height - 60, width - 50, height - 60)
+
+# Adicionar texto
+c.setFont("Helvetica", 12)
+c.drawString(50, height - 100, "Este é um exemplo de PDF criado com Python.")
+c.drawString(50, height - 120, "Podemos adicionar texto, imagens e formas.")
+
+# Adicionar uma forma
+c.setFillColor(colors.lightblue)
+c.rect(50, height - 200, 100, 50, fill=True)
+
+# Adicionar texto dentro da forma
+c.setFillColor(colors.black)
+c.drawString(70, height - 175, "Python PDF")
+
+# Salvar o PDF
+c.save()
+print("PDF criado com sucesso!")
+                        </code></pre>
+                    </div>
+                    
+                    <!-- Desafio Interativo para PDF -->
+                    <div class="challenge-container">
+                        <div class="challenge-header">
+                            <h3>Desafio: Extração de Texto de PDF</h3>
+                        </div>
+                        <div class="challenge-content">
+                            <div class="challenge-description">
+                                <p>Complete o código para extrair texto de um arquivo PDF e contar a frequência das palavras.</p>
+                            </div>
+                            <textarea id="editor-pdf-1" class="challenge-editor">
+import PyPDF2
+from collections import Counter
+import re
+
+# Função para extrair texto de um PDF
+def extrair_texto_pdf(caminho_arquivo):
+    # Complete o código para abrir o arquivo PDF e extrair o texto
+    # Dica: Use PdfReader do PyPDF2
+    
+    return texto
+
+# Função para contar frequência de palavras
+def contar_palavras(texto):
+    # Complete o código para:
+    # 1. Converter texto para minúsculas
+    # 2. Remover caracteres especiais
+    # 3. Dividir em palavras
+    # 4. Contar frequência das palavras
+    # 5. Retornar as 10 palavras mais frequentes
+    
+    return palavras_frequentes
+
+# Exemplo de uso (descomente para testar)
+# texto = extrair_texto_pdf("exemplo.pdf")
+# palavras_frequentes = contar_palavras(texto)
+# print(palavras_frequentes)
+                            </textarea>
+                            <div class="challenge-actions">
+                                <button class="btn-solution" data-challenge="pdf-1">Ver Solução</button>
+                                <button class="btn-reset" data-challenge="pdf-1">Reiniciar</button>
+                            </div>
+                            <div id="result-pdf-1" class="challenge-result"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="topic-section">
+                    <h3>6. Projeto Prático Integrado</h3>
+                    <p>Neste módulo final, você aplicará todos os conhecimentos adquiridos em um projeto prático que integra as diferentes bibliotecas e técnicas aprendidas durante o minicurso.</p>
+                    
+                    <p>O projeto consiste em criar um sistema de automação que:</p>
+                    <ol>
+                        <li>Utiliza Selenium para extrair dados de um site (por exemplo, produtos de um e-commerce)</li>
+                        <li>Processa os dados extraídos utilizando Pandas</li>
+                        <li>Gera um relatório em Excel com Openpyxl</li>
+                        <li>Cria um resumo em PDF com os principais insights</li>
+                    </ol>
+                    
+                    <!-- Desafio Integrado -->
+                    <div class="challenge-container">
+                        <div class="challenge-header">
+                            <h3>Projeto Final: Sistema de Automação Integrado</h3>
+                        </div>
+                        <div class="challenge-content">
+                            <div class="challenge-description">
+                                <p>Desenvolva um sistema que automatize a coleta de dados de cotações de moedas, processe esses dados, gere um relatório Excel e um resumo em PDF.</p>
+                                <p>Este projeto integra todas as bibliotecas estudadas no minicurso:</p>
+                                <ul>
+                                    <li>Selenium para extrair cotações de um site financeiro</li>
+                                    <li>Pandas para processar e analisar os dados</li>
+                                    <li>Openpyxl para gerar um relatório Excel com gráficos</li>
+                                    <li>ReportLab para criar um resumo em PDF</li>
+                                </ul>
+                            </div>
+                            <textarea id="editor-projeto-1" class="challenge-editor">
+# Projeto Integrado: Sistema de Automação para Cotações de Moedas
+# Este é um esqueleto do projeto. Complete as funções conforme necessário.
+
+import pandas as pd
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from openpyxl import Workbook
+from openpyxl.chart import LineChart, Reference
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+import time
+from datetime import datetime
+
+# 1. Função para extrair cotações usando Selenium
+def extrair_cotacoes():
+    # Complete o código para extrair cotações de moedas
+    # de um site financeiro (ex: investing.com, infomoney, etc.)
+    pass
+
+# 2. Função para processar dados com Pandas
+def processar_dados(cotacoes):
+    # Complete o código para processar os dados extraídos
+    # Calcular variações, médias, etc.
+    pass
+
+# 3. Função para gerar relatório Excel com Openpyxl
+def gerar_relatorio_excel(df_cotacoes):
+    # Complete o código para criar um relatório Excel
+    # com tabelas e gráficos
+    pass
+
+# 4. Função para criar resumo em PDF
+def criar_resumo_pdf(df_cotacoes):
+    # Complete o código para criar um resumo em PDF
+    # com as principais informações e insights
+    pass
+
+# Função principal que integra todas as etapas
+def executar_automacao():
+    print("Iniciando automação...")
+    
+    # Extrair cotações
+    cotacoes = extrair_cotacoes()
+    
+    # Processar dados
+    df_processado = processar_dados(cotacoes)
+    
+    # Gerar relatório Excel
+    gerar_relatorio_excel(df_processado)
+    
+    # Criar resumo PDF
+    criar_resumo_pdf(df_processado)
+    
+    print("Automação concluída com sucesso!")
+
+# Descomente para executar
+# executar_automacao()
+                            </textarea>
+                            <div class="challenge-actions">
+                                <button class="btn-solution" data-challenge="projeto-1">Ver Solução</button>
+                                <button class="btn-reset" data-challenge="projeto-1">Reiniciar</button>
+                            </div>
+                            <div id="result-projeto-1" class="challenge-result"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../img/seel_logo_rotated.png" alt="SEEL Logo" style="height: 50px;">
+                    </div>
+                    <p class="footer-about">A Semana da Engenharia Elétrica (SEEL) é um evento anual organizado pelos estudantes do curso de Engenharia Elétrica da UFTM.</p>
+                    <div class="footer-social">
+                        <a href="#" class="footer-social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="footer-social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="footer-social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3 class="footer-title">Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="../index.html">Home</a></li>
+                        <li class="footer-link"><a href="../minicursos.html">Minicursos</a></li>
+                        <li class="footer-link"><a href="../palestras.html">Palestras</a></li>
+                        <li class="footer-link"><a href="../cronograma.html">Cronograma</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 class="footer-title">Contato</h3>
+                    <div class="footer-contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-text">Universidade Federal do Triângulo Mineiro, Uberaba - MG</div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-text">seel@uftm.edu.br</div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-text">(34) 3700-0000</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SEEL - Semana da Engenharia Elétrica. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/script.js"></script>
+    <script>
+        // Soluções para os desafios
+        const solutions = {
+            'intro-1': `# Calculadora de média
+nota1 = float(input("Digite a primeira nota: "))
+nota2 = float(input("Digite a segunda nota: "))
+nota3 = float(input("Digite a terceira nota: "))
+
+# Calcular a média
+media = (nota1 + nota2 + nota3) / 3
+
+# Verificar se o aluno foi aprovado ou reprovado
+if media >= 7:
+    print(f"Média: {media:.2f} - Aluno APROVADO!")
+else:
+    print(f"Média: {media:.2f} - Aluno REPROVADO.")`,
+            
+            'selenium-1': `from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+
+# Inicializar o navegador
+driver = webdriver.Chrome(Options())
+
+# Acessar um site de notícias (exemplo: G1)
+driver.get("https://g1.globo.com/")
+
+# Encontrar os títulos das manchetes
+# O seletor CSS pode variar dependendo do site
+manchetes = driver.find_elements(By.CSS_SELECTOR, ".feed-post-link")
+
+# Imprimir os títulos
+print("Principais manchetes:")
+for i, manchete in enumerate(manchetes[:5], 1):
+    print(f"{i}. {manchete.text}")
+
+# Fechar o navegador
+driver.quit()`,
+            
+            'pandas-1': `import pandas as pd
+
+# Dados de vendas
+dados = {
+    'Produto': ['Notebook', 'Smartphone', 'Tablet', 'Monitor', 'Notebook', 'Smartphone', 'Tablet', 'Monitor'],
+    'Região': ['Sul', 'Sul', 'Sul', 'Sul', 'Nordeste', 'Nordeste', 'Nordeste', 'Nordeste'],
+    'Quantidade': [50, 100, 30, 20, 40, 80, 35, 15],
+    'Valor': [3500, 2000, 1500, 800, 3500, 2000, 1500, 800]
+}
+
+# Criar DataFrame
+df = pd.DataFrame(dados)
+
+# 1. Calcular o valor total de vendas (Quantidade * Valor)
+df['Total'] = df['Quantidade'] * df['Valor']
+
+# 2. Agrupar por Região e Produto
+vendas_por_regiao_produto = df.groupby(['Região', 'Produto']).agg({
+    'Quantidade': 'sum',
+    'Total': 'sum'
+}).reset_index()
+
+print("Vendas por região e produto:")
+print(vendas_por_regiao_produto)
+
+# 3. Encontrar o produto mais vendido em cada região
+produto_mais_vendido = vendas_por_regiao_produto.sort_values('Quantidade', ascending=False).groupby('Região').first()
+
+print("\nProduto mais vendido por região:")
+print(produto_mais_vendido[['Produto', 'Quantidade', 'Total']])`,
+            
+            'excel-1': `from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment
+
+# Criar um novo Workbook
+wb = Workbook()
+ws = wb.active
+ws.title = "Despesas"
+
+# Adicionar cabeçalhos
+headers = ["Mês", "Categoria", "Valor"]
+for col_num, header in enumerate(headers, 1):
+    cell = ws.cell(row=1, column=col_num)
+    cell.value = header
+    cell.font = Font(bold=True)
+    cell.alignment = Alignment(horizontal='center')
+    cell.fill = PatternFill(start_color="DDDDDD", end_color="DDDDDD", fill_type="solid")
+
+# Dados de despesas
+despesas = [
+    ["Janeiro", "Aluguel", 1200],
+    ["Janeiro", "Energia", 300],
+    ["Janeiro", "Internet", 150],
+    ["Fevereiro", "Aluguel", 1200],
+    ["Fevereiro", "Energia", 350],
+    ["Fevereiro", "Internet", 150],
+]
+
+# Adicionar dados e aplicar formatação condicional
+for row_num, despesa in enumerate(despesas, 2):
+    for col_num, valor in enumerate(despesa, 1):
+        cell = ws.cell(row=row_num, column=col_num)
+        cell.value = valor
+        
+        # Formatação condicional para valores acima de 1000
+        if col_num == 3 and isinstance(valor, (int, float)) and valor > 1000:
+            cell.font = Font(color="FF0000")  # Vermelho
+
+# Calcular totais por mês
+ws.cell(row=len(despesas) + 3, column=1).value = "Totais por Mês"
+ws.cell(row=len(despesas) + 3, column=1).font = Font(bold=True)
+
+# Janeiro
+ws.cell(row=len(despesas) + 4, column=1).value = "Janeiro"
+ws.cell(row=len(despesas) + 4, column=2).value = "Total"
+ws.cell(row=len(despesas) + 4, column=3).value = "=SUMIF(A2:A7,\"Janeiro\",C2:C7)"
+
+# Fevereiro
+ws.cell(row=len(despesas) + 5, column=1).value = "Fevereiro"
+ws.cell(row=len(despesas) + 5, column=2).value = "Total"
+ws.cell(row=len(despesas) + 5, column=3).value = "=SUMIF(A2:A7,\"Fevereiro\",C2:C7)"
+
+# Ajustar largura das colunas
+for col in ws.columns:
+    max_length = 0
+    column = col[0].column_letter
+    for cell in col:
+        if cell.value:
+            max_length = max(max_length, len(str(cell.value)))
+    adjusted_width = (max_length + 2)
+    ws.column_dimensions[column].width = adjusted_width
+
+# Salvar o arquivo
+wb.save("relatorio_despesas.xlsx")
+print("Relatório de despesas criado com sucesso!")`,
+            
+            'pdf-1': `import PyPDF2
+from collections import Counter
+import re
+
+# Função para extrair texto de um PDF
+def extrair_texto_pdf(caminho_arquivo):
+    # Abrir o arquivo PDF
+    with open(caminho_arquivo, 'rb') as arquivo:
+        # Criar um objeto PdfReader
+        leitor = PyPDF2.PdfReader(arquivo)
+        
+        # Inicializar uma string vazia para armazenar o texto
+        texto = ""
+        
+        # Iterar sobre todas as páginas e extrair o texto
+        for pagina in range(len(leitor.pages)):
+            texto += leitor.pages[pagina].extract_text()
+    
+    return texto
+
+# Função para contar frequência de palavras
+def contar_palavras(texto):
+    # Converter para minúsculas
+    texto = texto.lower()
+    
+    # Remover caracteres especiais e substituir por espaços
+    texto = re.sub(r'[^\w\s]', ' ', texto)
+    
+    # Dividir o texto em palavras
+    palavras = texto.split()
+    
+    # Remover palavras muito curtas (menos de 3 letras)
+    palavras = [palavra for palavra in palavras if len(palavra) >= 3]
+    
+    # Contar frequência das palavras
+    contador = Counter(palavras)
+    
+    # Retornar as 10 palavras mais frequentes
+    return contador.most_common(10)
+
+# Exemplo de uso (descomente para testar)
+# texto = extrair_texto_pdf("exemplo.pdf")
+# palavras_frequentes = contar_palavras(texto)
+# print(palavras_frequentes)`,
+            
+            'projeto-1': `# Projeto Integrado: Sistema de Automação para Cotações de Moedas
+
+import pandas as pd
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from openpyxl import Workbook
+from openpyxl.chart import LineChart, Reference
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from reportlab.lib import colors
+import time
+from datetime import datetime
+
+# 1. Função para extrair cotações usando Selenium
+def extrair_cotacoes():
+    print("Extraindo cotações...")
+    
+    # Configurar o navegador
+    options = Options()
+    options.add_argument('--headless')  # Executar em modo headless (sem interface gráfica)
+    driver = webdriver.Chrome(options=options)
+    
+    # Acessar o site de cotações
+    driver.get("https://www.investing.com/currencies/exchange-rates-table")
+    time.sleep(3)  # Aguardar carregamento da página
+    
+    # Extrair dados da tabela de cotações
+    tabela = driver.find_element(By.ID, "cr1")
+    linhas = tabela.find_elements(By.TAG_NAME, "tr")
+    
+    # Preparar listas para armazenar os dados
+    moedas = []
+    valores = []
+    variacoes = []
+    
+    # Iterar pelas linhas da tabela (ignorando o cabeçalho)
+    for linha in linhas[1:6]:  # Limitar a 5 moedas para o exemplo
+        colunas = linha.find_elements(By.TAG_NAME, "td")
+        if len(colunas) >= 3:
+            moeda = colunas[1].text
+            valor = colunas[2].text.replace(',', '')
+            variacao = colunas[3].text.replace('%', '').replace('+', '')
+            
+            moedas.append(moeda)
+            valores.append(float(valor))
+            variacoes.append(float(variacao))
+    
+    # Fechar o navegador
+    driver.quit()
+    
+    # Criar DataFrame com os dados extraídos
+    data = {
+        'Moeda': moedas,
+        'Valor': valores,
+        'Variacao': variacoes
+    }
+    
+    return pd.DataFrame(data)
+
+# 2. Função para processar dados com Pandas
+def processar_dados(cotacoes):
+    print("Processando dados...")
+    
+    # Adicionar data e hora da extração
+    cotacoes['Data_Extracao'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # Classificar moedas por valor
+    cotacoes_ordenadas = cotacoes.sort_values('Valor', ascending=False)
+    
+    # Calcular estatísticas
+    cotacoes['Variacao_Abs'] = cotacoes['Valor'] * cotacoes['Variacao'] / 100
+    
+    # Identificar moedas com maior valorização e desvalorização
+    maior_valorizacao = cotacoes.loc[cotacoes['Variacao'].idxmax()]
+    maior_desvalorizacao = cotacoes.loc[cotacoes['Variacao'].idxmin()]
+    
+    # Adicionar informações ao DataFrame
+    cotacoes['Status'] = ['Valorização' if var > 0 else 'Desvalorização' if var < 0 else 'Estável' for var in cotacoes['Variacao']]
+    
+    return {
+        'cotacoes': cotacoes,
+        'ordenadas': cotacoes_ordenadas,
+        'maior_valorizacao': maior_valorizacao,
+        'maior_desvalorizacao': maior_desvalorizacao
+    }
+
+# 3. Função para gerar relatório Excel com Openpyxl
+def gerar_relatorio_excel(dados_processados):
+    print("Gerando relatório Excel...")
+    
+    cotacoes = dados_processados['cotacoes']
+    
+    # Criar um novo workbook
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Cotações"
+    
+    # Adicionar cabeçalhos
+    headers = ["Moeda", "Valor", "Variação (%)", "Status", "Data Extração"]
+    for col_num, header in enumerate(headers, 1):
+        ws.cell(row=1, column=col_num).value = header
+    
+    # Adicionar dados
+    for row_num, (_, row) in enumerate(cotacoes.iterrows(), 2):
+        ws.cell(row=row_num, column=1).value = row['Moeda']
+        ws.cell(row=row_num, column=2).value = row['Valor']
+        ws.cell(row=row_num, column=3).value = row['Variacao']
+        ws.cell(row=row_num, column=4).value = row['Status']
+        ws.cell(row=row_num, column=5).value = row['Data_Extracao']
+    
+    # Criar gráfico
+    chart = LineChart()
+    chart.title = "Variação das Moedas"
+    chart.style = 10
+    chart.x_axis.title = "Moedas"
+    chart.y_axis.title = "Variação (%)"
+    
+    # Adicionar dados ao gráfico
+    data = Reference(ws, min_col=3, min_row=1, max_row=len(cotacoes)+1, max_col=3)
+    cats = Reference(ws, min_col=1, min_row=2, max_row=len(cotacoes)+1)
+    chart.add_data(data, titles_from_data=True)
+    chart.set_categories(cats)
+    
+    # Adicionar gráfico à planilha
+    ws.add_chart(chart, "G2")
+    
+    # Salvar o arquivo
+    nome_arquivo = f"cotacoes_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+    wb.save(nome_arquivo)
+    
+    return nome_arquivo
+
+# 4. Função para criar resumo em PDF
+def criar_resumo_pdf(dados_processados):
+    print("Criando resumo em PDF...")
+    
+    cotacoes = dados_processados['cotacoes']
+    maior_valorizacao = dados_processados['maior_valorizacao']
+    maior_desvalorizacao = dados_processados['maior_desvalorizacao']
+    
+    # Criar um novo PDF
+    nome_arquivo = f"resumo_cotacoes_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
+    c = canvas.Canvas(nome_arquivo, pagesize=letter)
+    width, height = letter
+    
+    # Adicionar título
+    c.setFont("Helvetica-Bold", 16)
+    c.drawString(50, height - 50, "Resumo de Cotações de Moedas")
+    
+    # Adicionar data e hora
+    c.setFont("Helvetica", 10)
+    c.drawString(50, height - 70, f"Gerado em: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}")
+    
+    # Adicionar linha separadora
+    c.setStrokeColor(colors.blue)
+    c.line(50, height - 80, width - 50, height - 80)
+    
+    # Adicionar resumo
+    c.setFont("Helvetica-Bold", 12)
+    c.drawString(50, height - 110, "Resumo das Cotações:")
+    
+    # Adicionar informações sobre maior valorização
+    c.setFont("Helvetica-Bold", 11)
+    c.drawString(50, height - 140, "Moeda com Maior Valorização:")
+    c.setFont("Helvetica", 11)
+    c.drawString(70, height - 160, f"Moeda: {maior_valorizacao['Moeda']}")
+    c.drawString(70, height - 180, f"Valor: {maior_valorizacao['Valor']}")
+    c.drawString(70, height - 200, f"Variação: {maior_valorizacao['Variacao']}%")
+    
+    # Adicionar informações sobre maior desvalorização
+    c.setFont("Helvetica-Bold", 11)
+    c.drawString(50, height - 230, "Moeda com Maior Desvalorização:")
+    c.setFont("Helvetica", 11)
+    c.drawString(70, height - 250, f"Moeda: {maior_desvalorizacao['Moeda']}")
+    c.drawString(70, height - 270, f"Valor: {maior_desvalorizacao['Valor']}")
+    c.drawString(70, height - 290, f"Variação: {maior_desvalorizacao['Variacao']}%")
+    
+    # Adicionar tabela de cotações
+    c.setFont("Helvetica-Bold", 11)
+    c.drawString(50, height - 320, "Tabela de Cotações:")
+    
+    # Cabeçalhos da tabela
+    c.setFont("Helvetica-Bold", 10)
+    c.drawString(70, height - 340, "Moeda")
+    c.drawString(200, height - 340, "Valor")
+    c.drawString(300, height - 340, "Variação (%)")
+    c.drawString(400, height - 340, "Status")
+    
+    # Linha separadora
+    c.line(70, height - 350, 500, height - 350)
+    
+    # Dados da tabela
+    c.setFont("Helvetica", 10)
+    for i, (_, row) in enumerate(cotacoes.iterrows()):
+        y_pos = height - 370 - (i * 20)
+        c.drawString(70, y_pos, str(row['Moeda']))
+        c.drawString(200, y_pos, str(row['Valor']))
+        c.drawString(300, y_pos, str(row['Variacao']))
+        c.drawString(400, y_pos, str(row['Status']))
+    
+    # Adicionar rodapé
+    c.setFont("Helvetica-Oblique", 8)
+    c.drawString(50, 30, "Este relatório foi gerado automaticamente pelo Sistema de Automação para Cotações de Moedas.")
+    c.drawString(50, 15, "Desenvolvido com Python, Selenium, Pandas, Openpyxl e ReportLab.")
+    
+    # Salvar o PDF
+    c.save()
+    
+    return nome_arquivo
+
+# Função principal que integra todas as etapas
+def executar_automacao():
+    print("Iniciando automação...")
+    
+    try:
+        # Extrair cotações
+        cotacoes = extrair_cotacoes()
+        print(f"Cotações extraídas: {len(cotacoes)} moedas")
+        
+        # Processar dados
+        dados_processados = processar_dados(cotacoes)
+        print("Dados processados com sucesso")
+        
+        # Gerar relatório Excel
+        arquivo_excel = gerar_relatorio_excel(dados_processados)
+        print(f"Relatório Excel gerado: {arquivo_excel}")
+        
+        # Criar resumo PDF
+        arquivo_pdf = criar_resumo_pdf(dados_processados)
+        print(f"Resumo PDF criado: {arquivo_pdf}")
+        
+        print("Automação concluída com sucesso!")
+        return True
+    
+    except Exception as e:
+        print(f"Erro durante a automação: {str(e)}")
+        return False
+
+# Descomente para executar
+# executar_automacao()`
+        };
+
+        // Configurar botões de solução e reset
+        document.addEventListener('DOMContentLoaded', function() {
+            // Botões de solução
+            document.querySelectorAll('.btn-solution').forEach(function(button) {
+                const challengeId = button.getAttribute('data-challenge');
+                button.addEventListener('click', function() {
+                    const editorElement = document.getElementById('editor-' + challengeId);
+                    if (editorElement && solutions[challengeId]) {
+                        editorElement.value = solutions[challengeId];
+                    }
+                });
+            });
+            
+            // Botões de reset
+            document.querySelectorAll('.btn-reset').forEach(function(button) {
+                const challengeId = button.getAttribute('data-challenge');
+                button.addEventListener('click', function() {
+                    const editorElement = document.getElementById('editor-' + challengeId);
+                    if (editorElement) {
+                        // Restaurar o conteúdo original
+                        const originalContent = editorElement.getAttribute('data-original') || editorElement.textContent.trim();
+                        editorElement.value = originalContent;
+                    }
+                });
+            });
+            
+            // Salvar o conteúdo original dos editores
+            document.querySelectorAll('.challenge-editor').forEach(function(editor) {
+                editor.setAttribute('data-original', editor.textContent.trim());
+            });
+        });
+    </script>
+</body>
+</html>

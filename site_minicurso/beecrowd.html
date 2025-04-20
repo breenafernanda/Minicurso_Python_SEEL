@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resoluções Beecrowd - Minicurso Python SEEL</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- CodeMirror para editor de código -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+    <style>
+        .search-container {
+            margin-bottom: 20px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .beecrowd-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .beecrowd-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .beecrowd-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .beecrowd-card h3 {
+            color: var(--azul-principal);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .beecrowd-card .btn-view {
+            background-color: var(--azul-principal);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .beecrowd-card .btn-view:hover {
+            background-color: var(--azul-escuro);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 900px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .modal-header h2 {
+            color: var(--azul-principal);
+            margin: 0;
+        }
+        
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: black;
+        }
+        
+        .code-container {
+            position: relative;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--amarelo);
+            color: var(--azul-principal);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .copy-btn:hover {
+            background-color: #e6bb00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Barra lateral com navegação -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="img/logo_eletrica.png" alt="Logo Engenharia Elétrica">
+                <h3>Minicurso Python</h3>
+            </div>
+            <div class="sidebar-menu">
+                <a href="index.html" class="menu-item">
+                    <div class="menu-number">01</div>
+                    <span>Início</span>
+                </a>
+                <a href="introducao.html" class="menu-item">
+                    <div class="menu-number">02</div>
+                    <span>Introdução ao Python</span>
+                </a>
+                <a href="selenium.html" class="menu-item">
+                    <div class="menu-number">03</div>
+                    <span>Automação com Selenium</span>
+                </a>
+                <a href="pandas.html" class="menu-item">
+                    <div class="menu-number">04</div>
+                    <span>Análise com Pandas</span>
+                </a>
+                <a href="openpyxl.html" class="menu-item">
+                    <div class="menu-number">05</div>
+                    <span>Planilhas com Openpyxl</span>
+                </a>
+                <a href="pdf.html" class="menu-item">
+                    <div class="menu-number">06</div>
+                    <span>Manipulação de PDF</span>
+                </a>
+                <a href="desafios.html" class="menu-item">
+                    <div class="menu-number">07</div>
+                    <span>Desafios Interativos</span>
+                </a>
+                <a href="beecrowd.html" class="menu-item active">
+                    <div class="menu-number">08</div>
+                    <span>Resoluções Beecrowd</span>
+                </a>
+                <a href="documentacao.html" class="menu-item">
+                    <div class="menu-number">09</div>
+                    <span>Documentação</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Conteúdo principal -->
+        <div class="main-content">
+            <div class="content-header">
+                <h1>Resoluções Beecrowd</h1>
+                <p>Coleção de mais de 200 soluções de problemas do Beecrowd (antigo URI Online Judge) implementadas em Python.</p>
+            </div>
+
+            <div class="content-section">
+                <h2>Sobre o Beecrowd</h2>
+                <p>O Beecrowd (anteriormente conhecido como URI Online Judge) é uma plataforma online que oferece milhares de problemas de programação para praticar suas habilidades de codificação. Os problemas são organizados por categorias e níveis de dificuldade.</p>
+                
+                <p>Resolver problemas do Beecrowd é uma excelente maneira de aprimorar suas habilidades em Python e lógica de programação. Aqui você encontrará soluções para mais de 200 problemas, que podem servir como referência para seus estudos.</p>
+                
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar problema por número ou nome...">
+                </div>
+                
+                <div class="beecrowd-grid" id="beecrowdGrid">
+                    <!-- Os cards serão gerados dinamicamente pelo JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para exibir o código -->
+    <div id="codeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Título do Problema</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="code-container">
+                <button class="copy-btn" id="copyBtn">Copiar Código</button>
+                <pre id="codeDisplay" class="code-block"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Lista de problemas do Beecrowd
+        const beecrowdProblems = [
+            // Os problemas serão carregados dinamicamente
+        ];
+
+        // Função para carregar os problemas
+        async function loadBeecrowdProblems() {
+            try {
+                const response = await fetch('js/beecrowd_problems.json');
+                const problems = await response.json();
+                return problems;
+            } catch (error) {
+                console.error('Erro ao carregar os problemas:', error);
+                return [];
+            }
+        }
+
+        // Função para renderizar os cards
+        function renderBeecrowdCards(problems) {
+            const grid = document.getElementById('beecrowdGrid');
+            grid.innerHTML = '';
+
+            problems.forEach(problem => {
+                const card = document.createElement('div');
+                card.className = 'beecrowd-card';
+                card.innerHTML = `
+                    <h3>${problem.id} - ${problem.name}</h3>
+                    <button class="btn-view" data-id="${problem.id}" data-file="${problem.file}">Ver Solução</button>
+                `;
+                grid.appendChild(card);
+            });
+
+            // Adicionar eventos aos botões
+            document.querySelectorAll('.btn-view').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    const file = this.getAttribute('data-file');
+                    openCodeModal(id, file);
+                });
+            });
+        }
+
+        // Função para abrir o modal com o código
+        async function openCodeModal(id, file) {
+            const modal = document.getElementById('codeModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const codeDisplay = document.getElementById('codeDisplay');
+            
+            modalTitle.textContent = `Problema ${id}`;
+            codeDisplay.textContent = 'Carregando...';
+            
+            try {
+                const response = await fetch(`beecrowd_code/${file}`);
+                const code = await response.text();
+                codeDisplay.textContent = code;
+            } catch (error) {
+                codeDisplay.textContent = 'Erro ao carregar o código.';
+                console.error('Erro ao carregar o código:', error);
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        // Função para filtrar os problemas
+        function filterProblems(searchTerm) {
+            return beecrowdProblems.filter(problem => {
+                const searchString = `${problem.id} - ${problem.name}`.toLowerCase();
+                return searchString.includes(searchTerm.toLowerCase());
+            });
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Carregar os problemas
+            beecrowdProblems.push(...await loadBeecrowdProblems());
+            
+            // Renderizar os cards iniciais
+            renderBeecrowdCards(beecrowdProblems);
+            
+            // Configurar a pesquisa
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function() {
+                const filteredProblems = filterProblems(this.value);
+                renderBeecrowdCards(filteredProblems);
+            });
+            
+            // Configurar o modal
+            const modal = document.getElementById('codeModal');
+            const closeBtn = document.querySelector('.close');
+            
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Configurar o botão de cópia
+            const copyBtn = document.getElementById('copyBtn');
+            copyBtn.addEventListener('click', function() {
+                const codeDisplay = document.getElementById('codeDisplay');
+                const textArea = document.createElement('textarea');
+                textArea.value = codeDisplay.textContent;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Feedback visual
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copiado!';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
